@@ -1,0 +1,71 @@
+name: Microsoft Planner
+description: Microsoft Planner is a task management tool that helps teams organize work, assign tasks, share files, and collaborate on projects within Microsoft 365.
+image: https://docs.microsoft.com/en-us/media/logos/logo-ms-social.png
+tags:
+- Task Management
+- Project Management
+- Collaboration
+- Productivity
+- Microsoft 365
+created: '2024'
+modified: '2024'
+url: https://www.microsoft.com/en-us/microsoft-365/business/task-management-software
+specificationVersion: '0.18'
+apis:
+- name: Microsoft Planner API
+  description: RESTful API for accessing and managing tasks, plans, and buckets in Microsoft Planner through Microsoft Graph
+  image: https://docs.microsoft.com/en-us/media/logos/logo-ms-social.png
+  humanURL: https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/resources/planner_overview
+  baseURL: https://graph.microsoft.com/v1.0/planner
+  tags:
+  - Tasks
+  - Plans
+  - Buckets
+  - Assignments
+  - Microsoft Graph
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/planner-overview
+  - type: OpenAPI
+    url: https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-1.0
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/graph/auth/
+  - type: Pricing
+    url: https://www.microsoft.com/en-us/microsoft-365/enterprise/microsoft365-plans-and-pricing
+  - type: Rate Limits
+    url: https://learn.microsoft.com/en-us/graph/throttling
+  - type: SDK - .NET
+    url: https://github.com/microsoftgraph/msgraph-sdk-dotnet
+  - type: SDK - JavaScript
+    url: https://github.com/microsoftgraph/msgraph-sdk-javascript
+  - type: SDK - Python
+    url: https://github.com/microsoftgraph/msgraph-sdk-python
+  - type: SDK - Java
+    url: https://github.com/microsoftgraph/msgraph-sdk-java
+  - type: Support
+    url: https://developer.microsoft.com/en-us/graph/support
+  - type: Changelog
+    url: https://developer.microsoft.com/en-us/graph/changelog
+  - type: Sandbox
+    url: https://developer.microsoft.com/en-us/graph/graph-explorer
+  contact:
+  - FN: Microsoft Graph Support
+    url: https://developer.microsoft.com/en-us/graph/support
+    email: graphsdksupport@microsoft.com
+maintainers:
+- FN: Microsoft Corporation
+  email: graphsdksupport@microsoft.com
+  url: https://www.microsoft.com
+common:
+- type: Portal
+  url: https://developer.microsoft.com/en-us/graph
+- type: Terms of Service
+  url: https://docs.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+- type: Privacy Policy
+  url: https://privacy.microsoft.com/en-us/privacystatement
+- type: Getting Started
+  url: https://learn.microsoft.com/en-us/graph/planner-concept-overview
+- type: Blog
+  url: https://developer.microsoft.com/en-us/graph/blogs/
+- type: Status
+  url: https://developer.microsoft.com/en-us/graph/status
