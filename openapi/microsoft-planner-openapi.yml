@@ -1,0 +1,1517 @@
+openapi: 3.1.0
+info:
+  title: Microsoft Graph Planner API
+  description: >-
+    The Microsoft Graph Planner API enables programmatic access to Planner
+    resources in Microsoft 365. You can create and manage plans, tasks, and
+    buckets to organize work, assign tasks to users, and track progress within
+    groups. Plans are contained by Microsoft 365 groups, and tasks are organized
+    into buckets within plans. This API covers the v1.0 stable endpoint for
+    basic (non-premium) Planner operations.
+  version: 1.0.0
+  contact:
+    name: Microsoft Graph Support
+    url: https://developer.microsoft.com/en-us/graph/support
+    email: graphsdksupport@microsoft.com
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://docs.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://docs.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  x-apisguru-categories:
+    - collaboration
+    - project-management
+  x-logo:
+    url: https://docs.microsoft.com/en-us/media/logos/logo-ms-social.png
+
+externalDocs:
+  description: Microsoft Graph Planner API documentation
+  url: https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-1.0
+
+servers:
+  - url: https://graph.microsoft.com/v1.0
+    description: Microsoft Graph v1.0 production endpoint
+
+security:
+  - oauth2:
+      - Tasks.Read
+      - Tasks.ReadWrite
+      - Group.Read.All
+      - Group.ReadWrite.All
+
+tags:
+  - name: Plans
+    description: Operations for managing Planner plans
+    externalDocs:
+      url: https://learn.microsoft.com/en-us/graph/api/resources/plannerplan?view=graph-rest-1.0
+  - name: Tasks
+    description: Operations for managing Planner tasks
+    externalDocs:
+      url: https://learn.microsoft.com/en-us/graph/api/resources/plannertask?view=graph-rest-1.0
+  - name: Buckets
+    description: Operations for managing Planner buckets
+    externalDocs:
+      url: https://learn.microsoft.com/en-us/graph/api/resources/plannerbucket?view=graph-rest-1.0
+  - name: Plan Details
+    description: Operations for managing additional plan details
+    externalDocs:
+      url: https://learn.microsoft.com/en-us/graph/api/resources/plannerplandetails?view=graph-rest-1.0
+  - name: Task Details
+    description: Operations for managing additional task details
+    externalDocs:
+      url: https://learn.microsoft.com/en-us/graph/api/resources/plannertaskdetails?view=graph-rest-1.0
+
+paths:
+  /planner/plans:
+    post:
+      operationId: createPlan
+      summary: Create a plan
+      description: >-
+        Create a new plannerPlan object. The plan is contained within a
+        Microsoft 365 group specified by the container property.
+      tags:
+        - Plans
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlannerPlanCreate'
+      responses:
+        '201':
+          description: The created plan
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerPlan'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /planner/plans/{plan-id}:
+    parameters:
+      - $ref: '#/components/parameters/PlanId'
+    get:
+      operationId: getPlan
+      summary: Get a plan
+      description: >-
+        Retrieve the properties and relationships of a plannerPlan object.
+      tags:
+        - Plans
+      responses:
+        '200':
+          description: The requested plan
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerPlan'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updatePlan
+      summary: Update a plan
+      description: >-
+        Update the properties of a plannerPlan object. Requires the If-Match
+        header with the last known ETag value of the plan.
+      tags:
+        - Plans
+      parameters:
+        - $ref: '#/components/parameters/IfMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlannerPlanUpdate'
+      responses:
+        '200':
+          description: The updated plan
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerPlan'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+    delete:
+      operationId: deletePlan
+      summary: Delete a plan
+      description: >-
+        Delete a plannerPlan object. Requires the If-Match header with the
+        last known ETag value of the plan.
+      tags:
+        - Plans
+      parameters:
+        - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '204':
+          description: Plan deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+
+  /planner/plans/{plan-id}/tasks:
+    parameters:
+      - $ref: '#/components/parameters/PlanId'
+    get:
+      operationId: listPlanTasks
+      summary: List plan tasks
+      description: >-
+        Retrieve a list of plannerTask objects associated with a plannerPlan
+        object.
+      tags:
+        - Plans
+        - Tasks
+      responses:
+        '200':
+          description: Collection of tasks in the plan
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerTaskCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /planner/plans/{plan-id}/buckets:
+    parameters:
+      - $ref: '#/components/parameters/PlanId'
+    get:
+      operationId: listPlanBuckets
+      summary: List plan buckets
+      description: >-
+        Retrieve a list of plannerBucket objects contained in a plannerPlan
+        object.
+      tags:
+        - Plans
+        - Buckets
+      responses:
+        '200':
+          description: Collection of buckets in the plan
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerBucketCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /planner/plans/{plan-id}/details:
+    parameters:
+      - $ref: '#/components/parameters/PlanId'
+    get:
+      operationId: getPlanDetails
+      summary: Get plan details
+      description: >-
+        Retrieve the properties and relationships of a plannerPlanDetails
+        object.
+      tags:
+        - Plan Details
+      responses:
+        '200':
+          description: The plan details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerPlanDetails'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updatePlanDetails
+      summary: Update plan details
+      description: >-
+        Update the properties of a plannerPlanDetails object. Requires the
+        If-Match header with the last known ETag value.
+      tags:
+        - Plan Details
+      parameters:
+        - $ref: '#/components/parameters/IfMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlannerPlanDetailsUpdate'
+      responses:
+        '200':
+          description: The updated plan details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerPlanDetails'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+
+  /planner/tasks:
+    post:
+      operationId: createTask
+      summary: Create a task
+      description: >-
+        Create a new plannerTask. The task must specify a planId to indicate
+        which plan it belongs to. Tasks cannot be created without plans.
+      tags:
+        - Tasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlannerTaskCreate'
+      responses:
+        '201':
+          description: The created task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerTask'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /planner/tasks/{task-id}:
+    parameters:
+      - $ref: '#/components/parameters/TaskId'
+    get:
+      operationId: getTask
+      summary: Get a task
+      description: >-
+        Retrieve the properties and relationships of a plannerTask object.
+      tags:
+        - Tasks
+      responses:
+        '200':
+          description: The requested task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerTask'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateTask
+      summary: Update a task
+      description: >-
+        Update the properties of a plannerTask object. Requires the If-Match
+        header with the last known ETag value of the task.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/IfMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlannerTaskUpdate'
+      responses:
+        '200':
+          description: The updated task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerTask'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+    delete:
+      operationId: deleteTask
+      summary: Delete a task
+      description: >-
+        Delete a plannerTask object. Requires the If-Match header with the
+        last known ETag value of the task.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '204':
+          description: Task deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+
+  /planner/tasks/{task-id}/details:
+    parameters:
+      - $ref: '#/components/parameters/TaskId'
+    get:
+      operationId: getTaskDetails
+      summary: Get task details
+      description: >-
+        Retrieve the properties and relationships of a plannerTaskDetails
+        object.
+      tags:
+        - Task Details
+      responses:
+        '200':
+          description: The task details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerTaskDetails'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateTaskDetails
+      summary: Update task details
+      description: >-
+        Update the properties of a plannerTaskDetails object. Requires the
+        If-Match header with the last known ETag value.
+      tags:
+        - Task Details
+      parameters:
+        - $ref: '#/components/parameters/IfMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlannerTaskDetailsUpdate'
+      responses:
+        '200':
+          description: The updated task details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerTaskDetails'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+
+  /planner/buckets:
+    post:
+      operationId: createBucket
+      summary: Create a bucket
+      description: >-
+        Create a new plannerBucket object. The bucket must specify a planId
+        indicating which plan it belongs to.
+      tags:
+        - Buckets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlannerBucketCreate'
+      responses:
+        '201':
+          description: The created bucket
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerBucket'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /planner/buckets/{bucket-id}:
+    parameters:
+      - $ref: '#/components/parameters/BucketId'
+    get:
+      operationId: getBucket
+      summary: Get a bucket
+      description: >-
+        Retrieve the properties and relationships of a plannerBucket object.
+      tags:
+        - Buckets
+      responses:
+        '200':
+          description: The requested bucket
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerBucket'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateBucket
+      summary: Update a bucket
+      description: >-
+        Update the properties of a plannerBucket object. Requires the If-Match
+        header with the last known ETag value of the bucket.
+      tags:
+        - Buckets
+      parameters:
+        - $ref: '#/components/parameters/IfMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlannerBucketUpdate'
+      responses:
+        '200':
+          description: The updated bucket
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerBucket'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+    delete:
+      operationId: deleteBucket
+      summary: Delete a bucket
+      description: >-
+        Delete a plannerBucket object. Requires the If-Match header with the
+        last known ETag value of the bucket.
+      tags:
+        - Buckets
+      parameters:
+        - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '204':
+          description: Bucket deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+
+  /planner/buckets/{bucket-id}/tasks:
+    parameters:
+      - $ref: '#/components/parameters/BucketId'
+    get:
+      operationId: listBucketTasks
+      summary: List bucket tasks
+      description: >-
+        Retrieve a list of plannerTask objects associated with a plannerBucket
+        object.
+      tags:
+        - Buckets
+        - Tasks
+      responses:
+        '200':
+          description: Collection of tasks in the bucket
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerTaskCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /groups/{group-id}/planner/plans:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+    get:
+      operationId: listGroupPlans
+      summary: List group plans
+      description: >-
+        Retrieve a list of plannerPlan objects owned by a Microsoft 365 group.
+      tags:
+        - Plans
+      responses:
+        '200':
+          description: Collection of plans owned by the group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerPlanCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /me/planner/tasks:
+    get:
+      operationId: listMyTasks
+      summary: List my tasks
+      description: >-
+        Retrieve a list of plannerTask objects assigned to the signed-in user.
+      tags:
+        - Tasks
+      responses:
+        '200':
+          description: Collection of tasks assigned to the current user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerTaskCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /users/{user-id}/planner/tasks:
+    parameters:
+      - $ref: '#/components/parameters/UserId'
+    get:
+      operationId: listUserTasks
+      summary: List user tasks
+      description: >-
+        Retrieve a list of plannerTask objects assigned to a specific user.
+      tags:
+        - Tasks
+      responses:
+        '200':
+          description: Collection of tasks assigned to the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerTaskCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authorization with Microsoft identity platform
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            Tasks.Read: Read user Planner tasks
+            Tasks.ReadWrite: Read and write user Planner tasks
+            Tasks.Read.All: Read all Planner tasks (admin)
+            Tasks.ReadWrite.All: Read and write all Planner tasks (admin)
+            Group.Read.All: Read all groups
+            Group.ReadWrite.All: Read and write all groups
+
+  parameters:
+    PlanId:
+      name: plan-id
+      in: path
+      required: true
+      description: The unique identifier of the plannerPlan (28 characters, case-sensitive)
+      schema:
+        type: string
+    TaskId:
+      name: task-id
+      in: path
+      required: true
+      description: The unique identifier of the plannerTask (28 characters, case-sensitive)
+      schema:
+        type: string
+    BucketId:
+      name: bucket-id
+      in: path
+      required: true
+      description: The unique identifier of the plannerBucket (28 characters, case-sensitive)
+      schema:
+        type: string
+    GroupId:
+      name: group-id
+      in: path
+      required: true
+      description: The unique identifier of the Microsoft 365 group
+      schema:
+        type: string
+    UserId:
+      name: user-id
+      in: path
+      required: true
+      description: The unique identifier of the user
+      schema:
+        type: string
+    IfMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: >-
+        The last known ETag value for the resource. Required for PATCH and
+        DELETE operations. Planner uses ETags for optimistic concurrency
+        control.
+      schema:
+        type: string
+
+  schemas:
+    IdentitySet:
+      type: object
+      description: A set of identities associated with various events for a resource
+      properties:
+        application:
+          $ref: '#/components/schemas/Identity'
+        device:
+          $ref: '#/components/schemas/Identity'
+        user:
+          $ref: '#/components/schemas/Identity'
+
+    Identity:
+      type: object
+      description: Represents an identity of an actor
+      properties:
+        displayName:
+          type: string
+          description: The display name of the identity
+        id:
+          type: string
+          description: The unique identifier of the identity
+
+    PlannerPlanContainer:
+      type: object
+      description: >-
+        Represents the container for a plannerPlan. The container is a resource
+        that specifies authorization rules and the lifecycle of the plan.
+      required:
+        - url
+      properties:
+        containerId:
+          type: string
+          description: The identifier of the resource that contains the plan
+          readOnly: true
+        type:
+          type: string
+          description: The type of the container
+          enum:
+            - group
+            - unknownFutureValue
+            - roster
+          readOnly: true
+        url:
+          type: string
+          format: uri
+          description: The full canonical URL of the container
+
+    PlannerAppliedCategories:
+      type: object
+      description: >-
+        The categories (labels) applied to a task. Up to 25 categories can be
+        defined per plan. Category names (category1 through category25) are
+        defined on the plan details.
+      additionalProperties:
+        type: boolean
+
+    PlannerAssignments:
+      type: object
+      description: >-
+        The set of user assignments for a task. Each key is the user ID of
+        the assignee, and the value is a plannerAssignment object.
+      additionalProperties:
+        $ref: '#/components/schemas/PlannerAssignment'
+
+    PlannerAssignment:
+      type: object
+      description: Represents the assignment of a task to a user
+      properties:
+        '@odata.type':
+          type: string
+          const: microsoft.graph.plannerAssignment
+        assignedBy:
+          $ref: '#/components/schemas/IdentitySet'
+          description: The identity of the user that performed the assignment
+          readOnly: true
+        assignedDateTime:
+          type: string
+          format: date-time
+          description: The time at which the task was assigned
+          readOnly: true
+        orderHint:
+          type: string
+          description: >-
+            Hint used to order assignees in a task. The format is defined in
+            the Planner order hints documentation.
+
+    PlannerCategoryDescriptions:
+      type: object
+      description: >-
+        Describes the 25 categories that can be associated with tasks in a
+        plan.
+      properties:
+        category1:
+          type: string
+          description: The label associated with category 1
+        category2:
+          type: string
+          description: The label associated with category 2
+        category3:
+          type: string
+          description: The label associated with category 3
+        category4:
+          type: string
+          description: The label associated with category 4
+        category5:
+          type: string
+          description: The label associated with category 5
+        category6:
+          type: string
+          description: The label associated with category 6
+        category7:
+          type: string
+          description: The label associated with category 7
+        category8:
+          type: string
+          description: The label associated with category 8
+        category9:
+          type: string
+          description: The label associated with category 9
+        category10:
+          type: string
+          description: The label associated with category 10
+        category11:
+          type: string
+          description: The label associated with category 11
+        category12:
+          type: string
+          description: The label associated with category 12
+        category13:
+          type: string
+          description: The label associated with category 13
+        category14:
+          type: string
+          description: The label associated with category 14
+        category15:
+          type: string
+          description: The label associated with category 15
+        category16:
+          type: string
+          description: The label associated with category 16
+        category17:
+          type: string
+          description: The label associated with category 17
+        category18:
+          type: string
+          description: The label associated with category 18
+        category19:
+          type: string
+          description: The label associated with category 19
+        category20:
+          type: string
+          description: The label associated with category 20
+        category21:
+          type: string
+          description: The label associated with category 21
+        category22:
+          type: string
+          description: The label associated with category 22
+        category23:
+          type: string
+          description: The label associated with category 23
+        category24:
+          type: string
+          description: The label associated with category 24
+        category25:
+          type: string
+          description: The label associated with category 25
+
+    PlannerChecklistItems:
+      type: object
+      description: >-
+        A collection of checklist items on a task. Each key is a GUID
+        identifying the checklist item, and the value is a
+        plannerChecklistItem.
+      additionalProperties:
+        $ref: '#/components/schemas/PlannerChecklistItem'
+
+    PlannerChecklistItem:
+      type: object
+      description: A checklist item on a Planner task
+      properties:
+        '@odata.type':
+          type: string
+          const: microsoft.graph.plannerChecklistItem
+        isChecked:
+          type: boolean
+          description: Whether the item is checked (completed)
+        lastModifiedBy:
+          $ref: '#/components/schemas/IdentitySet'
+          readOnly: true
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          description: The date and time the item was last modified
+          readOnly: true
+        orderHint:
+          type: string
+          description: Hint used to order items in the checklist
+        title:
+          type: string
+          description: Title of the checklist item
+
+    PlannerExternalReferences:
+      type: object
+      description: >-
+        A collection of references on a task. Each key is a URL-encoded URL
+        of the reference, and the value is a plannerExternalReference.
+      additionalProperties:
+        $ref: '#/components/schemas/PlannerExternalReference'
+
+    PlannerExternalReference:
+      type: object
+      description: An external reference attached to a Planner task
+      properties:
+        '@odata.type':
+          type: string
+          const: microsoft.graph.plannerExternalReference
+        alias:
+          type: string
+          description: A name alias for the reference
+        lastModifiedBy:
+          $ref: '#/components/schemas/IdentitySet'
+          readOnly: true
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          description: The date and time the reference was last modified
+          readOnly: true
+        previewPriority:
+          type: string
+          description: >-
+            Hint used to set the relative priority order in which the
+            reference will be shown as a preview on the task
+        type:
+          type: string
+          description: The type of the reference (e.g., PowerPoint, Word, Excel, Other)
+
+    PlannerUserIds:
+      type: object
+      description: >-
+        Set of user IDs that a plan is shared with. Each key is a user ID
+        and the value is true.
+      additionalProperties:
+        type: boolean
+
+    PlannerPlan:
+      type: object
+      description: >-
+        Represents a plan in Microsoft 365. A plan is owned by a group and
+        contains a collection of plannerTasks. It can also have a collection
+        of plannerBuckets.
+      properties:
+        '@odata.etag':
+          type: string
+          description: The ETag of the resource, used for concurrency control
+          readOnly: true
+        id:
+          type: string
+          description: >-
+            The unique identifier for the plan. 28 characters long and
+            case-sensitive.
+          readOnly: true
+        title:
+          type: string
+          description: Title of the plan
+        container:
+          $ref: '#/components/schemas/PlannerPlanContainer'
+          description: >-
+            Identifies the container of the plan. After it is set, this
+            property cannot be updated.
+        owner:
+          type: string
+          description: >-
+            Deprecated. Use the container property instead. ID of the group
+            that owns the plan.
+          deprecated: true
+        createdBy:
+          $ref: '#/components/schemas/IdentitySet'
+          description: The user who created the plan
+          readOnly: true
+        createdDateTime:
+          type: string
+          format: date-time
+          description: >-
+            The date and time at which the plan was created. ISO 8601 format,
+            always in UTC.
+          readOnly: true
+
+    PlannerPlanCreate:
+      type: object
+      description: Request body for creating a new plan
+      required:
+        - title
+        - container
+      properties:
+        title:
+          type: string
+          description: Title of the plan
+        container:
+          type: object
+          description: The container for the plan
+          required:
+            - url
+          properties:
+            url:
+              type: string
+              format: uri
+              description: >-
+                The full canonical URL of the container (e.g.,
+                https://graph.microsoft.com/v1.0/groups/{group-id})
+
+    PlannerPlanUpdate:
+      type: object
+      description: Request body for updating a plan
+      properties:
+        title:
+          type: string
+          description: Updated title of the plan
+
+    PlannerPlanDetails:
+      type: object
+      description: >-
+        Represents additional information about a plan, including category
+        descriptions and sharing information.
+      properties:
+        '@odata.etag':
+          type: string
+          description: The ETag of the resource
+          readOnly: true
+        id:
+          type: string
+          description: The unique identifier for the plan details
+          readOnly: true
+        categoryDescriptions:
+          $ref: '#/components/schemas/PlannerCategoryDescriptions'
+          description: >-
+            Specifies the descriptions of the 25 categories for tasks in the
+            plan
+        sharedWith:
+          $ref: '#/components/schemas/PlannerUserIds'
+          description: Set of user IDs that this plan is shared with
+
+    PlannerPlanDetailsUpdate:
+      type: object
+      description: Request body for updating plan details
+      properties:
+        categoryDescriptions:
+          $ref: '#/components/schemas/PlannerCategoryDescriptions'
+        sharedWith:
+          $ref: '#/components/schemas/PlannerUserIds'
+
+    PlannerTask:
+      type: object
+      description: >-
+        Represents a Planner task in Microsoft 365. A task is contained in a
+        plan and can be assigned to a bucket within the plan.
+      properties:
+        '@odata.etag':
+          type: string
+          description: The ETag of the resource, used for concurrency control
+          readOnly: true
+        id:
+          type: string
+          description: >-
+            The unique identifier for the task. 28 characters long and
+            case-sensitive.
+          readOnly: true
+        title:
+          type: string
+          description: Title of the task
+        planId:
+          type: string
+          description: Plan ID to which the task belongs
+        bucketId:
+          type:
+            - string
+            - 'null'
+          description: >-
+            Bucket ID to which the task belongs. The bucket must be in the
+            same plan as the task. 28 characters long and case-sensitive.
+        assignments:
+          $ref: '#/components/schemas/PlannerAssignments'
+          description: The set of assignees the task is assigned to
+        appliedCategories:
+          $ref: '#/components/schemas/PlannerAppliedCategories'
+          description: The categories applied to the task
+        priority:
+          type: integer
+          minimum: 0
+          maximum: 10
+          description: >-
+            Priority of the task. Valid range is 0-10 where 0 is highest
+            priority. Values 0-1 are urgent, 2-4 are important, 5-7 are
+            medium, 8-10 are low.
+        percentComplete:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: >-
+            Percentage of task completion. When set to 100, the task is
+            considered completed.
+        startDateTime:
+          type:
+            - string
+            - 'null'
+          format: date-time
+          description: >-
+            Date and time at which the task starts. ISO 8601 format, always
+            in UTC.
+        dueDateTime:
+          type:
+            - string
+            - 'null'
+          format: date-time
+          description: >-
+            Date and time at which the task is due. ISO 8601 format, always
+            in UTC.
+        completedDateTime:
+          type:
+            - string
+            - 'null'
+          format: date-time
+          description: >-
+            Date and time at which the percentComplete was set to 100.
+            ISO 8601 format, always in UTC.
+          readOnly: true
+        completedBy:
+          $ref: '#/components/schemas/IdentitySet'
+          description: Identity of the user that completed the task
+          readOnly: true
+        createdDateTime:
+          type: string
+          format: date-time
+          description: >-
+            Date and time at which the task was created. ISO 8601 format,
+            always in UTC.
+          readOnly: true
+        createdBy:
+          $ref: '#/components/schemas/IdentitySet'
+          description: Identity of the user that created the task
+          readOnly: true
+        hasDescription:
+          type: boolean
+          description: >-
+            Indicates whether the details object of the task has a nonempty
+            description.
+          readOnly: true
+        conversationThreadId:
+          type:
+            - string
+            - 'null'
+          description: >-
+            Thread ID of the conversation on the task in the containing
+            group.
+        orderHint:
+          type: string
+          description: Hint used to order items of this type in a list view
+        assigneePriority:
+          type: string
+          description: >-
+            Hint used to order items of this type when grouped by assignee
+        previewType:
+          type: string
+          description: The type of preview that shows on the task
+          enum:
+            - automatic
+            - noPreview
+            - checklist
+            - description
+            - reference
+        activeChecklistItemCount:
+          type: integer
+          description: Number of incomplete checklist items
+          readOnly: true
+        checklistItemCount:
+          type: integer
+          description: Total number of checklist items on the task
+          readOnly: true
+        referenceCount:
+          type: integer
+          description: Number of external references on the task
+          readOnly: true
+
+    PlannerTaskCreate:
+      type: object
+      description: Request body for creating a new task
+      required:
+        - planId
+        - title
+      properties:
+        planId:
+          type: string
+          description: ID of the plan the task belongs to
+        title:
+          type: string
+          description: Title of the task
+        bucketId:
+          type: string
+          description: ID of the bucket to place the task in
+        assignments:
+          $ref: '#/components/schemas/PlannerAssignments'
+        appliedCategories:
+          $ref: '#/components/schemas/PlannerAppliedCategories'
+        priority:
+          type: integer
+          minimum: 0
+          maximum: 10
+          description: Priority of the task (0 is highest, 10 is lowest)
+        percentComplete:
+          type: integer
+          minimum: 0
+          maximum: 100
+        startDateTime:
+          type: string
+          format: date-time
+        dueDateTime:
+          type: string
+          format: date-time
+        conversationThreadId:
+          type: string
+        orderHint:
+          type: string
+        assigneePriority:
+          type: string
+
+    PlannerTaskUpdate:
+      type: object
+      description: Request body for updating a task
+      properties:
+        title:
+          type: string
+        bucketId:
+          type: string
+        assignments:
+          $ref: '#/components/schemas/PlannerAssignments'
+        appliedCategories:
+          $ref: '#/components/schemas/PlannerAppliedCategories'
+        priority:
+          type: integer
+          minimum: 0
+          maximum: 10
+        percentComplete:
+          type: integer
+          minimum: 0
+          maximum: 100
+        startDateTime:
+          type: string
+          format: date-time
+        dueDateTime:
+          type: string
+          format: date-time
+        conversationThreadId:
+          type: string
+        orderHint:
+          type: string
+        assigneePriority:
+          type: string
+        previewType:
+          type: string
+          enum:
+            - automatic
+            - noPreview
+            - checklist
+            - description
+            - reference
+
+    PlannerTaskDetails:
+      type: object
+      description: >-
+        Represents the additional information about a task, including
+        description, checklist items, and external references.
+      properties:
+        '@odata.etag':
+          type: string
+          description: The ETag of the resource
+          readOnly: true
+        id:
+          type: string
+          description: The unique identifier for the task details
+          readOnly: true
+        description:
+          type: string
+          description: Description of the task
+        checklist:
+          $ref: '#/components/schemas/PlannerChecklistItems'
+          description: The collection of checklist items on the task
+        references:
+          $ref: '#/components/schemas/PlannerExternalReferences'
+          description: The collection of references on the task
+        previewType:
+          type: string
+          description: The type of preview shown on the task
+          enum:
+            - automatic
+            - noPreview
+            - checklist
+            - description
+            - reference
+
+    PlannerTaskDetailsUpdate:
+      type: object
+      description: Request body for updating task details
+      properties:
+        description:
+          type: string
+        checklist:
+          $ref: '#/components/schemas/PlannerChecklistItems'
+        references:
+          $ref: '#/components/schemas/PlannerExternalReferences'
+        previewType:
+          type: string
+          enum:
+            - automatic
+            - noPreview
+            - checklist
+            - description
+            - reference
+
+    PlannerBucket:
+      type: object
+      description: >-
+        Represents a bucket (custom column) for tasks in a plan in
+        Microsoft 365. It is contained in a plannerPlan and can have a
+        collection of plannerTasks.
+      properties:
+        '@odata.etag':
+          type: string
+          description: The ETag of the resource, used for concurrency control
+          readOnly: true
+        id:
+          type: string
+          description: >-
+            The unique identifier for the bucket. 28 characters long and
+            case-sensitive.
+          readOnly: true
+        name:
+          type: string
+          description: Name of the bucket
+        planId:
+          type: string
+          description: Plan ID to which the bucket belongs
+        orderHint:
+          type: string
+          description: Hint used to order buckets in a list view
+
+    PlannerBucketCreate:
+      type: object
+      description: Request body for creating a new bucket
+      required:
+        - name
+        - planId
+      properties:
+        name:
+          type: string
+          description: Name of the bucket
+        planId:
+          type: string
+          description: ID of the plan the bucket belongs to
+        orderHint:
+          type: string
+          description: Hint used to order the bucket
+
+    PlannerBucketUpdate:
+      type: object
+      description: Request body for updating a bucket
+      properties:
+        name:
+          type: string
+          description: Updated name of the bucket
+        orderHint:
+          type: string
+          description: Updated order hint for the bucket
+
+    PlannerPlanCollection:
+      type: object
+      description: A collection of plannerPlan resources
+      properties:
+        '@odata.context':
+          type: string
+          readOnly: true
+        '@odata.count':
+          type: integer
+          readOnly: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlannerPlan'
+
+    PlannerTaskCollection:
+      type: object
+      description: A collection of plannerTask resources
+      properties:
+        '@odata.context':
+          type: string
+          readOnly: true
+        '@odata.count':
+          type: integer
+          readOnly: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlannerTask'
+
+    PlannerBucketCollection:
+      type: object
+      description: A collection of plannerBucket resources
+      properties:
+        '@odata.context':
+          type: string
+          readOnly: true
+        '@odata.count':
+          type: integer
+          readOnly: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlannerBucket'
+
+    ODataError:
+      type: object
+      description: OData error response
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The error code
+            message:
+              type: string
+              description: A human-readable error message
+            innerError:
+              type: object
+              properties:
+                request-id:
+                  type: string
+                date:
+                  type: string
+                  format: date-time
+
+  responses:
+    BadRequest:
+      description: >-
+        Bad request. The request body or parameters are invalid. Common causes
+        include incorrect types for open properties, invalid order hint
+        formats, or logically inconsistent data such as a start date after a
+        due date.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: >-
+        Unauthorized. The request requires a valid OAuth 2.0 access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Forbidden:
+      description: >-
+        Forbidden. The caller does not have sufficient permissions, or a
+        service-defined limit has been exceeded (e.g.,
+        MaximumTasksInProject, MaximumBucketsInProject).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Conflict:
+      description: >-
+        Conflict. The request conflicts with the current state of the
+        resource due to a concurrent modification.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    PreconditionFailed:
+      description: >-
+        Precondition failed. The If-Match ETag value does not match the
+        current version of the resource. Read the resource again to obtain
+        the latest ETag.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'

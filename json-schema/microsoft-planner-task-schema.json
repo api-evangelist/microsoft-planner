@@ -1,0 +1,403 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.example.com/microsoft-planner/task",
+  "title": "Microsoft Planner Task",
+  "description": "Represents a Planner task in Microsoft 365 as defined by the Microsoft Graph API v1.0. A task is contained in a plannerPlan and can be assigned to a plannerBucket within the plan. Each task can be assigned to users, categorized, and tracked for completion.",
+  "type": "object",
+  "required": [
+    "planId",
+    "title"
+  ],
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "description": "The ETag of the resource, used for optimistic concurrency control via the If-Match header on PATCH and DELETE operations.",
+      "readOnly": true
+    },
+    "id": {
+      "type": "string",
+      "description": "Read-only unique identifier of the task. It is 28 characters long and case-sensitive. Format validation is performed by the service.",
+      "readOnly": true,
+      "minLength": 28,
+      "maxLength": 28
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the task.",
+      "minLength": 1
+    },
+    "planId": {
+      "type": "string",
+      "description": "The ID of the plan to which the task belongs. Tasks cannot be created without specifying a plan.",
+      "minLength": 28,
+      "maxLength": 28
+    },
+    "bucketId": {
+      "type": ["string", "null"],
+      "description": "The ID of the bucket to which the task belongs. The bucket must be in the same plan as the task. It is 28 characters long and case-sensitive.",
+      "minLength": 28,
+      "maxLength": 28
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the task."
+    },
+    "assignments": {
+      "$ref": "#/$defs/plannerAssignments",
+      "description": "The set of assignees the task is assigned to. Each key is the user ID of the assignee."
+    },
+    "appliedCategories": {
+      "$ref": "#/$defs/plannerAppliedCategories",
+      "description": "The categories (labels) applied to the task. Category names are defined on the plan details."
+    },
+    "priority": {
+      "type": "integer",
+      "description": "Priority of the task. Valid range is 0-10, with 0 being highest priority. Values 0-1 map to 'urgent', 2-4 to 'important', 5-7 to 'medium', and 8-10 to 'low'. Planner sets 1 for urgent, 3 for important, 5 for medium, and 9 for low.",
+      "minimum": 0,
+      "maximum": 10,
+      "default": 5
+    },
+    "percentComplete": {
+      "type": "integer",
+      "description": "Percentage of task completion. When set to 100, the task is considered completed.",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 0
+    },
+    "startDateTime": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Date and time at which the task starts. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time."
+    },
+    "dueDateTime": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Date and time at which the task is due. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time."
+    },
+    "completedDateTime": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Read-only. Date and time at which the percentComplete of the task was set to 100. ISO 8601 format, always in UTC.",
+      "readOnly": true
+    },
+    "completedBy": {
+      "$ref": "#/$defs/identitySet",
+      "description": "Read-only. Identity of the user that completed the task.",
+      "readOnly": true
+    },
+    "createdDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Read-only. Date and time at which the task was created. ISO 8601 format, always in UTC.",
+      "readOnly": true
+    },
+    "createdBy": {
+      "$ref": "#/$defs/identitySet",
+      "description": "Read-only. Identity of the user that created the task.",
+      "readOnly": true
+    },
+    "hasDescription": {
+      "type": "boolean",
+      "description": "Read-only. True if the details object of the task has a nonempty description, false otherwise.",
+      "readOnly": true
+    },
+    "conversationThreadId": {
+      "type": ["string", "null"],
+      "description": "Thread ID of the conversation on the task. This is the ID of the conversation thread object created in the group."
+    },
+    "orderHint": {
+      "type": "string",
+      "description": "Hint used to order items of this type in a list view. The format is defined by the Planner order hints specification."
+    },
+    "assigneePriority": {
+      "type": "string",
+      "description": "Hint used to order items of this type in a list view when grouped by the user assigned to."
+    },
+    "previewType": {
+      "type": "string",
+      "description": "The type of preview that shows up on the task.",
+      "enum": [
+        "automatic",
+        "noPreview",
+        "checklist",
+        "description",
+        "reference"
+      ],
+      "default": "automatic"
+    },
+    "activeChecklistItemCount": {
+      "type": "integer",
+      "description": "Read-only. Number of checklist items with value set to false, representing incomplete items.",
+      "readOnly": true,
+      "minimum": 0
+    },
+    "checklistItemCount": {
+      "type": "integer",
+      "description": "Read-only. Total number of checklist items present on the task.",
+      "readOnly": true,
+      "minimum": 0
+    },
+    "referenceCount": {
+      "type": "integer",
+      "description": "Read-only. Number of external references that exist on the task.",
+      "readOnly": true,
+      "minimum": 0
+    }
+  },
+  "$defs": {
+    "identitySet": {
+      "type": "object",
+      "description": "A set of identities associated with various events for a resource, such as created by or last modified by.",
+      "properties": {
+        "application": {
+          "$ref": "#/$defs/identity"
+        },
+        "device": {
+          "$ref": "#/$defs/identity"
+        },
+        "user": {
+          "$ref": "#/$defs/identity"
+        }
+      },
+      "additionalProperties": false
+    },
+    "identity": {
+      "type": "object",
+      "description": "Represents an identity of an actor (user, application, or device).",
+      "properties": {
+        "displayName": {
+          "type": ["string", "null"],
+          "description": "The display name of the identity."
+        },
+        "id": {
+          "type": ["string", "null"],
+          "description": "The unique identifier of the identity."
+        }
+      },
+      "additionalProperties": false
+    },
+    "plannerAssignments": {
+      "type": "object",
+      "description": "The set of user assignments for a task. Each property name (key) is the user ID of the assignee, and the value is a plannerAssignment object.",
+      "additionalProperties": {
+        "$ref": "#/$defs/plannerAssignment"
+      }
+    },
+    "plannerAssignment": {
+      "type": "object",
+      "description": "Represents the assignment of a task to a user.",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "const": "microsoft.graph.plannerAssignment"
+        },
+        "assignedBy": {
+          "$ref": "#/$defs/identitySet",
+          "description": "The identity of the user that performed the assignment of the task.",
+          "readOnly": true
+        },
+        "assignedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the task was assigned. ISO 8601 format, always in UTC.",
+          "readOnly": true
+        },
+        "orderHint": {
+          "type": "string",
+          "description": "Hint used to order assignees in a task."
+        }
+      },
+      "required": [
+        "@odata.type",
+        "orderHint"
+      ],
+      "additionalProperties": false
+    },
+    "plannerAppliedCategories": {
+      "type": "object",
+      "description": "The categories (labels) applied to a task. Up to 25 categories can be defined per plan. Each property name is a category identifier (category1 through category25) and the value is a boolean indicating whether the category is applied.",
+      "properties": {
+        "category1": { "type": "boolean" },
+        "category2": { "type": "boolean" },
+        "category3": { "type": "boolean" },
+        "category4": { "type": "boolean" },
+        "category5": { "type": "boolean" },
+        "category6": { "type": "boolean" },
+        "category7": { "type": "boolean" },
+        "category8": { "type": "boolean" },
+        "category9": { "type": "boolean" },
+        "category10": { "type": "boolean" },
+        "category11": { "type": "boolean" },
+        "category12": { "type": "boolean" },
+        "category13": { "type": "boolean" },
+        "category14": { "type": "boolean" },
+        "category15": { "type": "boolean" },
+        "category16": { "type": "boolean" },
+        "category17": { "type": "boolean" },
+        "category18": { "type": "boolean" },
+        "category19": { "type": "boolean" },
+        "category20": { "type": "boolean" },
+        "category21": { "type": "boolean" },
+        "category22": { "type": "boolean" },
+        "category23": { "type": "boolean" },
+        "category24": { "type": "boolean" },
+        "category25": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "plannerTaskDetails": {
+      "type": "object",
+      "description": "Represents the additional information about a task, retrieved via the /details relationship. Includes description, checklist items, and external references.",
+      "properties": {
+        "@odata.etag": {
+          "type": "string",
+          "description": "The ETag of the resource.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "Read-only. The unique identifier for the task details. 28 characters long and case-sensitive.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the task."
+        },
+        "checklist": {
+          "$ref": "#/$defs/plannerChecklistItems",
+          "description": "The collection of checklist items on the task."
+        },
+        "references": {
+          "$ref": "#/$defs/plannerExternalReferences",
+          "description": "The collection of external references on the task."
+        },
+        "previewType": {
+          "type": "string",
+          "description": "The type of preview that shows up on the task. When set to automatic, the displayed preview is chosen by the app viewing the task.",
+          "enum": [
+            "automatic",
+            "noPreview",
+            "checklist",
+            "description",
+            "reference"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "plannerChecklistItems": {
+      "type": "object",
+      "description": "A collection of checklist items on a task. Each key is a GUID identifying the checklist item.",
+      "additionalProperties": {
+        "$ref": "#/$defs/plannerChecklistItem"
+      }
+    },
+    "plannerChecklistItem": {
+      "type": "object",
+      "description": "Represents a single checklist item on a Planner task.",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "const": "microsoft.graph.plannerChecklistItem"
+        },
+        "isChecked": {
+          "type": "boolean",
+          "description": "Whether the checklist item is checked (completed).",
+          "default": false
+        },
+        "lastModifiedBy": {
+          "$ref": "#/$defs/identitySet",
+          "description": "Identity of the user that last modified the checklist item.",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the item was last modified. ISO 8601 format, always in UTC.",
+          "readOnly": true
+        },
+        "orderHint": {
+          "type": "string",
+          "description": "Hint used to order items in the checklist."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the checklist item."
+        }
+      },
+      "required": ["title"],
+      "additionalProperties": false
+    },
+    "plannerExternalReferences": {
+      "type": "object",
+      "description": "A collection of external references on a task. Each key is a URL-encoded URL of the reference.",
+      "additionalProperties": {
+        "$ref": "#/$defs/plannerExternalReference"
+      }
+    },
+    "plannerExternalReference": {
+      "type": "object",
+      "description": "Represents an external reference (link or file) attached to a Planner task.",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "const": "microsoft.graph.plannerExternalReference"
+        },
+        "alias": {
+          "type": "string",
+          "description": "A name alias to describe the reference."
+        },
+        "lastModifiedBy": {
+          "$ref": "#/$defs/identitySet",
+          "description": "Identity of the user that last modified the reference.",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the reference was last modified. ISO 8601 format, always in UTC.",
+          "readOnly": true
+        },
+        "previewPriority": {
+          "type": "string",
+          "description": "Hint used to set the relative priority order in which the reference will be shown as a preview on the task."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the reference, used to represent the type of resource (e.g., PowerPoint, Word, Excel, Other)."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true,
+  "examples": [
+    {
+      "id": "ABCDEFGHIJKLMNOPQRSTUVWXYZab",
+      "title": "Review project requirements",
+      "planId": "ABCDEFGHIJKLMNOPQRSTUVWXYZab",
+      "bucketId": "ABCDEFGHIJKLMNOPQRSTUVWXYZab",
+      "assignments": {
+        "user-id-1": {
+          "@odata.type": "microsoft.graph.plannerAssignment",
+          "orderHint": "8586352891559904378"
+        }
+      },
+      "appliedCategories": {
+        "category1": true,
+        "category3": true
+      },
+      "priority": 3,
+      "percentComplete": 50,
+      "startDateTime": "2026-03-01T09:00:00Z",
+      "dueDateTime": "2026-03-15T17:00:00Z",
+      "completedDateTime": null,
+      "createdDateTime": "2026-02-28T12:00:00Z",
+      "hasDescription": true,
+      "previewType": "automatic",
+      "activeChecklistItemCount": 2,
+      "checklistItemCount": 5,
+      "referenceCount": 1
+    }
+  ]
+}
