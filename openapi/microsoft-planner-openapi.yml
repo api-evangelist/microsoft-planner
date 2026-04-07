@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Microsoft Graph Planner API
+  title: Microsoft Planner Microsoft Graph Planner API
   description: >-
     The Microsoft Graph Planner API enables programmatic access to Planner
     resources in Microsoft 365. You can create and manage plans, tasks, and
@@ -64,7 +64,7 @@ paths:
   /planner/plans:
     post:
       operationId: createPlan
-      summary: Create a plan
+      summary: Microsoft Planner Create a plan
       description: >-
         Create a new plannerPlan object. The plan is contained within a
         Microsoft 365 group specified by the container property.
@@ -95,7 +95,7 @@ paths:
       - $ref: '#/components/parameters/PlanId'
     get:
       operationId: getPlan
-      summary: Get a plan
+      summary: Microsoft Planner Get a plan
       description: >-
         Retrieve the properties and relationships of a plannerPlan object.
       tags:
@@ -115,7 +115,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       operationId: updatePlan
-      summary: Update a plan
+      summary: Microsoft Planner Update a plan
       description: >-
         Update the properties of a plannerPlan object. Requires the If-Match
         header with the last known ETag value of the plan.
@@ -150,7 +150,7 @@ paths:
           $ref: '#/components/responses/PreconditionFailed'
     delete:
       operationId: deletePlan
-      summary: Delete a plan
+      summary: Microsoft Planner Delete a plan
       description: >-
         Delete a plannerPlan object. Requires the If-Match header with the
         last known ETag value of the plan.
@@ -177,7 +177,7 @@ paths:
       - $ref: '#/components/parameters/PlanId'
     get:
       operationId: listPlanTasks
-      summary: List plan tasks
+      summary: Microsoft Planner List plan tasks
       description: >-
         Retrieve a list of plannerTask objects associated with a plannerPlan
         object.
@@ -203,7 +203,7 @@ paths:
       - $ref: '#/components/parameters/PlanId'
     get:
       operationId: listPlanBuckets
-      summary: List plan buckets
+      summary: Microsoft Planner List plan buckets
       description: >-
         Retrieve a list of plannerBucket objects contained in a plannerPlan
         object.
@@ -229,7 +229,7 @@ paths:
       - $ref: '#/components/parameters/PlanId'
     get:
       operationId: getPlanDetails
-      summary: Get plan details
+      summary: Microsoft Planner Get plan details
       description: >-
         Retrieve the properties and relationships of a plannerPlanDetails
         object.
@@ -250,7 +250,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       operationId: updatePlanDetails
-      summary: Update plan details
+      summary: Microsoft Planner Update plan details
       description: >-
         Update the properties of a plannerPlanDetails object. Requires the
         If-Match header with the last known ETag value.
@@ -287,7 +287,7 @@ paths:
   /planner/tasks:
     post:
       operationId: createTask
-      summary: Create a task
+      summary: Microsoft Planner Create a task
       description: >-
         Create a new plannerTask. The task must specify a planId to indicate
         which plan it belongs to. Tasks cannot be created without plans.
@@ -318,7 +318,7 @@ paths:
       - $ref: '#/components/parameters/TaskId'
     get:
       operationId: getTask
-      summary: Get a task
+      summary: Microsoft Planner Get a task
       description: >-
         Retrieve the properties and relationships of a plannerTask object.
       tags:
@@ -338,7 +338,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       operationId: updateTask
-      summary: Update a task
+      summary: Microsoft Planner Update a task
       description: >-
         Update the properties of a plannerTask object. Requires the If-Match
         header with the last known ETag value of the task.
@@ -373,7 +373,7 @@ paths:
           $ref: '#/components/responses/PreconditionFailed'
     delete:
       operationId: deleteTask
-      summary: Delete a task
+      summary: Microsoft Planner Delete a task
       description: >-
         Delete a plannerTask object. Requires the If-Match header with the
         last known ETag value of the task.
@@ -400,7 +400,7 @@ paths:
       - $ref: '#/components/parameters/TaskId'
     get:
       operationId: getTaskDetails
-      summary: Get task details
+      summary: Microsoft Planner Get task details
       description: >-
         Retrieve the properties and relationships of a plannerTaskDetails
         object.
@@ -421,7 +421,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       operationId: updateTaskDetails
-      summary: Update task details
+      summary: Microsoft Planner Update task details
       description: >-
         Update the properties of a plannerTaskDetails object. Requires the
         If-Match header with the last known ETag value.
@@ -458,7 +458,7 @@ paths:
   /planner/buckets:
     post:
       operationId: createBucket
-      summary: Create a bucket
+      summary: Microsoft Planner Create a bucket
       description: >-
         Create a new plannerBucket object. The bucket must specify a planId
         indicating which plan it belongs to.
@@ -489,7 +489,7 @@ paths:
       - $ref: '#/components/parameters/BucketId'
     get:
       operationId: getBucket
-      summary: Get a bucket
+      summary: Microsoft Planner Get a bucket
       description: >-
         Retrieve the properties and relationships of a plannerBucket object.
       tags:
@@ -509,7 +509,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       operationId: updateBucket
-      summary: Update a bucket
+      summary: Microsoft Planner Update a bucket
       description: >-
         Update the properties of a plannerBucket object. Requires the If-Match
         header with the last known ETag value of the bucket.
@@ -544,7 +544,7 @@ paths:
           $ref: '#/components/responses/PreconditionFailed'
     delete:
       operationId: deleteBucket
-      summary: Delete a bucket
+      summary: Microsoft Planner Delete a bucket
       description: >-
         Delete a plannerBucket object. Requires the If-Match header with the
         last known ETag value of the bucket.
@@ -571,7 +571,7 @@ paths:
       - $ref: '#/components/parameters/BucketId'
     get:
       operationId: listBucketTasks
-      summary: List bucket tasks
+      summary: Microsoft Planner List bucket tasks
       description: >-
         Retrieve a list of plannerTask objects associated with a plannerBucket
         object.
@@ -597,7 +597,7 @@ paths:
       - $ref: '#/components/parameters/GroupId'
     get:
       operationId: listGroupPlans
-      summary: List group plans
+      summary: Microsoft Planner List group plans
       description: >-
         Retrieve a list of plannerPlan objects owned by a Microsoft 365 group.
       tags:
@@ -619,7 +619,7 @@ paths:
   /me/planner/tasks:
     get:
       operationId: listMyTasks
-      summary: List my tasks
+      summary: Microsoft Planner List my tasks
       description: >-
         Retrieve a list of plannerTask objects assigned to the signed-in user.
       tags:
@@ -641,7 +641,7 @@ paths:
       - $ref: '#/components/parameters/UserId'
     get:
       operationId: listUserTasks
-      summary: List user tasks
+      summary: Microsoft Planner List user tasks
       description: >-
         Retrieve a list of plannerTask objects assigned to a specific user.
       tags:
