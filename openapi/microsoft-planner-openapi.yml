@@ -39,14 +39,6 @@ security:
       - Group.ReadWrite.All
 
 tags:
-  - name: Plans
-    description: Operations for managing Planner plans
-    externalDocs:
-      url: https://learn.microsoft.com/en-us/graph/api/resources/plannerplan?view=graph-rest-1.0
-  - name: Tasks
-    description: Operations for managing Planner tasks
-    externalDocs:
-      url: https://learn.microsoft.com/en-us/graph/api/resources/plannertask?view=graph-rest-1.0
   - name: Buckets
     description: Operations for managing Planner buckets
     externalDocs:
@@ -55,11 +47,19 @@ tags:
     description: Operations for managing additional plan details
     externalDocs:
       url: https://learn.microsoft.com/en-us/graph/api/resources/plannerplandetails?view=graph-rest-1.0
+  - name: Plans
+    description: Operations for managing Planner plans
+    externalDocs:
+      url: https://learn.microsoft.com/en-us/graph/api/resources/plannerplan?view=graph-rest-1.0
   - name: Task Details
     description: Operations for managing additional task details
     externalDocs:
       url: https://learn.microsoft.com/en-us/graph/api/resources/plannertaskdetails?view=graph-rest-1.0
 
+  - name: Tasks
+    description: Operations for managing Planner tasks
+    externalDocs:
+      url: https://learn.microsoft.com/en-us/graph/api/resources/plannertask?view=graph-rest-1.0
 paths:
   /planner/plans:
     post:
@@ -208,8 +208,8 @@ paths:
         Retrieve a list of plannerBucket objects contained in a plannerPlan
         object.
       tags:
-        - Plans
         - Buckets
+        - Plans
       responses:
         '200':
           description: Collection of buckets in the plan
