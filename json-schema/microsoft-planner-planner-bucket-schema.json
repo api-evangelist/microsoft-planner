@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerBucket",
+  "type": "object",
+  "description": "Represents a bucket (custom column) for tasks in a plan in Microsoft 365. It is contained in a plannerPlan and can have a collection of plannerTasks.",
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "description": "The ETag of the resource, used for concurrency control"
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the bucket. 28 characters long and case-sensitive."
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the bucket"
+    },
+    "planId": {
+      "type": "string",
+      "description": "Plan ID to which the bucket belongs"
+    },
+    "orderHint": {
+      "type": "string",
+      "description": "Hint used to order buckets in a list view"
+    }
+  }
+}

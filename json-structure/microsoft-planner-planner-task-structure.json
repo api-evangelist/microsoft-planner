@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "PlannerTask",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "planId": {
+      "type": "string"
+    },
+    "bucketId": {
+      "type": "['string', 'null']"
+    },
+    "priority": {
+      "type": "integer"
+    },
+    "percentComplete": {
+      "type": "integer"
+    },
+    "startDateTime": {
+      "type": "['string', 'null']"
+    },
+    "dueDateTime": {
+      "type": "['string', 'null']"
+    },
+    "completedDateTime": {
+      "type": "['string', 'null']"
+    },
+    "createdDateTime": {
+      "type": "string"
+    },
+    "hasDescription": {
+      "type": "boolean"
+    },
+    "conversationThreadId": {
+      "type": "['string', 'null']"
+    },
+    "orderHint": {
+      "type": "string"
+    },
+    "assigneePriority": {
+      "type": "string"
+    },
+    "previewType": {
+      "type": "string"
+    },
+    "activeChecklistItemCount": {
+      "type": "integer"
+    },
+    "checklistItemCount": {
+      "type": "integer"
+    },
+    "referenceCount": {
+      "type": "integer"
+    }
+  }
+}

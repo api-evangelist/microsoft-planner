@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerTaskCollection",
+  "type": "object",
+  "description": "A collection of plannerTask resources",
+  "properties": {
+    "@odata.context": {
+      "type": "string"
+    },
+    "@odata.count": {
+      "type": "integer"
+    },
+    "value": {
+      "type": "array"
+    }
+  }
+}

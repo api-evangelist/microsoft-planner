@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "PlannerExternalReference",
+  "type": "object",
+  "properties": {
+    "@odata.type": {
+      "type": "string"
+    },
+    "alias": {
+      "type": "string"
+    },
+    "lastModifiedDateTime": {
+      "type": "string"
+    },
+    "previewPriority": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    }
+  }
+}

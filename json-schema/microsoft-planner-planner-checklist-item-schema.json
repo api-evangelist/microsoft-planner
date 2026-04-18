@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerChecklistItem",
+  "type": "object",
+  "description": "A checklist item on a Planner task",
+  "properties": {
+    "@odata.type": {
+      "type": "string"
+    },
+    "isChecked": {
+      "type": "boolean",
+      "description": "Whether the item is checked (completed)"
+    },
+    "lastModifiedDateTime": {
+      "type": "string",
+      "description": "The date and time the item was last modified"
+    },
+    "orderHint": {
+      "type": "string",
+      "description": "Hint used to order items in the checklist"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the checklist item"
+    }
+  }
+}

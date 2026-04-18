@@ -1,0 +1,21 @@
+{
+  "@odata.etag": "example_value",
+  "id": "abc123",
+  "title": "Example Title",
+  "planId": "500123",
+  "bucketId": "500123",
+  "priority": 10,
+  "percentComplete": 10,
+  "startDateTime": "example_value",
+  "dueDateTime": "example_value",
+  "completedDateTime": "example_value",
+  "createdDateTime": "example_value",
+  "hasDescription": true,
+  "conversationThreadId": "500123",
+  "orderHint": "example_value",
+  "assigneePriority": "example_value",
+  "previewType": "example_value",
+  "activeChecklistItemCount": 10,
+  "checklistItemCount": 10,
+  "referenceCount": 10
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerTaskUpdate",
+  "type": "object",
+  "description": "Request body for updating a task",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "bucketId": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "integer"
+    },
+    "percentComplete": {
+      "type": "integer"
+    },
+    "startDateTime": {
+      "type": "string"
+    },
+    "dueDateTime": {
+      "type": "string"
+    },
+    "conversationThreadId": {
+      "type": "string"
+    },
+    "orderHint": {
+      "type": "string"
+    },
+    "assigneePriority": {
+      "type": "string"
+    },
+    "previewType": {
+      "type": "string"
+    }
+  }
+}

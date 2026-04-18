@@ -1,0 +1,7 @@
+{
+  "@odata.etag": "example_value",
+  "id": "abc123",
+  "name": "Example Title",
+  "planId": "500123",
+  "orderHint": "example_value"
+}

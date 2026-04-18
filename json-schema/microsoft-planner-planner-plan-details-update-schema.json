@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerPlanDetailsUpdate",
+  "type": "object",
+  "description": "Request body for updating plan details",
+  "properties": {}
+}

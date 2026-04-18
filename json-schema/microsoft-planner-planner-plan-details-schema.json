@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerPlanDetails",
+  "type": "object",
+  "description": "Represents additional information about a plan, including category descriptions and sharing information.",
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "description": "The ETag of the resource"
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the plan details"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerExternalReferences",
+  "type": "object",
+  "description": "A collection of references on a task. Each key is a URL-encoded URL of the reference, and the value is a plannerExternalReference."
+}

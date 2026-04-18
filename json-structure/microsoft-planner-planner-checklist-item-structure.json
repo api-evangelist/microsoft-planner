@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "PlannerChecklistItem",
+  "type": "object",
+  "properties": {
+    "@odata.type": {
+      "type": "string"
+    },
+    "isChecked": {
+      "type": "boolean"
+    },
+    "lastModifiedDateTime": {
+      "type": "string"
+    },
+    "orderHint": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

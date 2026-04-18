@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerTask",
+  "type": "object",
+  "description": "Represents a Planner task in Microsoft 365. A task is contained in a plan and can be assigned to a bucket within the plan.",
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "description": "The ETag of the resource, used for concurrency control"
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the task. 28 characters long and case-sensitive."
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the task"
+    },
+    "planId": {
+      "type": "string",
+      "description": "Plan ID to which the task belongs"
+    },
+    "bucketId": {
+      "type": "['string', 'null']",
+      "description": "Bucket ID to which the task belongs. The bucket must be in the same plan as the task. 28 characters long and case-sensitive."
+    },
+    "priority": {
+      "type": "integer",
+      "description": "Priority of the task. Valid range is 0-10 where 0 is highest priority. Values 0-1 are urgent, 2-4 are important, 5-7 are medium, 8-10 are low."
+    },
+    "percentComplete": {
+      "type": "integer",
+      "description": "Percentage of task completion. When set to 100, the task is considered completed."
+    },
+    "startDateTime": {
+      "type": "['string', 'null']",
+      "description": "Date and time at which the task starts. ISO 8601 format, always in UTC."
+    },
+    "dueDateTime": {
+      "type": "['string', 'null']",
+      "description": "Date and time at which the task is due. ISO 8601 format, always in UTC."
+    },
+    "completedDateTime": {
+      "type": "['string', 'null']",
+      "description": "Date and time at which the percentComplete was set to 100. ISO 8601 format, always in UTC."
+    },
+    "createdDateTime": {
+      "type": "string",
+      "description": "Date and time at which the task was created. ISO 8601 format, always in UTC."
+    },
+    "hasDescription": {
+      "type": "boolean",
+      "description": "Indicates whether the details object of the task has a nonempty description."
+    },
+    "conversationThreadId": {
+      "type": "['string', 'null']",
+      "description": "Thread ID of the conversation on the task in the containing group."
+    },
+    "orderHint": {
+      "type": "string",
+      "description": "Hint used to order items of this type in a list view"
+    },
+    "assigneePriority": {
+      "type": "string",
+      "description": "Hint used to order items of this type when grouped by assignee"
+    },
+    "previewType": {
+      "type": "string",
+      "description": "The type of preview that shows on the task"
+    },
+    "activeChecklistItemCount": {
+      "type": "integer",
+      "description": "Number of incomplete checklist items"
+    },
+    "checklistItemCount": {
+      "type": "integer",
+      "description": "Total number of checklist items on the task"
+    },
+    "referenceCount": {
+      "type": "integer",
+      "description": "Number of external references on the task"
+    }
+  }
+}

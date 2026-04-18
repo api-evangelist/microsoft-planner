@@ -1,0 +1,332 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Microsoft Planner"
+  description: "Microsoft Graph Planner API for managing plans, tasks, and buckets."
+  tags:
+    - Microsoft
+    - Planner
+    - Task Management
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      MICROSOFT_GRAPH_TOKEN: MICROSOFT_GRAPH_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: planner
+      baseUri: https://graph.microsoft.com/v1.0
+      description: "Microsoft Graph Planner API"
+      authentication:
+        type: bearer
+        token: "{{MICROSOFT_GRAPH_TOKEN}}"
+      resources:
+        - name: plans
+          path: /planner/plans
+          description: "Manage Planner plans"
+          operations:
+            - name: create-plan
+              method: POST
+              description: "Create a new plan"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  title: "{{tools.title}}"
+                  container:
+                    url: "{{tools.containerUrl}}"
+            - name: get-plan
+              method: GET
+              description: "Get a plan by ID"
+              inputParameters:
+                - name: planId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The plan ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-plan
+              method: PATCH
+              description: "Update a plan"
+              inputParameters:
+                - name: planId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The plan ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  title: "{{tools.title}}"
+            - name: delete-plan
+              method: DELETE
+              description: "Delete a plan"
+              inputParameters:
+                - name: planId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The plan ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: list-plan-tasks
+              method: GET
+              description: "List tasks in a plan"
+              inputParameters:
+                - name: planId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The plan ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: list-plan-buckets
+              method: GET
+              description: "List buckets in a plan"
+              inputParameters:
+                - name: planId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The plan ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-plan-details
+              method: GET
+              description: "Get plan details"
+              inputParameters:
+                - name: planId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The plan ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-plan-details
+              method: PATCH
+              description: "Update plan details"
+              inputParameters:
+                - name: planId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The plan ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: tasks
+          path: /planner/tasks
+          description: "Manage Planner tasks"
+          operations:
+            - name: create-task
+              method: POST
+              description: "Create a new task"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  planId: "{{tools.planId}}"
+                  title: "{{tools.title}}"
+                  bucketId: "{{tools.bucketId}}"
+            - name: get-task
+              method: GET
+              description: "Get a task by ID"
+              inputParameters:
+                - name: taskId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The task ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-task
+              method: PATCH
+              description: "Update a task"
+              inputParameters:
+                - name: taskId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The task ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-task
+              method: DELETE
+              description: "Delete a task"
+              inputParameters:
+                - name: taskId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The task ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-task-details
+              method: GET
+              description: "Get task details including checklist and references"
+              inputParameters:
+                - name: taskId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The task ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-task-details
+              method: PATCH
+              description: "Update task details"
+              inputParameters:
+                - name: taskId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The task ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: buckets
+          path: /planner/buckets
+          description: "Manage Planner buckets"
+          operations:
+            - name: create-bucket
+              method: POST
+              description: "Create a new bucket"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  planId: "{{tools.planId}}"
+            - name: get-bucket
+              method: GET
+              description: "Get a bucket by ID"
+              inputParameters:
+                - name: bucketId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The bucket ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-bucket
+              method: PATCH
+              description: "Update a bucket"
+              inputParameters:
+                - name: bucketId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The bucket ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-bucket
+              method: DELETE
+              description: "Delete a bucket"
+              inputParameters:
+                - name: bucketId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The bucket ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: list-bucket-tasks
+              method: GET
+              description: "List tasks in a bucket"
+              inputParameters:
+                - name: bucketId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The bucket ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: user-tasks
+          path: /me/planner/tasks
+          description: "Access user tasks"
+          operations:
+            - name: list-my-tasks
+              method: GET
+              description: "List tasks assigned to the current user"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: planner-api
+      resources: []
+
+    - type: mcp
+      port: 9100
+      namespace: planner-mcp
+      transport: http
+      tools: []

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerPlanContainer",
+  "type": "object",
+  "description": "Represents the container for a plannerPlan. The container is a resource that specifies authorization rules and the lifecycle of the plan.",
+  "properties": {
+    "containerId": {
+      "type": "string",
+      "description": "The identifier of the resource that contains the plan"
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of the container"
+    },
+    "url": {
+      "type": "string",
+      "description": "The full canonical URL of the container"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerBucketUpdate",
+  "type": "object",
+  "description": "Request body for updating a bucket",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Updated name of the bucket"
+    },
+    "orderHint": {
+      "type": "string",
+      "description": "Updated order hint for the bucket"
+    }
+  }
+}

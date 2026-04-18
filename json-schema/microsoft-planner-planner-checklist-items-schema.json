@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerChecklistItems",
+  "type": "object",
+  "description": "A collection of checklist items on a task. Each key is a GUID identifying the checklist item, and the value is a plannerChecklistItem."
+}

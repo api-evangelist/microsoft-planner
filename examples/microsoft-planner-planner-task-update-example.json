@@ -1,0 +1,12 @@
+{
+  "title": "Example Title",
+  "bucketId": "500123",
+  "priority": 10,
+  "percentComplete": 10,
+  "startDateTime": "example_value",
+  "dueDateTime": "example_value",
+  "conversationThreadId": "500123",
+  "orderHint": "example_value",
+  "assigneePriority": "example_value",
+  "previewType": "example_value"
+}

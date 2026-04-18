@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerTaskDetailsUpdate",
+  "type": "object",
+  "description": "Request body for updating task details",
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "previewType": {
+      "type": "string"
+    }
+  }
+}

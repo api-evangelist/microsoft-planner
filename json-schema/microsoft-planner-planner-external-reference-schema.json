@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerExternalReference",
+  "type": "object",
+  "description": "An external reference attached to a Planner task",
+  "properties": {
+    "@odata.type": {
+      "type": "string"
+    },
+    "alias": {
+      "type": "string",
+      "description": "A name alias for the reference"
+    },
+    "lastModifiedDateTime": {
+      "type": "string",
+      "description": "The date and time the reference was last modified"
+    },
+    "previewPriority": {
+      "type": "string",
+      "description": "Hint used to set the relative priority order in which the reference will be shown as a preview on the task"
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of the reference (e.g., PowerPoint, Word, Excel, Other)"
+    }
+  }
+}

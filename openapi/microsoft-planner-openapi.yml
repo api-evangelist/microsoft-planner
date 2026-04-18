@@ -18,8 +18,8 @@ info:
     url: https://docs.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
   termsOfService: https://docs.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
   x-apisguru-categories:
-    - collaboration
-    - project-management
+  - collaboration
+  - project-management
   x-logo:
     url: https://docs.microsoft.com/en-us/media/logos/logo-ms-social.png
 
@@ -28,54 +28,62 @@ externalDocs:
   url: https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-1.0
 
 servers:
-  - url: https://graph.microsoft.com/v1.0
-    description: Microsoft Graph v1.0 production endpoint
+- url: https://graph.microsoft.com/v1.0
+  description: Microsoft Graph v1.0 production endpoint
 
 security:
-  - oauth2:
-      - Tasks.Read
-      - Tasks.ReadWrite
-      - Group.Read.All
-      - Group.ReadWrite.All
+- oauth2:
+  - Tasks.Read
+  - Tasks.ReadWrite
+  - Group.Read.All
+  - Group.ReadWrite.All
 
 tags:
-  - name: Buckets
-    description: Operations for managing Planner buckets
-    externalDocs:
-      url: https://learn.microsoft.com/en-us/graph/api/resources/plannerbucket?view=graph-rest-1.0
-  - name: Plan Details
-    description: Operations for managing additional plan details
-    externalDocs:
-      url: https://learn.microsoft.com/en-us/graph/api/resources/plannerplandetails?view=graph-rest-1.0
-  - name: Plans
-    description: Operations for managing Planner plans
-    externalDocs:
-      url: https://learn.microsoft.com/en-us/graph/api/resources/plannerplan?view=graph-rest-1.0
-  - name: Task Details
-    description: Operations for managing additional task details
-    externalDocs:
-      url: https://learn.microsoft.com/en-us/graph/api/resources/plannertaskdetails?view=graph-rest-1.0
+- name: Buckets
+  description: Operations for managing Planner buckets
+  externalDocs:
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannerbucket?view=graph-rest-1.0
+- name: Plan Details
+  description: Operations for managing additional plan details
+  externalDocs:
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannerplandetails?view=graph-rest-1.0
+- name: Plans
+  description: Operations for managing Planner plans
+  externalDocs:
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannerplan?view=graph-rest-1.0
+- name: Task Details
+  description: Operations for managing additional task details
+  externalDocs:
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannertaskdetails?view=graph-rest-1.0
 
-  - name: Tasks
-    description: Operations for managing Planner tasks
-    externalDocs:
-      url: https://learn.microsoft.com/en-us/graph/api/resources/plannertask?view=graph-rest-1.0
+- name: Tasks
+  description: Operations for managing Planner tasks
+  externalDocs:
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannertask?view=graph-rest-1.0
 paths:
   /planner/plans:
     post:
       operationId: createPlan
-      summary: Microsoft Planner Create a plan
+      summary: Microsoft Planner Create a Plan
       description: >-
         Create a new plannerPlan object. The plan is contained within a
         Microsoft 365 group specified by the container property.
       tags:
-        - Plans
+      - Plans
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PlannerPlanCreate'
+            examples:
+              CreateplanRequestExample:
+                summary: Default createPlan request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  container:
+                    url: https://www.example.com
       responses:
         '201':
           description: The created plan
@@ -83,6 +91,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerPlan'
+              examples:
+                Createplan201Example:
+                  summary: Default createPlan 201 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    title: Example Title
+                    container:
+                      containerId: '500123'
+                      type: group
+                      url: https://www.example.com
+                    owner: example_value
+                    createdBy: {}
+                    createdDateTime: '2026-01-15T10:30:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -90,16 +113,19 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /planner/plans/{plan-id}:
     parameters:
-      - $ref: '#/components/parameters/PlanId'
+    - $ref: '#/components/parameters/PlanId'
     get:
       operationId: getPlan
-      summary: Microsoft Planner Get a plan
+      summary: Microsoft Planner Get a Plan
       description: >-
         Retrieve the properties and relationships of a plannerPlan object.
       tags:
-        - Plans
+      - Plans
       responses:
         '200':
           description: The requested plan
@@ -107,28 +133,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerPlan'
+              examples:
+                Getplan200Example:
+                  summary: Default getPlan 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    title: Example Title
+                    container:
+                      containerId: '500123'
+                      type: group
+                      url: https://www.example.com
+                    owner: example_value
+                    createdBy: {}
+                    createdDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updatePlan
-      summary: Microsoft Planner Update a plan
+      summary: Microsoft Planner Update a Plan
       description: >-
         Update the properties of a plannerPlan object. Requires the If-Match
         header with the last known ETag value of the plan.
       tags:
-        - Plans
+      - Plans
       parameters:
-        - $ref: '#/components/parameters/IfMatch'
+      - $ref: '#/components/parameters/IfMatch'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PlannerPlanUpdate'
+            examples:
+              UpdateplanRequestExample:
+                summary: Default updatePlan request
+                x-microcks-default: true
+                value:
+                  title: Example Title
       responses:
         '200':
           description: The updated plan
@@ -136,6 +186,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerPlan'
+              examples:
+                Updateplan200Example:
+                  summary: Default updatePlan 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    title: Example Title
+                    container:
+                      containerId: '500123'
+                      type: group
+                      url: https://www.example.com
+                    owner: example_value
+                    createdBy: {}
+                    createdDateTime: '2026-01-15T10:30:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -148,16 +213,19 @@ paths:
           $ref: '#/components/responses/Conflict'
         '412':
           $ref: '#/components/responses/PreconditionFailed'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deletePlan
-      summary: Microsoft Planner Delete a plan
+      summary: Microsoft Planner Delete a Plan
       description: >-
         Delete a plannerPlan object. Requires the If-Match header with the
         last known ETag value of the plan.
       tags:
-        - Plans
+      - Plans
       parameters:
-        - $ref: '#/components/parameters/IfMatch'
+      - $ref: '#/components/parameters/IfMatch'
       responses:
         '204':
           description: Plan deleted successfully
@@ -172,18 +240,21 @@ paths:
         '412':
           $ref: '#/components/responses/PreconditionFailed'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /planner/plans/{plan-id}/tasks:
     parameters:
-      - $ref: '#/components/parameters/PlanId'
+    - $ref: '#/components/parameters/PlanId'
     get:
       operationId: listPlanTasks
-      summary: Microsoft Planner List plan tasks
+      summary: Microsoft Planner List Plan Tasks
       description: >-
         Retrieve a list of plannerTask objects associated with a plannerPlan
         object.
       tags:
-        - Plans
-        - Tasks
+      - Plans
+      - Tasks
       responses:
         '200':
           description: Collection of tasks in the plan
@@ -191,6 +262,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerTaskCollection'
+              examples:
+                Listplantasks200Example:
+                  summary: Default listPlanTasks 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.context': example_value
+                    '@odata.count': 10
+                    value:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      title: Example Title
+                      planId: '500123'
+                      bucketId: '500123'
+                      priority: 10
+                      percentComplete: 10
+                      startDateTime: '2026-01-15T10:30:00Z'
+                      dueDateTime: '2026-01-15T10:30:00Z'
+                      completedDateTime: '2026-01-15T10:30:00Z'
+                      createdDateTime: '2026-01-15T10:30:00Z'
+                      hasDescription: true
+                      conversationThreadId: '500123'
+                      orderHint: example_value
+                      assigneePriority: example_value
+                      previewType: automatic
+                      activeChecklistItemCount: 10
+                      checklistItemCount: 10
+                      referenceCount: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -198,18 +296,21 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /planner/plans/{plan-id}/buckets:
     parameters:
-      - $ref: '#/components/parameters/PlanId'
+    - $ref: '#/components/parameters/PlanId'
     get:
       operationId: listPlanBuckets
-      summary: Microsoft Planner List plan buckets
+      summary: Microsoft Planner List Plan Buckets
       description: >-
         Retrieve a list of plannerBucket objects contained in a plannerPlan
         object.
       tags:
-        - Buckets
-        - Plans
+      - Buckets
+      - Plans
       responses:
         '200':
           description: Collection of buckets in the plan
@@ -217,6 +318,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerBucketCollection'
+              examples:
+                Listplanbuckets200Example:
+                  summary: Default listPlanBuckets 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.context': example_value
+                    '@odata.count': 10
+                    value:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      name: Example Title
+                      planId: '500123'
+                      orderHint: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -224,17 +338,20 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /planner/plans/{plan-id}/details:
     parameters:
-      - $ref: '#/components/parameters/PlanId'
+    - $ref: '#/components/parameters/PlanId'
     get:
       operationId: getPlanDetails
-      summary: Microsoft Planner Get plan details
+      summary: Microsoft Planner Get Plan Details
       description: >-
         Retrieve the properties and relationships of a plannerPlanDetails
         object.
       tags:
-        - Plan Details
+      - Plan Details
       responses:
         '200':
           description: The plan details
@@ -242,28 +359,97 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerPlanDetails'
+              examples:
+                Getplandetails200Example:
+                  summary: Default getPlanDetails 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    categoryDescriptions:
+                      category1: example_value
+                      category2: example_value
+                      category3: example_value
+                      category4: example_value
+                      category5: example_value
+                      category6: example_value
+                      category7: example_value
+                      category8: example_value
+                      category9: example_value
+                      category10: example_value
+                      category11: example_value
+                      category12: example_value
+                      category13: example_value
+                      category14: example_value
+                      category15: example_value
+                      category16: example_value
+                      category17: example_value
+                      category18: example_value
+                      category19: example_value
+                      category20: example_value
+                      category21: example_value
+                      category22: example_value
+                      category23: example_value
+                      category24: example_value
+                      category25: example_value
+                    sharedWith: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updatePlanDetails
-      summary: Microsoft Planner Update plan details
+      summary: Microsoft Planner Update Plan Details
       description: >-
         Update the properties of a plannerPlanDetails object. Requires the
         If-Match header with the last known ETag value.
       tags:
-        - Plan Details
+      - Plan Details
       parameters:
-        - $ref: '#/components/parameters/IfMatch'
+      - $ref: '#/components/parameters/IfMatch'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PlannerPlanDetailsUpdate'
+            examples:
+              UpdateplandetailsRequestExample:
+                summary: Default updatePlanDetails request
+                x-microcks-default: true
+                value:
+                  categoryDescriptions:
+                    category1: example_value
+                    category2: example_value
+                    category3: example_value
+                    category4: example_value
+                    category5: example_value
+                    category6: example_value
+                    category7: example_value
+                    category8: example_value
+                    category9: example_value
+                    category10: example_value
+                    category11: example_value
+                    category12: example_value
+                    category13: example_value
+                    category14: example_value
+                    category15: example_value
+                    category16: example_value
+                    category17: example_value
+                    category18: example_value
+                    category19: example_value
+                    category20: example_value
+                    category21: example_value
+                    category22: example_value
+                    category23: example_value
+                    category24: example_value
+                    category25: example_value
+                  sharedWith: {}
       responses:
         '200':
           description: The updated plan details
@@ -271,6 +457,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerPlanDetails'
+              examples:
+                Updateplandetails200Example:
+                  summary: Default updatePlanDetails 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    categoryDescriptions:
+                      category1: example_value
+                      category2: example_value
+                      category3: example_value
+                      category4: example_value
+                      category5: example_value
+                      category6: example_value
+                      category7: example_value
+                      category8: example_value
+                      category9: example_value
+                      category10: example_value
+                      category11: example_value
+                      category12: example_value
+                      category13: example_value
+                      category14: example_value
+                      category15: example_value
+                      category16: example_value
+                      category17: example_value
+                      category18: example_value
+                      category19: example_value
+                      category20: example_value
+                      category21: example_value
+                      category22: example_value
+                      category23: example_value
+                      category24: example_value
+                      category25: example_value
+                    sharedWith: {}
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -284,21 +504,41 @@ paths:
         '412':
           $ref: '#/components/responses/PreconditionFailed'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /planner/tasks:
     post:
       operationId: createTask
-      summary: Microsoft Planner Create a task
+      summary: Microsoft Planner Create a Task
       description: >-
         Create a new plannerTask. The task must specify a planId to indicate
         which plan it belongs to. Tasks cannot be created without plans.
       tags:
-        - Tasks
+      - Tasks
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PlannerTaskCreate'
+            examples:
+              CreatetaskRequestExample:
+                summary: Default createTask request
+                x-microcks-default: true
+                value:
+                  planId: '500123'
+                  title: Example Title
+                  bucketId: '500123'
+                  assignments: {}
+                  appliedCategories: {}
+                  priority: 10
+                  percentComplete: 10
+                  startDateTime: '2026-01-15T10:30:00Z'
+                  dueDateTime: '2026-01-15T10:30:00Z'
+                  conversationThreadId: '500123'
+                  orderHint: example_value
+                  assigneePriority: example_value
       responses:
         '201':
           description: The created task
@@ -306,6 +546,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerTask'
+              examples:
+                Createtask201Example:
+                  summary: Default createTask 201 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    title: Example Title
+                    planId: '500123'
+                    bucketId: '500123'
+                    assignments: {}
+                    appliedCategories: {}
+                    priority: 10
+                    percentComplete: 10
+                    startDateTime: '2026-01-15T10:30:00Z'
+                    dueDateTime: '2026-01-15T10:30:00Z'
+                    completedDateTime: '2026-01-15T10:30:00Z'
+                    completedBy: {}
+                    createdDateTime: '2026-01-15T10:30:00Z'
+                    createdBy: {}
+                    hasDescription: true
+                    conversationThreadId: '500123'
+                    orderHint: example_value
+                    assigneePriority: example_value
+                    previewType: automatic
+                    activeChecklistItemCount: 10
+                    checklistItemCount: 10
+                    referenceCount: 10
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -313,16 +581,19 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /planner/tasks/{task-id}:
     parameters:
-      - $ref: '#/components/parameters/TaskId'
+    - $ref: '#/components/parameters/TaskId'
     get:
       operationId: getTask
-      summary: Microsoft Planner Get a task
+      summary: Microsoft Planner Get a Task
       description: >-
         Retrieve the properties and relationships of a plannerTask object.
       tags:
-        - Tasks
+      - Tasks
       responses:
         '200':
           description: The requested task
@@ -330,28 +601,76 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerTask'
+              examples:
+                Gettask200Example:
+                  summary: Default getTask 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    title: Example Title
+                    planId: '500123'
+                    bucketId: '500123'
+                    assignments: {}
+                    appliedCategories: {}
+                    priority: 10
+                    percentComplete: 10
+                    startDateTime: '2026-01-15T10:30:00Z'
+                    dueDateTime: '2026-01-15T10:30:00Z'
+                    completedDateTime: '2026-01-15T10:30:00Z'
+                    completedBy: {}
+                    createdDateTime: '2026-01-15T10:30:00Z'
+                    createdBy: {}
+                    hasDescription: true
+                    conversationThreadId: '500123'
+                    orderHint: example_value
+                    assigneePriority: example_value
+                    previewType: automatic
+                    activeChecklistItemCount: 10
+                    checklistItemCount: 10
+                    referenceCount: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateTask
-      summary: Microsoft Planner Update a task
+      summary: Microsoft Planner Update a Task
       description: >-
         Update the properties of a plannerTask object. Requires the If-Match
         header with the last known ETag value of the task.
       tags:
-        - Tasks
+      - Tasks
       parameters:
-        - $ref: '#/components/parameters/IfMatch'
+      - $ref: '#/components/parameters/IfMatch'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PlannerTaskUpdate'
+            examples:
+              UpdatetaskRequestExample:
+                summary: Default updateTask request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  bucketId: '500123'
+                  assignments: {}
+                  appliedCategories: {}
+                  priority: 10
+                  percentComplete: 10
+                  startDateTime: '2026-01-15T10:30:00Z'
+                  dueDateTime: '2026-01-15T10:30:00Z'
+                  conversationThreadId: '500123'
+                  orderHint: example_value
+                  assigneePriority: example_value
+                  previewType: automatic
       responses:
         '200':
           description: The updated task
@@ -359,6 +678,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerTask'
+              examples:
+                Updatetask200Example:
+                  summary: Default updateTask 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    title: Example Title
+                    planId: '500123'
+                    bucketId: '500123'
+                    assignments: {}
+                    appliedCategories: {}
+                    priority: 10
+                    percentComplete: 10
+                    startDateTime: '2026-01-15T10:30:00Z'
+                    dueDateTime: '2026-01-15T10:30:00Z'
+                    completedDateTime: '2026-01-15T10:30:00Z'
+                    completedBy: {}
+                    createdDateTime: '2026-01-15T10:30:00Z'
+                    createdBy: {}
+                    hasDescription: true
+                    conversationThreadId: '500123'
+                    orderHint: example_value
+                    assigneePriority: example_value
+                    previewType: automatic
+                    activeChecklistItemCount: 10
+                    checklistItemCount: 10
+                    referenceCount: 10
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -371,16 +718,19 @@ paths:
           $ref: '#/components/responses/Conflict'
         '412':
           $ref: '#/components/responses/PreconditionFailed'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteTask
-      summary: Microsoft Planner Delete a task
+      summary: Microsoft Planner Delete a Task
       description: >-
         Delete a plannerTask object. Requires the If-Match header with the
         last known ETag value of the task.
       tags:
-        - Tasks
+      - Tasks
       parameters:
-        - $ref: '#/components/parameters/IfMatch'
+      - $ref: '#/components/parameters/IfMatch'
       responses:
         '204':
           description: Task deleted successfully
@@ -395,17 +745,20 @@ paths:
         '412':
           $ref: '#/components/responses/PreconditionFailed'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /planner/tasks/{task-id}/details:
     parameters:
-      - $ref: '#/components/parameters/TaskId'
+    - $ref: '#/components/parameters/TaskId'
     get:
       operationId: getTaskDetails
-      summary: Microsoft Planner Get task details
+      summary: Microsoft Planner Get Task Details
       description: >-
         Retrieve the properties and relationships of a plannerTaskDetails
         object.
       tags:
-        - Task Details
+      - Task Details
       responses:
         '200':
           description: The task details
@@ -413,28 +766,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerTaskDetails'
+              examples:
+                Gettaskdetails200Example:
+                  summary: Default getTaskDetails 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    description: A sample description.
+                    checklist: {}
+                    references: {}
+                    previewType: automatic
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateTaskDetails
-      summary: Microsoft Planner Update task details
+      summary: Microsoft Planner Update Task Details
       description: >-
         Update the properties of a plannerTaskDetails object. Requires the
         If-Match header with the last known ETag value.
       tags:
-        - Task Details
+      - Task Details
       parameters:
-        - $ref: '#/components/parameters/IfMatch'
+      - $ref: '#/components/parameters/IfMatch'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PlannerTaskDetailsUpdate'
+            examples:
+              UpdatetaskdetailsRequestExample:
+                summary: Default updateTaskDetails request
+                x-microcks-default: true
+                value:
+                  description: A sample description.
+                  checklist: {}
+                  references: {}
+                  previewType: automatic
       responses:
         '200':
           description: The updated task details
@@ -442,6 +818,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerTaskDetails'
+              examples:
+                Updatetaskdetails200Example:
+                  summary: Default updateTaskDetails 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    description: A sample description.
+                    checklist: {}
+                    references: {}
+                    previewType: automatic
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -455,21 +842,32 @@ paths:
         '412':
           $ref: '#/components/responses/PreconditionFailed'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /planner/buckets:
     post:
       operationId: createBucket
-      summary: Microsoft Planner Create a bucket
+      summary: Microsoft Planner Create a Bucket
       description: >-
         Create a new plannerBucket object. The bucket must specify a planId
         indicating which plan it belongs to.
       tags:
-        - Buckets
+      - Buckets
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PlannerBucketCreate'
+            examples:
+              CreatebucketRequestExample:
+                summary: Default createBucket request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  planId: '500123'
+                  orderHint: example_value
       responses:
         '201':
           description: The created bucket
@@ -477,6 +875,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerBucket'
+              examples:
+                Createbucket201Example:
+                  summary: Default createBucket 201 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    name: Example Title
+                    planId: '500123'
+                    orderHint: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -484,16 +892,19 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /planner/buckets/{bucket-id}:
     parameters:
-      - $ref: '#/components/parameters/BucketId'
+    - $ref: '#/components/parameters/BucketId'
     get:
       operationId: getBucket
-      summary: Microsoft Planner Get a bucket
+      summary: Microsoft Planner Get a Bucket
       description: >-
         Retrieve the properties and relationships of a plannerBucket object.
       tags:
-        - Buckets
+      - Buckets
       responses:
         '200':
           description: The requested bucket
@@ -501,28 +912,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerBucket'
+              examples:
+                Getbucket200Example:
+                  summary: Default getBucket 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    name: Example Title
+                    planId: '500123'
+                    orderHint: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateBucket
-      summary: Microsoft Planner Update a bucket
+      summary: Microsoft Planner Update a Bucket
       description: >-
         Update the properties of a plannerBucket object. Requires the If-Match
         header with the last known ETag value of the bucket.
       tags:
-        - Buckets
+      - Buckets
       parameters:
-        - $ref: '#/components/parameters/IfMatch'
+      - $ref: '#/components/parameters/IfMatch'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PlannerBucketUpdate'
+            examples:
+              UpdatebucketRequestExample:
+                summary: Default updateBucket request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  orderHint: example_value
       responses:
         '200':
           description: The updated bucket
@@ -530,6 +961,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerBucket'
+              examples:
+                Updatebucket200Example:
+                  summary: Default updateBucket 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    name: Example Title
+                    planId: '500123'
+                    orderHint: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -542,16 +983,19 @@ paths:
           $ref: '#/components/responses/Conflict'
         '412':
           $ref: '#/components/responses/PreconditionFailed'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteBucket
-      summary: Microsoft Planner Delete a bucket
+      summary: Microsoft Planner Delete a Bucket
       description: >-
         Delete a plannerBucket object. Requires the If-Match header with the
         last known ETag value of the bucket.
       tags:
-        - Buckets
+      - Buckets
       parameters:
-        - $ref: '#/components/parameters/IfMatch'
+      - $ref: '#/components/parameters/IfMatch'
       responses:
         '204':
           description: Bucket deleted successfully
@@ -566,18 +1010,21 @@ paths:
         '412':
           $ref: '#/components/responses/PreconditionFailed'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /planner/buckets/{bucket-id}/tasks:
     parameters:
-      - $ref: '#/components/parameters/BucketId'
+    - $ref: '#/components/parameters/BucketId'
     get:
       operationId: listBucketTasks
-      summary: Microsoft Planner List bucket tasks
+      summary: Microsoft Planner List Bucket Tasks
       description: >-
         Retrieve a list of plannerTask objects associated with a plannerBucket
         object.
       tags:
-        - Buckets
-        - Tasks
+      - Buckets
+      - Tasks
       responses:
         '200':
           description: Collection of tasks in the bucket
@@ -585,6 +1032,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerTaskCollection'
+              examples:
+                Listbuckettasks200Example:
+                  summary: Default listBucketTasks 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.context': example_value
+                    '@odata.count': 10
+                    value:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      title: Example Title
+                      planId: '500123'
+                      bucketId: '500123'
+                      priority: 10
+                      percentComplete: 10
+                      startDateTime: '2026-01-15T10:30:00Z'
+                      dueDateTime: '2026-01-15T10:30:00Z'
+                      completedDateTime: '2026-01-15T10:30:00Z'
+                      createdDateTime: '2026-01-15T10:30:00Z'
+                      hasDescription: true
+                      conversationThreadId: '500123'
+                      orderHint: example_value
+                      assigneePriority: example_value
+                      previewType: automatic
+                      activeChecklistItemCount: 10
+                      checklistItemCount: 10
+                      referenceCount: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -592,16 +1066,19 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /groups/{group-id}/planner/plans:
     parameters:
-      - $ref: '#/components/parameters/GroupId'
+    - $ref: '#/components/parameters/GroupId'
     get:
       operationId: listGroupPlans
-      summary: Microsoft Planner List group plans
+      summary: Microsoft Planner List Group Plans
       description: >-
         Retrieve a list of plannerPlan objects owned by a Microsoft 365 group.
       tags:
-        - Plans
+      - Plans
       responses:
         '200':
           description: Collection of plans owned by the group
@@ -609,6 +1086,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerPlanCollection'
+              examples:
+                Listgroupplans200Example:
+                  summary: Default listGroupPlans 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.context': example_value
+                    '@odata.count': 10
+                    value:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      title: Example Title
+                      owner: example_value
+                      createdDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -616,14 +1106,17 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /me/planner/tasks:
     get:
       operationId: listMyTasks
-      summary: Microsoft Planner List my tasks
+      summary: Microsoft Planner List My Tasks
       description: >-
         Retrieve a list of plannerTask objects assigned to the signed-in user.
       tags:
-        - Tasks
+      - Tasks
       responses:
         '200':
           description: Collection of tasks assigned to the current user
@@ -631,21 +1124,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerTaskCollection'
+              examples:
+                Listmytasks200Example:
+                  summary: Default listMyTasks 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.context': example_value
+                    '@odata.count': 10
+                    value:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      title: Example Title
+                      planId: '500123'
+                      bucketId: '500123'
+                      priority: 10
+                      percentComplete: 10
+                      startDateTime: '2026-01-15T10:30:00Z'
+                      dueDateTime: '2026-01-15T10:30:00Z'
+                      completedDateTime: '2026-01-15T10:30:00Z'
+                      createdDateTime: '2026-01-15T10:30:00Z'
+                      hasDescription: true
+                      conversationThreadId: '500123'
+                      orderHint: example_value
+                      assigneePriority: example_value
+                      previewType: automatic
+                      activeChecklistItemCount: 10
+                      checklistItemCount: 10
+                      referenceCount: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /users/{user-id}/planner/tasks:
     parameters:
-      - $ref: '#/components/parameters/UserId'
+    - $ref: '#/components/parameters/UserId'
     get:
       operationId: listUserTasks
-      summary: Microsoft Planner List user tasks
+      summary: Microsoft Planner List User Tasks
       description: >-
         Retrieve a list of plannerTask objects assigned to a specific user.
       tags:
-        - Tasks
+      - Tasks
       responses:
         '200':
           description: Collection of tasks assigned to the user
@@ -653,6 +1176,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlannerTaskCollection'
+              examples:
+                Listusertasks200Example:
+                  summary: Default listUserTasks 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.context': example_value
+                    '@odata.count': 10
+                    value:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      title: Example Title
+                      planId: '500123'
+                      bucketId: '500123'
+                      priority: 10
+                      percentComplete: 10
+                      startDateTime: '2026-01-15T10:30:00Z'
+                      dueDateTime: '2026-01-15T10:30:00Z'
+                      completedDateTime: '2026-01-15T10:30:00Z'
+                      createdDateTime: '2026-01-15T10:30:00Z'
+                      hasDescription: true
+                      conversationThreadId: '500123'
+                      orderHint: example_value
+                      assigneePriority: example_value
+                      previewType: automatic
+                      activeChecklistItemCount: 10
+                      checklistItemCount: 10
+                      referenceCount: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -660,6 +1210,9 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     oauth2:
@@ -743,35 +1296,40 @@ components:
         displayName:
           type: string
           description: The display name of the identity
+          example: example_value
         id:
           type: string
           description: The unique identifier of the identity
 
+          example: abc123
     PlannerPlanContainer:
       type: object
       description: >-
         Represents the container for a plannerPlan. The container is a resource
         that specifies authorization rules and the lifecycle of the plan.
       required:
-        - url
+      - url
       properties:
         containerId:
           type: string
           description: The identifier of the resource that contains the plan
           readOnly: true
+          example: '500123'
         type:
           type: string
           description: The type of the container
           enum:
-            - group
-            - unknownFutureValue
-            - roster
+          - group
+          - unknownFutureValue
+          - roster
           readOnly: true
+          example: group
         url:
           type: string
           format: uri
           description: The full canonical URL of the container
 
+          example: https://www.example.com
     PlannerAppliedCategories:
       type: object
       description: >-
@@ -796,6 +1354,7 @@ components:
         '@odata.type':
           type: string
           const: microsoft.graph.plannerAssignment
+          example: example_value
         assignedBy:
           $ref: '#/components/schemas/IdentitySet'
           description: The identity of the user that performed the assignment
@@ -805,12 +1364,14 @@ components:
           format: date-time
           description: The time at which the task was assigned
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
         orderHint:
           type: string
           description: >-
             Hint used to order assignees in a task. The format is defined in
             the Planner order hints documentation.
 
+          example: example_value
     PlannerCategoryDescriptions:
       type: object
       description: >-
@@ -820,79 +1381,104 @@ components:
         category1:
           type: string
           description: The label associated with category 1
+          example: example_value
         category2:
           type: string
           description: The label associated with category 2
+          example: example_value
         category3:
           type: string
           description: The label associated with category 3
+          example: example_value
         category4:
           type: string
           description: The label associated with category 4
+          example: example_value
         category5:
           type: string
           description: The label associated with category 5
+          example: example_value
         category6:
           type: string
           description: The label associated with category 6
+          example: example_value
         category7:
           type: string
           description: The label associated with category 7
+          example: example_value
         category8:
           type: string
           description: The label associated with category 8
+          example: example_value
         category9:
           type: string
           description: The label associated with category 9
+          example: example_value
         category10:
           type: string
           description: The label associated with category 10
+          example: example_value
         category11:
           type: string
           description: The label associated with category 11
+          example: example_value
         category12:
           type: string
           description: The label associated with category 12
+          example: example_value
         category13:
           type: string
           description: The label associated with category 13
+          example: example_value
         category14:
           type: string
           description: The label associated with category 14
+          example: example_value
         category15:
           type: string
           description: The label associated with category 15
+          example: example_value
         category16:
           type: string
           description: The label associated with category 16
+          example: example_value
         category17:
           type: string
           description: The label associated with category 17
+          example: example_value
         category18:
           type: string
           description: The label associated with category 18
+          example: example_value
         category19:
           type: string
           description: The label associated with category 19
+          example: example_value
         category20:
           type: string
           description: The label associated with category 20
+          example: example_value
         category21:
           type: string
           description: The label associated with category 21
+          example: example_value
         category22:
           type: string
           description: The label associated with category 22
+          example: example_value
         category23:
           type: string
           description: The label associated with category 23
+          example: example_value
         category24:
           type: string
           description: The label associated with category 24
+          example: example_value
         category25:
           type: string
           description: The label associated with category 25
 
+          example: example_value
     PlannerChecklistItems:
       type: object
       description: >-
@@ -909,9 +1495,11 @@ components:
         '@odata.type':
           type: string
           const: microsoft.graph.plannerChecklistItem
+          example: example_value
         isChecked:
           type: boolean
           description: Whether the item is checked (completed)
+          example: true
         lastModifiedBy:
           $ref: '#/components/schemas/IdentitySet'
           readOnly: true
@@ -920,13 +1508,16 @@ components:
           format: date-time
           description: The date and time the item was last modified
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
         orderHint:
           type: string
           description: Hint used to order items in the checklist
+          example: example_value
         title:
           type: string
           description: Title of the checklist item
 
+          example: Example Title
     PlannerExternalReferences:
       type: object
       description: >-
@@ -942,9 +1533,11 @@ components:
         '@odata.type':
           type: string
           const: microsoft.graph.plannerExternalReference
+          example: example_value
         alias:
           type: string
           description: A name alias for the reference
+          example: example_value
         lastModifiedBy:
           $ref: '#/components/schemas/IdentitySet'
           readOnly: true
@@ -953,15 +1546,18 @@ components:
           format: date-time
           description: The date and time the reference was last modified
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
         previewPriority:
           type: string
           description: >-
             Hint used to set the relative priority order in which the
             reference will be shown as a preview on the task
+          example: example_value
         type:
           type: string
           description: The type of the reference (e.g., PowerPoint, Word, Excel, Other)
 
+          example: example_value
     PlannerUserIds:
       type: object
       description: >-
@@ -981,15 +1577,18 @@ components:
           type: string
           description: The ETag of the resource, used for concurrency control
           readOnly: true
+          example: example_value
         id:
           type: string
           description: >-
             The unique identifier for the plan. 28 characters long and
             case-sensitive.
           readOnly: true
+          example: abc123
         title:
           type: string
           description: Title of the plan
+          example: Example Title
         container:
           $ref: '#/components/schemas/PlannerPlanContainer'
           description: >-
@@ -1001,6 +1600,7 @@ components:
             Deprecated. Use the container property instead. ID of the group
             that owns the plan.
           deprecated: true
+          example: example_value
         createdBy:
           $ref: '#/components/schemas/IdentitySet'
           description: The user who created the plan
@@ -1013,21 +1613,23 @@ components:
             always in UTC.
           readOnly: true
 
+          example: '2026-01-15T10:30:00Z'
     PlannerPlanCreate:
       type: object
       description: Request body for creating a new plan
       required:
-        - title
-        - container
+      - title
+      - container
       properties:
         title:
           type: string
           description: Title of the plan
+          example: Example Title
         container:
           type: object
           description: The container for the plan
           required:
-            - url
+          - url
           properties:
             url:
               type: string
@@ -1036,6 +1638,7 @@ components:
                 The full canonical URL of the container (e.g.,
                 https://graph.microsoft.com/v1.0/groups/{group-id})
 
+          example: example_value
     PlannerPlanUpdate:
       type: object
       description: Request body for updating a plan
@@ -1044,6 +1647,7 @@ components:
           type: string
           description: Updated title of the plan
 
+          example: Example Title
     PlannerPlanDetails:
       type: object
       description: >-
@@ -1054,10 +1658,12 @@ components:
           type: string
           description: The ETag of the resource
           readOnly: true
+          example: example_value
         id:
           type: string
           description: The unique identifier for the plan details
           readOnly: true
+          example: abc123
         categoryDescriptions:
           $ref: '#/components/schemas/PlannerCategoryDescriptions'
           description: >-
@@ -1086,25 +1692,30 @@ components:
           type: string
           description: The ETag of the resource, used for concurrency control
           readOnly: true
+          example: example_value
         id:
           type: string
           description: >-
             The unique identifier for the task. 28 characters long and
             case-sensitive.
           readOnly: true
+          example: abc123
         title:
           type: string
           description: Title of the task
+          example: Example Title
         planId:
           type: string
           description: Plan ID to which the task belongs
+          example: '500123'
         bucketId:
           type:
-            - string
-            - 'null'
+          - string
+          - 'null'
           description: >-
             Bucket ID to which the task belongs. The bucket must be in the
             same plan as the task. 28 characters long and case-sensitive.
+          example: '500123'
         assignments:
           $ref: '#/components/schemas/PlannerAssignments'
           description: The set of assignees the task is assigned to
@@ -1119,6 +1730,7 @@ components:
             Priority of the task. Valid range is 0-10 where 0 is highest
             priority. Values 0-1 are urgent, 2-4 are important, 5-7 are
             medium, 8-10 are low.
+          example: 10
         percentComplete:
           type: integer
           minimum: 0
@@ -1126,31 +1738,35 @@ components:
           description: >-
             Percentage of task completion. When set to 100, the task is
             considered completed.
+          example: 10
         startDateTime:
           type:
-            - string
-            - 'null'
+          - string
+          - 'null'
           format: date-time
           description: >-
             Date and time at which the task starts. ISO 8601 format, always
             in UTC.
+          example: '2026-01-15T10:30:00Z'
         dueDateTime:
           type:
-            - string
-            - 'null'
+          - string
+          - 'null'
           format: date-time
           description: >-
             Date and time at which the task is due. ISO 8601 format, always
             in UTC.
+          example: '2026-01-15T10:30:00Z'
         completedDateTime:
           type:
-            - string
-            - 'null'
+          - string
+          - 'null'
           format: date-time
           description: >-
             Date and time at which the percentComplete was set to 100.
             ISO 8601 format, always in UTC.
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
         completedBy:
           $ref: '#/components/schemas/IdentitySet'
           description: Identity of the user that completed the task
@@ -1162,6 +1778,7 @@ components:
             Date and time at which the task was created. ISO 8601 format,
             always in UTC.
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
         createdBy:
           $ref: '#/components/schemas/IdentitySet'
           description: Identity of the user that created the task
@@ -1172,58 +1789,69 @@ components:
             Indicates whether the details object of the task has a nonempty
             description.
           readOnly: true
+          example: true
         conversationThreadId:
           type:
-            - string
-            - 'null'
+          - string
+          - 'null'
           description: >-
             Thread ID of the conversation on the task in the containing
             group.
+          example: '500123'
         orderHint:
           type: string
           description: Hint used to order items of this type in a list view
+          example: example_value
         assigneePriority:
           type: string
           description: >-
             Hint used to order items of this type when grouped by assignee
+          example: example_value
         previewType:
           type: string
           description: The type of preview that shows on the task
           enum:
-            - automatic
-            - noPreview
-            - checklist
-            - description
-            - reference
+          - automatic
+          - noPreview
+          - checklist
+          - description
+          - reference
+          example: automatic
         activeChecklistItemCount:
           type: integer
           description: Number of incomplete checklist items
           readOnly: true
+          example: 10
         checklistItemCount:
           type: integer
           description: Total number of checklist items on the task
           readOnly: true
+          example: 10
         referenceCount:
           type: integer
           description: Number of external references on the task
           readOnly: true
 
+          example: 10
     PlannerTaskCreate:
       type: object
       description: Request body for creating a new task
       required:
-        - planId
-        - title
+      - planId
+      - title
       properties:
         planId:
           type: string
           description: ID of the plan the task belongs to
+          example: '500123'
         title:
           type: string
           description: Title of the task
+          example: Example Title
         bucketId:
           type: string
           description: ID of the bucket to place the task in
+          example: '500123'
         assignments:
           $ref: '#/components/schemas/PlannerAssignments'
         appliedCategories:
@@ -1233,31 +1861,40 @@ components:
           minimum: 0
           maximum: 10
           description: Priority of the task (0 is highest, 10 is lowest)
+          example: 10
         percentComplete:
           type: integer
           minimum: 0
           maximum: 100
+          example: 10
         startDateTime:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         dueDateTime:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         conversationThreadId:
           type: string
+          example: '500123'
         orderHint:
           type: string
+          example: example_value
         assigneePriority:
           type: string
 
+          example: example_value
     PlannerTaskUpdate:
       type: object
       description: Request body for updating a task
       properties:
         title:
           type: string
+          example: Example Title
         bucketId:
           type: string
+          example: '500123'
         assignments:
           $ref: '#/components/schemas/PlannerAssignments'
         appliedCategories:
@@ -1266,31 +1903,39 @@ components:
           type: integer
           minimum: 0
           maximum: 10
+          example: 10
         percentComplete:
           type: integer
           minimum: 0
           maximum: 100
+          example: 10
         startDateTime:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         dueDateTime:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         conversationThreadId:
           type: string
+          example: '500123'
         orderHint:
           type: string
+          example: example_value
         assigneePriority:
           type: string
+          example: example_value
         previewType:
           type: string
           enum:
-            - automatic
-            - noPreview
-            - checklist
-            - description
-            - reference
+          - automatic
+          - noPreview
+          - checklist
+          - description
+          - reference
 
+          example: automatic
     PlannerTaskDetails:
       type: object
       description: >-
@@ -1301,13 +1946,16 @@ components:
           type: string
           description: The ETag of the resource
           readOnly: true
+          example: example_value
         id:
           type: string
           description: The unique identifier for the task details
           readOnly: true
+          example: abc123
         description:
           type: string
           description: Description of the task
+          example: A sample description.
         checklist:
           $ref: '#/components/schemas/PlannerChecklistItems'
           description: The collection of checklist items on the task
@@ -1318,18 +1966,20 @@ components:
           type: string
           description: The type of preview shown on the task
           enum:
-            - automatic
-            - noPreview
-            - checklist
-            - description
-            - reference
+          - automatic
+          - noPreview
+          - checklist
+          - description
+          - reference
 
+          example: automatic
     PlannerTaskDetailsUpdate:
       type: object
       description: Request body for updating task details
       properties:
         description:
           type: string
+          example: A sample description.
         checklist:
           $ref: '#/components/schemas/PlannerChecklistItems'
         references:
@@ -1337,12 +1987,13 @@ components:
         previewType:
           type: string
           enum:
-            - automatic
-            - noPreview
-            - checklist
-            - description
-            - reference
+          - automatic
+          - noPreview
+          - checklist
+          - description
+          - reference
 
+          example: automatic
     PlannerBucket:
       type: object
       description: >-
@@ -1354,39 +2005,47 @@ components:
           type: string
           description: The ETag of the resource, used for concurrency control
           readOnly: true
+          example: example_value
         id:
           type: string
           description: >-
             The unique identifier for the bucket. 28 characters long and
             case-sensitive.
           readOnly: true
+          example: abc123
         name:
           type: string
           description: Name of the bucket
+          example: Example Title
         planId:
           type: string
           description: Plan ID to which the bucket belongs
+          example: '500123'
         orderHint:
           type: string
           description: Hint used to order buckets in a list view
 
+          example: example_value
     PlannerBucketCreate:
       type: object
       description: Request body for creating a new bucket
       required:
-        - name
-        - planId
+      - name
+      - planId
       properties:
         name:
           type: string
           description: Name of the bucket
+          example: Example Title
         planId:
           type: string
           description: ID of the plan the bucket belongs to
+          example: '500123'
         orderHint:
           type: string
           description: Hint used to order the bucket
 
+          example: example_value
     PlannerBucketUpdate:
       type: object
       description: Request body for updating a bucket
@@ -1394,10 +2053,12 @@ components:
         name:
           type: string
           description: Updated name of the bucket
+          example: Example Title
         orderHint:
           type: string
           description: Updated order hint for the bucket
 
+          example: example_value
     PlannerPlanCollection:
       type: object
       description: A collection of plannerPlan resources
@@ -1405,14 +2066,17 @@ components:
         '@odata.context':
           type: string
           readOnly: true
+          example: example_value
         '@odata.count':
           type: integer
           readOnly: true
+          example: 10
         value:
           type: array
           items:
             $ref: '#/components/schemas/PlannerPlan'
 
+          example: []
     PlannerTaskCollection:
       type: object
       description: A collection of plannerTask resources
@@ -1420,14 +2084,17 @@ components:
         '@odata.context':
           type: string
           readOnly: true
+          example: example_value
         '@odata.count':
           type: integer
           readOnly: true
+          example: 10
         value:
           type: array
           items:
             $ref: '#/components/schemas/PlannerTask'
 
+          example: []
     PlannerBucketCollection:
       type: object
       description: A collection of plannerBucket resources
@@ -1435,14 +2102,17 @@ components:
         '@odata.context':
           type: string
           readOnly: true
+          example: example_value
         '@odata.count':
           type: integer
           readOnly: true
+          example: 10
         value:
           type: array
           items:
             $ref: '#/components/schemas/PlannerBucket'
 
+          example: []
     ODataError:
       type: object
       description: OData error response
@@ -1465,6 +2135,7 @@ components:
                   type: string
                   format: date-time
 
+          example: example_value
   responses:
     BadRequest:
       description: >-

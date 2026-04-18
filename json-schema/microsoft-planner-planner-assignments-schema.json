@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerAssignments",
+  "type": "object",
+  "description": "The set of user assignments for a task. Each key is the user ID of the assignee, and the value is a plannerAssignment object."
+}

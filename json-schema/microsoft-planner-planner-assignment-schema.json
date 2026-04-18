@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerAssignment",
+  "type": "object",
+  "description": "Represents the assignment of a task to a user",
+  "properties": {
+    "@odata.type": {
+      "type": "string"
+    },
+    "assignedDateTime": {
+      "type": "string",
+      "description": "The time at which the task was assigned"
+    },
+    "orderHint": {
+      "type": "string",
+      "description": "Hint used to order assignees in a task. The format is defined in the Planner order hints documentation."
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerTaskCreate",
+  "type": "object",
+  "description": "Request body for creating a new task",
+  "properties": {
+    "planId": {
+      "type": "string",
+      "description": "ID of the plan the task belongs to"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the task"
+    },
+    "bucketId": {
+      "type": "string",
+      "description": "ID of the bucket to place the task in"
+    },
+    "priority": {
+      "type": "integer",
+      "description": "Priority of the task (0 is highest, 10 is lowest)"
+    },
+    "percentComplete": {
+      "type": "integer"
+    },
+    "startDateTime": {
+      "type": "string"
+    },
+    "dueDateTime": {
+      "type": "string"
+    },
+    "conversationThreadId": {
+      "type": "string"
+    },
+    "orderHint": {
+      "type": "string"
+    },
+    "assigneePriority": {
+      "type": "string"
+    }
+  }
+}

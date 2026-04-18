@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerBucketCreate",
+  "type": "object",
+  "description": "Request body for creating a new bucket",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the bucket"
+    },
+    "planId": {
+      "type": "string",
+      "description": "ID of the plan the bucket belongs to"
+    },
+    "orderHint": {
+      "type": "string",
+      "description": "Hint used to order the bucket"
+    }
+  }
+}

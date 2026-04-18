@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerPlan",
+  "type": "object",
+  "description": "Represents a plan in Microsoft 365. A plan is owned by a group and contains a collection of plannerTasks. It can also have a collection of plannerBuckets.",
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "description": "The ETag of the resource, used for concurrency control"
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the plan. 28 characters long and case-sensitive."
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the plan"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Deprecated. Use the container property instead. ID of the group that owns the plan."
+    },
+    "createdDateTime": {
+      "type": "string",
+      "description": "The date and time at which the plan was created. ISO 8601 format, always in UTC."
+    }
+  }
+}

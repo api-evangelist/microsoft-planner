@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlannerPlanUpdate",
+  "type": "object",
+  "description": "Request body for updating a plan",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Updated title of the plan"
+    }
+  }
+}
