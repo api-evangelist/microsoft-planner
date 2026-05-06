@@ -4,112 +4,67 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Microsoft Planner
 providerId: microsoft-planner
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Collaboration
-  - Microsoft 365
-  - Productivity
-  - Project Management
-  - Task Management
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Microsoft Planner API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
+  - Project Management
+  - Tasks
+  - Microsoft Graph
+  - Microsoft
+description: Microsoft Planner is administered exclusively via the Microsoft Graph planner endpoints.
+  Microsoft does not publish Planner-specific per-second / per-minute throttling numbers; Planner inherits
+  the Microsoft Graph global ceiling (130,000 requests per 10 seconds per app) and the Identity & Access
+  per-app-per-tenant ResourceUnit budget for user / group lookups. Returns 429 Too Many Requests with
+  Retry-After.
+sources:
+  - https://learn.microsoft.com/en-us/graph/throttling
+  - https://learn.microsoft.com/en-us/graph/throttling-limits
+  - https://learn.microsoft.com/en-us/graph/api/resources/planner-overview
+notes: No Planner-specific per-second numbers are published; values shown reflect inherited Microsoft
+  Graph limits.
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
   retryAfter: Retry-After
-  policy: RateLimit-Policy
+  requestId: request-id
+  throttleScope: x-ms-throttle-scope
+  throttleLimit: x-ms-throttle-limit-percentage
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
+  preconditionFailed: 412
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Microsoft Planner API
-      - Microsoft Graph Plans API
-      - Microsoft Graph Tasks API
-      - Microsoft Graph Buckets API
-      - Microsoft Graph Planner API (Beta)
-      - Microsoft Graph Business Scenarios Planner API (Beta)
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Microsoft Planner API
-      - Microsoft Graph Plans API
-      - Microsoft Graph Tasks API
-      - Microsoft Graph Buckets API
-      - Microsoft Graph Planner API (Beta)
-      - Microsoft Graph Business Scenarios Planner API (Beta)
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Microsoft Planner API
-      - Microsoft Graph Plans API
-      - Microsoft Graph Tasks API
-      - Microsoft Graph Buckets API
-      - Microsoft Graph Planner API (Beta)
-      - Microsoft Graph Business Scenarios Planner API (Beta)
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Microsoft Planner API
-      - Microsoft Graph Plans API
-      - Microsoft Graph Tasks API
-      - Microsoft Graph Buckets API
-      - Microsoft Graph Planner API (Beta)
-      - Microsoft Graph Business Scenarios Planner API (Beta)
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Microsoft Planner API
-      - Microsoft Graph Plans API
-      - Microsoft Graph Tasks API
-      - Microsoft Graph Buckets API
-      - Microsoft Graph Planner API (Beta)
-      - Microsoft Graph Business Scenarios Planner API (Beta)
+  - name: Microsoft Graph global ceiling
+    scope: application
+    metric: requests_per_10_seconds
+    limit: 130000
+    timeFrame: second
+  - name: Identity & Access (read) per app/tenant
+    scope: app/tenant
+    metric: resource_units_per_10_seconds
+    limit: 3500–8000 RU per 10s based on tenant size
+    timeFrame: second
+  - name: Identity & Access (write) per app/tenant
+    scope: app/tenant
+    metric: requests_per_2m30s
+    limit: 3000
+    timeFrame: second
+  - name: Planner endpoints
+    scope: app/tenant
+    metric: varies
+    limit: see Microsoft Graph throttling guidance — no Planner-specific numbers published
 policies:
+  - name: ETag concurrency
+    description: Planner uses optimistic concurrency. Every PATCH / DELETE must include the If-Match header
+      with the resource ETag; mismatches return 412 Precondition Failed.
   - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+    description: Honour Retry-After on 429 / 503; the Microsoft Graph SDK handlers do this automatically.
+  - name: Use change notifications
+    description: Subscribe to plan and task change notifications instead of polling.
+  - name: Use $batch
+    description: Combine read calls in $batch envelopes; each is throttled individually.
+  - name: Group-aware writes
+    description: Each plan is owned by a Microsoft 365 Group; bulk writes that touch many plans across
+      a tenant should be rate-paced to avoid hitting Identity & Access write limits.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
-    url: https://apievangelist.com
