@@ -1,0 +1,236 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Microsoft Planner Microsoft Graph Planner API — Buckets
+  description: 'Microsoft Planner Microsoft Graph Planner API — Buckets. 6 operations. Lead operation: Microsoft Planner Create
+    a Bucket. Self-contained Naftiko capability covering one Microsoft Planner business surface.'
+  tags:
+  - Microsoft Planner
+  - Buckets
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MICROSOFT_PLANNER_API_KEY: MICROSOFT_PLANNER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: microsoft-planner-buckets
+    baseUri: https://graph.microsoft.com/v1.0
+    description: Microsoft Planner Microsoft Graph Planner API — Buckets business capability. Self-contained, no shared references.
+    resources:
+    - name: planner-buckets
+      path: /planner/buckets
+      operations:
+      - name: createbucket
+        method: POST
+        description: Microsoft Planner Create a Bucket
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: planner-buckets-bucket-id
+      path: /planner/buckets/{bucket-id}
+      operations:
+      - name: getbucket
+        method: GET
+        description: Microsoft Planner Get a Bucket
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatebucket
+        method: PATCH
+        description: Microsoft Planner Update a Bucket
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletebucket
+        method: DELETE
+        description: Microsoft Planner Delete a Bucket
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: planner-buckets-bucket-id-tasks
+      path: /planner/buckets/{bucket-id}/tasks
+      operations:
+      - name: listbuckettasks
+        method: GET
+        description: Microsoft Planner List Bucket Tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: planner-plans-plan-id-buckets
+      path: /planner/plans/{plan-id}/buckets
+      operations:
+      - name: listplanbuckets
+        method: GET
+        description: Microsoft Planner List Plan Buckets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.MICROSOFT_PLANNER_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: microsoft-planner-buckets-rest
+    port: 8080
+    description: REST adapter for Microsoft Planner Microsoft Graph Planner API — Buckets. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/planner/buckets
+      name: planner-buckets
+      description: REST surface for planner-buckets.
+      operations:
+      - method: POST
+        name: createbucket
+        description: Microsoft Planner Create a Bucket
+        call: microsoft-planner-buckets.createbucket
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/planner/buckets/{bucket-id}
+      name: planner-buckets-bucket-id
+      description: REST surface for planner-buckets-bucket-id.
+      operations:
+      - method: GET
+        name: getbucket
+        description: Microsoft Planner Get a Bucket
+        call: microsoft-planner-buckets.getbucket
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatebucket
+        description: Microsoft Planner Update a Bucket
+        call: microsoft-planner-buckets.updatebucket
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletebucket
+        description: Microsoft Planner Delete a Bucket
+        call: microsoft-planner-buckets.deletebucket
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/planner/buckets/{bucket-id}/tasks
+      name: planner-buckets-bucket-id-tasks
+      description: REST surface for planner-buckets-bucket-id-tasks.
+      operations:
+      - method: GET
+        name: listbuckettasks
+        description: Microsoft Planner List Bucket Tasks
+        call: microsoft-planner-buckets.listbuckettasks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/planner/plans/{plan-id}/buckets
+      name: planner-plans-plan-id-buckets
+      description: REST surface for planner-plans-plan-id-buckets.
+      operations:
+      - method: GET
+        name: listplanbuckets
+        description: Microsoft Planner List Plan Buckets
+        call: microsoft-planner-buckets.listplanbuckets
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: microsoft-planner-buckets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Microsoft Planner Microsoft Graph Planner API — Buckets. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: microsoft-planner-create-bucket
+      description: Microsoft Planner Create a Bucket
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: microsoft-planner-buckets.createbucket
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-get-bucket
+      description: Microsoft Planner Get a Bucket
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-planner-buckets.getbucket
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-update-bucket
+      description: Microsoft Planner Update a Bucket
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-planner-buckets.updatebucket
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-delete-bucket
+      description: Microsoft Planner Delete a Bucket
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: microsoft-planner-buckets.deletebucket
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-list-bucket-tasks
+      description: Microsoft Planner List Bucket Tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-planner-buckets.listbuckettasks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-list-plan-buckets
+      description: Microsoft Planner List Plan Buckets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-planner-buckets.listplanbuckets
+      outputParameters:
+      - type: object
+        mapping: $.

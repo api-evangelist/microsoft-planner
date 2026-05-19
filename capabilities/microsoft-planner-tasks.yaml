@@ -1,0 +1,300 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Microsoft Planner Microsoft Graph Planner API — Tasks
+  description: 'Microsoft Planner Microsoft Graph Planner API — Tasks. 8 operations. Lead operation: Microsoft Planner List
+    My Tasks. Self-contained Naftiko capability covering one Microsoft Planner business surface.'
+  tags:
+  - Microsoft Planner
+  - Tasks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MICROSOFT_PLANNER_API_KEY: MICROSOFT_PLANNER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: microsoft-planner-tasks
+    baseUri: https://graph.microsoft.com/v1.0
+    description: Microsoft Planner Microsoft Graph Planner API — Tasks business capability. Self-contained, no shared references.
+    resources:
+    - name: me-planner-tasks
+      path: /me/planner/tasks
+      operations:
+      - name: listmytasks
+        method: GET
+        description: Microsoft Planner List My Tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: planner-buckets-bucket-id-tasks
+      path: /planner/buckets/{bucket-id}/tasks
+      operations:
+      - name: listbuckettasks
+        method: GET
+        description: Microsoft Planner List Bucket Tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: planner-plans-plan-id-tasks
+      path: /planner/plans/{plan-id}/tasks
+      operations:
+      - name: listplantasks
+        method: GET
+        description: Microsoft Planner List Plan Tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: planner-tasks
+      path: /planner/tasks
+      operations:
+      - name: createtask
+        method: POST
+        description: Microsoft Planner Create a Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: planner-tasks-task-id
+      path: /planner/tasks/{task-id}
+      operations:
+      - name: gettask
+        method: GET
+        description: Microsoft Planner Get a Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatetask
+        method: PATCH
+        description: Microsoft Planner Update a Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletetask
+        method: DELETE
+        description: Microsoft Planner Delete a Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users-user-id-planner-tasks
+      path: /users/{user-id}/planner/tasks
+      operations:
+      - name: listusertasks
+        method: GET
+        description: Microsoft Planner List User Tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.MICROSOFT_PLANNER_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: microsoft-planner-tasks-rest
+    port: 8080
+    description: REST adapter for Microsoft Planner Microsoft Graph Planner API — Tasks. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/me/planner/tasks
+      name: me-planner-tasks
+      description: REST surface for me-planner-tasks.
+      operations:
+      - method: GET
+        name: listmytasks
+        description: Microsoft Planner List My Tasks
+        call: microsoft-planner-tasks.listmytasks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/planner/buckets/{bucket-id}/tasks
+      name: planner-buckets-bucket-id-tasks
+      description: REST surface for planner-buckets-bucket-id-tasks.
+      operations:
+      - method: GET
+        name: listbuckettasks
+        description: Microsoft Planner List Bucket Tasks
+        call: microsoft-planner-tasks.listbuckettasks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/planner/plans/{plan-id}/tasks
+      name: planner-plans-plan-id-tasks
+      description: REST surface for planner-plans-plan-id-tasks.
+      operations:
+      - method: GET
+        name: listplantasks
+        description: Microsoft Planner List Plan Tasks
+        call: microsoft-planner-tasks.listplantasks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/planner/tasks
+      name: planner-tasks
+      description: REST surface for planner-tasks.
+      operations:
+      - method: POST
+        name: createtask
+        description: Microsoft Planner Create a Task
+        call: microsoft-planner-tasks.createtask
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/planner/tasks/{task-id}
+      name: planner-tasks-task-id
+      description: REST surface for planner-tasks-task-id.
+      operations:
+      - method: GET
+        name: gettask
+        description: Microsoft Planner Get a Task
+        call: microsoft-planner-tasks.gettask
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatetask
+        description: Microsoft Planner Update a Task
+        call: microsoft-planner-tasks.updatetask
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletetask
+        description: Microsoft Planner Delete a Task
+        call: microsoft-planner-tasks.deletetask
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{user-id}/planner/tasks
+      name: users-user-id-planner-tasks
+      description: REST surface for users-user-id-planner-tasks.
+      operations:
+      - method: GET
+        name: listusertasks
+        description: Microsoft Planner List User Tasks
+        call: microsoft-planner-tasks.listusertasks
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: microsoft-planner-tasks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Microsoft Planner Microsoft Graph Planner API — Tasks. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: microsoft-planner-list-my-tasks
+      description: Microsoft Planner List My Tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-planner-tasks.listmytasks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-list-bucket-tasks
+      description: Microsoft Planner List Bucket Tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-planner-tasks.listbuckettasks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-list-plan-tasks
+      description: Microsoft Planner List Plan Tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-planner-tasks.listplantasks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-create-task
+      description: Microsoft Planner Create a Task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: microsoft-planner-tasks.createtask
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-get-task
+      description: Microsoft Planner Get a Task
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-planner-tasks.gettask
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-update-task
+      description: Microsoft Planner Update a Task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-planner-tasks.updatetask
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-delete-task
+      description: Microsoft Planner Delete a Task
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: microsoft-planner-tasks.deletetask
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-list-user-tasks
+      description: Microsoft Planner List User Tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-planner-tasks.listusertasks
+      outputParameters:
+      - type: object
+        mapping: $.

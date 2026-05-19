@@ -1,0 +1,268 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Microsoft Planner Microsoft Graph Planner API — Plans
+  description: 'Microsoft Planner Microsoft Graph Planner API — Plans. 7 operations. Lead operation: Microsoft Planner List
+    Group Plans. Self-contained Naftiko capability covering one Microsoft Planner business surface.'
+  tags:
+  - Microsoft Planner
+  - Plans
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MICROSOFT_PLANNER_API_KEY: MICROSOFT_PLANNER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: microsoft-planner-plans
+    baseUri: https://graph.microsoft.com/v1.0
+    description: Microsoft Planner Microsoft Graph Planner API — Plans business capability. Self-contained, no shared references.
+    resources:
+    - name: groups-group-id-planner-plans
+      path: /groups/{group-id}/planner/plans
+      operations:
+      - name: listgroupplans
+        method: GET
+        description: Microsoft Planner List Group Plans
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: planner-plans
+      path: /planner/plans
+      operations:
+      - name: createplan
+        method: POST
+        description: Microsoft Planner Create a Plan
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: planner-plans-plan-id
+      path: /planner/plans/{plan-id}
+      operations:
+      - name: getplan
+        method: GET
+        description: Microsoft Planner Get a Plan
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateplan
+        method: PATCH
+        description: Microsoft Planner Update a Plan
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteplan
+        method: DELETE
+        description: Microsoft Planner Delete a Plan
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: planner-plans-plan-id-buckets
+      path: /planner/plans/{plan-id}/buckets
+      operations:
+      - name: listplanbuckets
+        method: GET
+        description: Microsoft Planner List Plan Buckets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: planner-plans-plan-id-tasks
+      path: /planner/plans/{plan-id}/tasks
+      operations:
+      - name: listplantasks
+        method: GET
+        description: Microsoft Planner List Plan Tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.MICROSOFT_PLANNER_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: microsoft-planner-plans-rest
+    port: 8080
+    description: REST adapter for Microsoft Planner Microsoft Graph Planner API — Plans. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/groups/{group-id}/planner/plans
+      name: groups-group-id-planner-plans
+      description: REST surface for groups-group-id-planner-plans.
+      operations:
+      - method: GET
+        name: listgroupplans
+        description: Microsoft Planner List Group Plans
+        call: microsoft-planner-plans.listgroupplans
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/planner/plans
+      name: planner-plans
+      description: REST surface for planner-plans.
+      operations:
+      - method: POST
+        name: createplan
+        description: Microsoft Planner Create a Plan
+        call: microsoft-planner-plans.createplan
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/planner/plans/{plan-id}
+      name: planner-plans-plan-id
+      description: REST surface for planner-plans-plan-id.
+      operations:
+      - method: GET
+        name: getplan
+        description: Microsoft Planner Get a Plan
+        call: microsoft-planner-plans.getplan
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateplan
+        description: Microsoft Planner Update a Plan
+        call: microsoft-planner-plans.updateplan
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteplan
+        description: Microsoft Planner Delete a Plan
+        call: microsoft-planner-plans.deleteplan
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/planner/plans/{plan-id}/buckets
+      name: planner-plans-plan-id-buckets
+      description: REST surface for planner-plans-plan-id-buckets.
+      operations:
+      - method: GET
+        name: listplanbuckets
+        description: Microsoft Planner List Plan Buckets
+        call: microsoft-planner-plans.listplanbuckets
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/planner/plans/{plan-id}/tasks
+      name: planner-plans-plan-id-tasks
+      description: REST surface for planner-plans-plan-id-tasks.
+      operations:
+      - method: GET
+        name: listplantasks
+        description: Microsoft Planner List Plan Tasks
+        call: microsoft-planner-plans.listplantasks
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: microsoft-planner-plans-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Microsoft Planner Microsoft Graph Planner API — Plans. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: microsoft-planner-list-group-plans
+      description: Microsoft Planner List Group Plans
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-planner-plans.listgroupplans
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-create-plan
+      description: Microsoft Planner Create a Plan
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: microsoft-planner-plans.createplan
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-get-plan
+      description: Microsoft Planner Get a Plan
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-planner-plans.getplan
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-update-plan
+      description: Microsoft Planner Update a Plan
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-planner-plans.updateplan
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-delete-plan
+      description: Microsoft Planner Delete a Plan
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: microsoft-planner-plans.deleteplan
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-list-plan-buckets
+      description: Microsoft Planner List Plan Buckets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-planner-plans.listplanbuckets
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: microsoft-planner-list-plan-tasks
+      description: Microsoft Planner List Plan Tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-planner-plans.listplantasks
+      outputParameters:
+      - type: object
+        mapping: $.
