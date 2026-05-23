@@ -1,0 +1,30 @@
+{
+  "operationId": "updateBucket",
+  "method": "PATCH",
+  "path": "/planner/buckets/{bucket-id}",
+  "summary": "Microsoft Planner Update a Bucket",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "UpdatebucketRequestExample",
+      "example": {
+        "name": "Example Title",
+        "orderHint": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Updatebucket200Example",
+      "example": {
+        "@odata.etag": "example_value",
+        "id": "abc123",
+        "name": "Example Title",
+        "planId": "500123",
+        "orderHint": "example_value"
+      }
+    }
+  ]
+}

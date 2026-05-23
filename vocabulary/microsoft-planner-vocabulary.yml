@@ -1,0 +1,15 @@
+name: Microsoft Planner Domain Vocabulary
+provider: Microsoft Planner
+providerId: microsoft-planner
+description: Tag-derived vocabulary for the Microsoft Planner API surface; sourced from openapi/ tags.
+terms:
+- term: Buckets
+  description: Operations for managing Planner buckets
+- term: Plan Details
+  description: Operations for managing additional plan details
+- term: Plans
+  description: Operations for managing Planner plans
+- term: Task Details
+  description: Operations for managing additional task details
+- term: Tasks
+  description: Operations for managing Planner tasks

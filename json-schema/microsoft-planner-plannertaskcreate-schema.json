@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlannerTaskCreate",
+  "title": "PlannerTaskCreate",
+  "type": "object",
+  "description": "Request body for creating a new task",
+  "required": [
+    "planId",
+    "title"
+  ],
+  "properties": {
+    "planId": {
+      "type": "string",
+      "description": "ID of the plan the task belongs to",
+      "example": "500123"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the task",
+      "example": "Example Title"
+    },
+    "bucketId": {
+      "type": "string",
+      "description": "ID of the bucket to place the task in",
+      "example": "500123"
+    },
+    "assignments": {
+      "$ref": "#/components/schemas/PlannerAssignments"
+    },
+    "appliedCategories": {
+      "$ref": "#/components/schemas/PlannerAppliedCategories"
+    },
+    "priority": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10,
+      "description": "Priority of the task (0 is highest, 10 is lowest)",
+      "example": 10
+    },
+    "percentComplete": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "example": 10
+    },
+    "startDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "dueDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "conversationThreadId": {
+      "type": "string",
+      "example": "500123"
+    },
+    "orderHint": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "assigneePriority": {
+      "type": "string",
+      "example": "example_value"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlannerPlanDetails",
+  "title": "PlannerPlanDetails",
+  "type": "object",
+  "description": "Represents additional information about a plan, including category descriptions and sharing information.",
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "description": "The ETag of the resource",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the plan details",
+      "readOnly": true,
+      "example": "abc123"
+    },
+    "categoryDescriptions": {
+      "$ref": "#/components/schemas/PlannerCategoryDescriptions",
+      "description": "Specifies the descriptions of the 25 categories for tasks in the plan"
+    },
+    "sharedWith": {
+      "$ref": "#/components/schemas/PlannerUserIds",
+      "description": "Set of user IDs that this plan is shared with"
+    }
+  }
+}

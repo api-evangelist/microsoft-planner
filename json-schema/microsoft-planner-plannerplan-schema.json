@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlannerPlan",
+  "title": "PlannerPlan",
+  "type": "object",
+  "description": "Represents a plan in Microsoft 365. A plan is owned by a group and contains a collection of plannerTasks. It can also have a collection of plannerBuckets.",
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "description": "The ETag of the resource, used for concurrency control",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the plan. 28 characters long and case-sensitive.",
+      "readOnly": true,
+      "example": "abc123"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the plan",
+      "example": "Example Title"
+    },
+    "container": {
+      "$ref": "#/components/schemas/PlannerPlanContainer",
+      "description": "Identifies the container of the plan. After it is set, this property cannot be updated."
+    },
+    "owner": {
+      "type": "string",
+      "description": "Deprecated. Use the container property instead. ID of the group that owns the plan.",
+      "deprecated": true,
+      "example": "example_value"
+    },
+    "createdBy": {
+      "$ref": "#/components/schemas/IdentitySet",
+      "description": "The user who created the plan",
+      "readOnly": true
+    },
+    "createdDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time at which the plan was created. ISO 8601 format, always in UTC.",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    }
+  }
+}

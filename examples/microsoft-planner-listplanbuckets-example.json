@@ -1,0 +1,27 @@
+{
+  "operationId": "listPlanBuckets",
+  "method": "GET",
+  "path": "/planner/plans/{plan-id}/buckets",
+  "summary": "Microsoft Planner List Plan Buckets",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listplanbuckets200Example",
+      "example": {
+        "@odata.context": "example_value",
+        "@odata.count": 10,
+        "value": [
+          {
+            "@odata.etag": "example_value",
+            "id": "abc123",
+            "name": "Example Title",
+            "planId": "500123",
+            "orderHint": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

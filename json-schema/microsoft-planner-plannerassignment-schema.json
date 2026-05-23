@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlannerAssignment",
+  "title": "PlannerAssignment",
+  "type": "object",
+  "description": "Represents the assignment of a task to a user",
+  "properties": {
+    "@odata.type": {
+      "type": "string",
+      "const": "microsoft.graph.plannerAssignment",
+      "example": "example_value"
+    },
+    "assignedBy": {
+      "$ref": "#/components/schemas/IdentitySet",
+      "description": "The identity of the user that performed the assignment",
+      "readOnly": true
+    },
+    "assignedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time at which the task was assigned",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "orderHint": {
+      "type": "string",
+      "description": "Hint used to order assignees in a task. The format is defined in the Planner order hints documentation.",
+      "example": "example_value"
+    }
+  }
+}

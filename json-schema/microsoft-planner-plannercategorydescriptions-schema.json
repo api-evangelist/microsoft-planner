@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlannerCategoryDescriptions",
+  "title": "PlannerCategoryDescriptions",
+  "type": "object",
+  "description": "Describes the 25 categories that can be associated with tasks in a plan.",
+  "properties": {
+    "category1": {
+      "type": "string",
+      "description": "The label associated with category 1",
+      "example": "example_value"
+    },
+    "category2": {
+      "type": "string",
+      "description": "The label associated with category 2",
+      "example": "example_value"
+    },
+    "category3": {
+      "type": "string",
+      "description": "The label associated with category 3",
+      "example": "example_value"
+    },
+    "category4": {
+      "type": "string",
+      "description": "The label associated with category 4",
+      "example": "example_value"
+    },
+    "category5": {
+      "type": "string",
+      "description": "The label associated with category 5",
+      "example": "example_value"
+    },
+    "category6": {
+      "type": "string",
+      "description": "The label associated with category 6",
+      "example": "example_value"
+    },
+    "category7": {
+      "type": "string",
+      "description": "The label associated with category 7",
+      "example": "example_value"
+    },
+    "category8": {
+      "type": "string",
+      "description": "The label associated with category 8",
+      "example": "example_value"
+    },
+    "category9": {
+      "type": "string",
+      "description": "The label associated with category 9",
+      "example": "example_value"
+    },
+    "category10": {
+      "type": "string",
+      "description": "The label associated with category 10",
+      "example": "example_value"
+    },
+    "category11": {
+      "type": "string",
+      "description": "The label associated with category 11",
+      "example": "example_value"
+    },
+    "category12": {
+      "type": "string",
+      "description": "The label associated with category 12",
+      "example": "example_value"
+    },
+    "category13": {
+      "type": "string",
+      "description": "The label associated with category 13",
+      "example": "example_value"
+    },
+    "category14": {
+      "type": "string",
+      "description": "The label associated with category 14",
+      "example": "example_value"
+    },
+    "category15": {
+      "type": "string",
+      "description": "The label associated with category 15",
+      "example": "example_value"
+    },
+    "category16": {
+      "type": "string",
+      "description": "The label associated with category 16",
+      "example": "example_value"
+    },
+    "category17": {
+      "type": "string",
+      "description": "The label associated with category 17",
+      "example": "example_value"
+    },
+    "category18": {
+      "type": "string",
+      "description": "The label associated with category 18",
+      "example": "example_value"
+    },
+    "category19": {
+      "type": "string",
+      "description": "The label associated with category 19",
+      "example": "example_value"
+    },
+    "category20": {
+      "type": "string",
+      "description": "The label associated with category 20",
+      "example": "example_value"
+    },
+    "category21": {
+      "type": "string",
+      "description": "The label associated with category 21",
+      "example": "example_value"
+    },
+    "category22": {
+      "type": "string",
+      "description": "The label associated with category 22",
+      "example": "example_value"
+    },
+    "category23": {
+      "type": "string",
+      "description": "The label associated with category 23",
+      "example": "example_value"
+    },
+    "category24": {
+      "type": "string",
+      "description": "The label associated with category 24",
+      "example": "example_value"
+    },
+    "category25": {
+      "type": "string",
+      "description": "The label associated with category 25",
+      "example": "example_value"
+    }
+  }
+}

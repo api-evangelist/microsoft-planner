@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlannerUserIds",
+  "title": "PlannerUserIds",
+  "type": "object",
+  "description": "Set of user IDs that a plan is shared with. Each key is a user ID and the value is true.",
+  "additionalProperties": {
+    "type": "boolean"
+  }
+}

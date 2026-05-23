@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlannerTask",
+  "title": "PlannerTask",
+  "type": "object",
+  "description": "Represents a Planner task in Microsoft 365. A task is contained in a plan and can be assigned to a bucket within the plan.",
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "description": "The ETag of the resource, used for concurrency control",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the task. 28 characters long and case-sensitive.",
+      "readOnly": true,
+      "example": "abc123"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the task",
+      "example": "Example Title"
+    },
+    "planId": {
+      "type": "string",
+      "description": "Plan ID to which the task belongs",
+      "example": "500123"
+    },
+    "bucketId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Bucket ID to which the task belongs. The bucket must be in the same plan as the task. 28 characters long and case-sensitive.",
+      "example": "500123"
+    },
+    "assignments": {
+      "$ref": "#/components/schemas/PlannerAssignments",
+      "description": "The set of assignees the task is assigned to"
+    },
+    "appliedCategories": {
+      "$ref": "#/components/schemas/PlannerAppliedCategories",
+      "description": "The categories applied to the task"
+    },
+    "priority": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10,
+      "description": "Priority of the task. Valid range is 0-10 where 0 is highest priority. Values 0-1 are urgent, 2-4 are important, 5-7 are medium, 8-10 are low.",
+      "example": 10
+    },
+    "percentComplete": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Percentage of task completion. When set to 100, the task is considered completed.",
+      "example": 10
+    },
+    "startDateTime": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "Date and time at which the task starts. ISO 8601 format, always in UTC.",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "dueDateTime": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "Date and time at which the task is due. ISO 8601 format, always in UTC.",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "completedDateTime": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "Date and time at which the percentComplete was set to 100. ISO 8601 format, always in UTC.",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "completedBy": {
+      "$ref": "#/components/schemas/IdentitySet",
+      "description": "Identity of the user that completed the task",
+      "readOnly": true
+    },
+    "createdDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time at which the task was created. ISO 8601 format, always in UTC.",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "createdBy": {
+      "$ref": "#/components/schemas/IdentitySet",
+      "description": "Identity of the user that created the task",
+      "readOnly": true
+    },
+    "hasDescription": {
+      "type": "boolean",
+      "description": "Indicates whether the details object of the task has a nonempty description.",
+      "readOnly": true,
+      "example": true
+    },
+    "conversationThreadId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Thread ID of the conversation on the task in the containing group.",
+      "example": "500123"
+    },
+    "orderHint": {
+      "type": "string",
+      "description": "Hint used to order items of this type in a list view",
+      "example": "example_value"
+    },
+    "assigneePriority": {
+      "type": "string",
+      "description": "Hint used to order items of this type when grouped by assignee",
+      "example": "example_value"
+    },
+    "previewType": {
+      "type": "string",
+      "description": "The type of preview that shows on the task",
+      "enum": [
+        "automatic",
+        "noPreview",
+        "checklist",
+        "description",
+        "reference"
+      ],
+      "example": "automatic"
+    },
+    "activeChecklistItemCount": {
+      "type": "integer",
+      "description": "Number of incomplete checklist items",
+      "readOnly": true,
+      "example": 10
+    },
+    "checklistItemCount": {
+      "type": "integer",
+      "description": "Total number of checklist items on the task",
+      "readOnly": true,
+      "example": 10
+    },
+    "referenceCount": {
+      "type": "integer",
+      "description": "Number of external references on the task",
+      "readOnly": true,
+      "example": 10
+    }
+  }
+}

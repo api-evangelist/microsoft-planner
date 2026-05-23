@@ -1,0 +1,33 @@
+{
+  "operationId": "updateTaskDetails",
+  "method": "PATCH",
+  "path": "/planner/tasks/{task-id}/details",
+  "summary": "Microsoft Planner Update Task Details",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "UpdatetaskdetailsRequestExample",
+      "example": {
+        "description": "A sample description.",
+        "checklist": {},
+        "references": {},
+        "previewType": "automatic"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Updatetaskdetails200Example",
+      "example": {
+        "@odata.etag": "example_value",
+        "id": "abc123",
+        "description": "A sample description.",
+        "checklist": {},
+        "references": {},
+        "previewType": "automatic"
+      }
+    }
+  ]
+}

@@ -1,0 +1,398 @@
+{
+  "provider": "Microsoft Planner",
+  "providerId": "microsoft-planner",
+  "kind": "json-structure",
+  "description": "Structural overview of the Microsoft Planner API surface; extracted from openapi/.",
+  "schemaCount": 29,
+  "operationCount": 22,
+  "schemas": [
+    {
+      "name": "IdentitySet",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Identity",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "PlannerPlanContainer",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "url"
+      ]
+    },
+    {
+      "name": "PlannerAppliedCategories",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "PlannerAssignments",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "PlannerAssignment",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "PlannerCategoryDescriptions",
+      "type": "object",
+      "propertyCount": 25,
+      "required": []
+    },
+    {
+      "name": "PlannerChecklistItems",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "PlannerChecklistItem",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "PlannerExternalReferences",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "PlannerExternalReference",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "PlannerUserIds",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "PlannerPlan",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "PlannerPlanCreate",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "title",
+        "container"
+      ]
+    },
+    {
+      "name": "PlannerPlanUpdate",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "PlannerPlanDetails",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "PlannerPlanDetailsUpdate",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "PlannerTask",
+      "type": "object",
+      "propertyCount": 23,
+      "required": []
+    },
+    {
+      "name": "PlannerTaskCreate",
+      "type": "object",
+      "propertyCount": 12,
+      "required": [
+        "planId",
+        "title"
+      ]
+    },
+    {
+      "name": "PlannerTaskUpdate",
+      "type": "object",
+      "propertyCount": 12,
+      "required": []
+    },
+    {
+      "name": "PlannerTaskDetails",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "PlannerTaskDetailsUpdate",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "PlannerBucket",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "PlannerBucketCreate",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "name",
+        "planId"
+      ]
+    },
+    {
+      "name": "PlannerBucketUpdate",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "PlannerPlanCollection",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "PlannerTaskCollection",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "PlannerBucketCollection",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "ODataError",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "POST",
+      "path": "/planner/plans",
+      "operationId": "createPlan",
+      "summary": "Microsoft Planner Create a Plan",
+      "tags": [
+        "Plans"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/planner/plans/{plan-id}",
+      "operationId": "getPlan",
+      "summary": "Microsoft Planner Get a Plan",
+      "tags": [
+        "Plans"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/planner/plans/{plan-id}",
+      "operationId": "deletePlan",
+      "summary": "Microsoft Planner Delete a Plan",
+      "tags": [
+        "Plans"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/planner/plans/{plan-id}",
+      "operationId": "updatePlan",
+      "summary": "Microsoft Planner Update a Plan",
+      "tags": [
+        "Plans"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/planner/plans/{plan-id}/tasks",
+      "operationId": "listPlanTasks",
+      "summary": "Microsoft Planner List Plan Tasks",
+      "tags": [
+        "Plans",
+        "Tasks"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/planner/plans/{plan-id}/buckets",
+      "operationId": "listPlanBuckets",
+      "summary": "Microsoft Planner List Plan Buckets",
+      "tags": [
+        "Buckets",
+        "Plans"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/planner/plans/{plan-id}/details",
+      "operationId": "getPlanDetails",
+      "summary": "Microsoft Planner Get Plan Details",
+      "tags": [
+        "Plan Details"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/planner/plans/{plan-id}/details",
+      "operationId": "updatePlanDetails",
+      "summary": "Microsoft Planner Update Plan Details",
+      "tags": [
+        "Plan Details"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/planner/tasks",
+      "operationId": "createTask",
+      "summary": "Microsoft Planner Create a Task",
+      "tags": [
+        "Tasks"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/planner/tasks/{task-id}",
+      "operationId": "getTask",
+      "summary": "Microsoft Planner Get a Task",
+      "tags": [
+        "Tasks"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/planner/tasks/{task-id}",
+      "operationId": "deleteTask",
+      "summary": "Microsoft Planner Delete a Task",
+      "tags": [
+        "Tasks"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/planner/tasks/{task-id}",
+      "operationId": "updateTask",
+      "summary": "Microsoft Planner Update a Task",
+      "tags": [
+        "Tasks"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/planner/tasks/{task-id}/details",
+      "operationId": "getTaskDetails",
+      "summary": "Microsoft Planner Get Task Details",
+      "tags": [
+        "Task Details"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/planner/tasks/{task-id}/details",
+      "operationId": "updateTaskDetails",
+      "summary": "Microsoft Planner Update Task Details",
+      "tags": [
+        "Task Details"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/planner/buckets",
+      "operationId": "createBucket",
+      "summary": "Microsoft Planner Create a Bucket",
+      "tags": [
+        "Buckets"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/planner/buckets/{bucket-id}",
+      "operationId": "getBucket",
+      "summary": "Microsoft Planner Get a Bucket",
+      "tags": [
+        "Buckets"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/planner/buckets/{bucket-id}",
+      "operationId": "deleteBucket",
+      "summary": "Microsoft Planner Delete a Bucket",
+      "tags": [
+        "Buckets"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/planner/buckets/{bucket-id}",
+      "operationId": "updateBucket",
+      "summary": "Microsoft Planner Update a Bucket",
+      "tags": [
+        "Buckets"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/planner/buckets/{bucket-id}/tasks",
+      "operationId": "listBucketTasks",
+      "summary": "Microsoft Planner List Bucket Tasks",
+      "tags": [
+        "Buckets",
+        "Tasks"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/groups/{group-id}/planner/plans",
+      "operationId": "listGroupPlans",
+      "summary": "Microsoft Planner List Group Plans",
+      "tags": [
+        "Plans"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/me/planner/tasks",
+      "operationId": "listMyTasks",
+      "summary": "Microsoft Planner List My Tasks",
+      "tags": [
+        "Tasks"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/users/{user-id}/planner/tasks",
+      "operationId": "listUserTasks",
+      "summary": "Microsoft Planner List User Tasks",
+      "tags": [
+        "Tasks"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "operationId": "createBucket",
+  "method": "POST",
+  "path": "/planner/buckets",
+  "summary": "Microsoft Planner Create a Bucket",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreatebucketRequestExample",
+      "example": {
+        "name": "Example Title",
+        "planId": "500123",
+        "orderHint": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createbucket201Example",
+      "example": {
+        "@odata.etag": "example_value",
+        "id": "abc123",
+        "name": "Example Title",
+        "planId": "500123",
+        "orderHint": "example_value"
+      }
+    }
+  ]
+}

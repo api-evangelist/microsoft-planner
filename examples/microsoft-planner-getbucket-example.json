@@ -1,0 +1,21 @@
+{
+  "operationId": "getBucket",
+  "method": "GET",
+  "path": "/planner/buckets/{bucket-id}",
+  "summary": "Microsoft Planner Get a Bucket",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getbucket200Example",
+      "example": {
+        "@odata.etag": "example_value",
+        "id": "abc123",
+        "name": "Example Title",
+        "planId": "500123",
+        "orderHint": "example_value"
+      }
+    }
+  ]
+}

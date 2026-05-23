@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlannerTaskDetailsUpdate",
+  "title": "PlannerTaskDetailsUpdate",
+  "type": "object",
+  "description": "Request body for updating task details",
+  "properties": {
+    "description": {
+      "type": "string",
+      "example": "A sample description."
+    },
+    "checklist": {
+      "$ref": "#/components/schemas/PlannerChecklistItems"
+    },
+    "references": {
+      "$ref": "#/components/schemas/PlannerExternalReferences"
+    },
+    "previewType": {
+      "type": "string",
+      "enum": [
+        "automatic",
+        "noPreview",
+        "checklist",
+        "description",
+        "reference"
+      ],
+      "example": "automatic"
+    }
+  }
+}

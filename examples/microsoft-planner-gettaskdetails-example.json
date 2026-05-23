@@ -1,0 +1,22 @@
+{
+  "operationId": "getTaskDetails",
+  "method": "GET",
+  "path": "/planner/tasks/{task-id}/details",
+  "summary": "Microsoft Planner Get Task Details",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Gettaskdetails200Example",
+      "example": {
+        "@odata.etag": "example_value",
+        "id": "abc123",
+        "description": "A sample description.",
+        "checklist": {},
+        "references": {},
+        "previewType": "automatic"
+      }
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlannerTaskUpdate",
+  "title": "PlannerTaskUpdate",
+  "type": "object",
+  "description": "Request body for updating a task",
+  "properties": {
+    "title": {
+      "type": "string",
+      "example": "Example Title"
+    },
+    "bucketId": {
+      "type": "string",
+      "example": "500123"
+    },
+    "assignments": {
+      "$ref": "#/components/schemas/PlannerAssignments"
+    },
+    "appliedCategories": {
+      "$ref": "#/components/schemas/PlannerAppliedCategories"
+    },
+    "priority": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10,
+      "example": 10
+    },
+    "percentComplete": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "example": 10
+    },
+    "startDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "dueDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "conversationThreadId": {
+      "type": "string",
+      "example": "500123"
+    },
+    "orderHint": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "assigneePriority": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "previewType": {
+      "type": "string",
+      "enum": [
+        "automatic",
+        "noPreview",
+        "checklist",
+        "description",
+        "reference"
+      ],
+      "example": "automatic"
+    }
+  }
+}

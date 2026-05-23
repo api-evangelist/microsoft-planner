@@ -1,0 +1,27 @@
+{
+  "operationId": "getPlan",
+  "method": "GET",
+  "path": "/planner/plans/{plan-id}",
+  "summary": "Microsoft Planner Get a Plan",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getplan200Example",
+      "example": {
+        "@odata.etag": "example_value",
+        "id": "abc123",
+        "title": "Example Title",
+        "container": {
+          "containerId": "500123",
+          "type": "group",
+          "url": "https://www.example.com"
+        },
+        "owner": "example_value",
+        "createdBy": {},
+        "createdDateTime": "2026-01-15T10:30:00Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlannerChecklistItem",
+  "title": "PlannerChecklistItem",
+  "type": "object",
+  "description": "A checklist item on a Planner task",
+  "properties": {
+    "@odata.type": {
+      "type": "string",
+      "const": "microsoft.graph.plannerChecklistItem",
+      "example": "example_value"
+    },
+    "isChecked": {
+      "type": "boolean",
+      "description": "Whether the item is checked (completed)",
+      "example": true
+    },
+    "lastModifiedBy": {
+      "$ref": "#/components/schemas/IdentitySet",
+      "readOnly": true
+    },
+    "lastModifiedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the item was last modified",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "orderHint": {
+      "type": "string",
+      "description": "Hint used to order items in the checklist",
+      "example": "example_value"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the checklist item",
+      "example": "Example Title"
+    }
+  }
+}
