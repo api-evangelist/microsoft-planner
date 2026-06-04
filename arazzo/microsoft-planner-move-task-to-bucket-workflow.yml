@@ -1,0 +1,85 @@
+arazzo: 1.0.1
+info:
+  title: Microsoft Planner Move a Task Into a Different Bucket
+  summary: Confirm the target bucket exists, read the task ETag, then reassign the task to that bucket.
+  description: >-
+    Reorganizing work in Planner means changing a task's bucketId. This flow first
+    reads the target bucket to confirm it exists and belongs to a plan, then reads
+    the task to capture its current ETag, and finally patches the task to point at
+    the target bucket using an If-Match header for optimistic concurrency. Every
+    request is spelled out inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: plannerApi
+  url: ../openapi/microsoft-planner-openapi.yml
+  type: openapi
+workflows:
+- workflowId: move-task-to-bucket
+  summary: Validate a bucket then move a task into it.
+  description: >-
+    Chains getBucket, getTask, and updateTask, confirming the destination bucket
+    and carrying the task ETag into the If-Match header of the move.
+  inputs:
+    type: object
+    required:
+    - taskId
+    - bucketId
+    properties:
+      taskId:
+        type: string
+        description: The id of the task to move.
+      bucketId:
+        type: string
+        description: The id of the destination bucket the task should be moved into.
+  steps:
+  - stepId: getBucket
+    description: >-
+      Read the destination bucket to confirm it exists and capture the plan it
+      belongs to before moving the task.
+    operationId: getBucket
+    parameters:
+    - name: bucket-id
+      in: path
+      value: $inputs.bucketId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      bucketPlanId: $response.body#/planId
+  - stepId: getTask
+    description: >-
+      Read the task to capture its current ETag for the If-Match header used by
+      the move.
+    operationId: getTask
+    parameters:
+    - name: task-id
+      in: path
+      value: $inputs.taskId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      taskEtag: $response.body#/@odata.etag
+  - stepId: updateTask
+    description: >-
+      Patch the task to set its bucketId to the destination bucket. The If-Match
+      header carries the task ETag. Planner returns 200 with the updated task.
+    operationId: updateTask
+    parameters:
+    - name: task-id
+      in: path
+      value: $inputs.taskId
+    - name: If-Match
+      in: header
+      value: $steps.getTask.outputs.taskEtag
+    requestBody:
+      contentType: application/json
+      payload:
+        bucketId: $inputs.bucketId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      bucketId: $response.body#/bucketId
+      newEtag: $response.body#/@odata.etag
+  outputs:
+    taskId: $inputs.taskId
+    bucketId: $steps.updateTask.outputs.bucketId

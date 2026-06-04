@@ -1,0 +1,74 @@
+arazzo: 1.0.1
+info:
+  title: Microsoft Planner Drill From Group to Plan to Tasks
+  summary: List a group's plans, pick the first plan, and list that plan's tasks and buckets.
+  description: >-
+    A read-only discovery flow that starts from a Microsoft 365 group and walks
+    down into Planner. It lists the plans owned by the group, selects the first
+    returned plan, and then lists both the tasks and the buckets contained in that
+    plan so a caller can see the full structure of the group's primary plan. Every
+    request is spelled out inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: plannerApi
+  url: ../openapi/microsoft-planner-openapi.yml
+  type: openapi
+workflows:
+- workflowId: list-group-plan-tasks
+  summary: List a group's plans then the tasks and buckets of its first plan.
+  description: >-
+    Chains listGroupPlans, listPlanTasks, and listPlanBuckets, carrying the first
+    plan id from the group's plan collection into the task and bucket listings.
+  inputs:
+    type: object
+    required:
+    - groupId
+    properties:
+      groupId:
+        type: string
+        description: The id of the Microsoft 365 group whose plans are listed.
+  steps:
+  - stepId: listGroupPlans
+    description: >-
+      List the plans owned by the supplied group and capture the id of the first
+      plan in the collection.
+    operationId: listGroupPlans
+    parameters:
+    - name: group-id
+      in: path
+      value: $inputs.groupId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      plans: $response.body#/value
+      firstPlanId: $response.body#/value/0/id
+  - stepId: listPlanTasks
+    description: >-
+      List the tasks contained in the first plan returned for the group.
+    operationId: listPlanTasks
+    parameters:
+    - name: plan-id
+      in: path
+      value: $steps.listGroupPlans.outputs.firstPlanId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tasks: $response.body#/value
+  - stepId: listPlanBuckets
+    description: >-
+      List the buckets contained in the same plan so the plan's organization is
+      visible alongside its tasks.
+    operationId: listPlanBuckets
+    parameters:
+    - name: plan-id
+      in: path
+      value: $steps.listGroupPlans.outputs.firstPlanId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      buckets: $response.body#/value
+  outputs:
+    planId: $steps.listGroupPlans.outputs.firstPlanId
+    tasks: $steps.listPlanTasks.outputs.tasks
+    buckets: $steps.listPlanBuckets.outputs.buckets

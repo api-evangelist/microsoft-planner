@@ -226,6 +226,33 @@ maintainers:
   email: kin@apievangelist.com
   url: https://apievangelist.com
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/microsoft-planner-add-bucket-task-to-plan-workflow.yml
+    name: Microsoft Planner Add a Bucket and Task to an Existing Plan
+    summary: Confirm a plan exists, create a new bucket in it, then add a task to that bucket.
+  - url: arazzo/microsoft-planner-complete-my-first-task-workflow.yml
+    name: Microsoft Planner Complete My First Assigned Task
+    summary: List tasks assigned to the signed-in user and, if any exist, mark the first one complete.
+  - url: arazzo/microsoft-planner-complete-task-workflow.yml
+    name: Microsoft Planner Mark a Task Complete
+    summary: Read a task to capture its ETag, then patch it to 100 percent complete.
+  - url: arazzo/microsoft-planner-create-plan-bucket-task-workflow.yml
+    name: Microsoft Planner Stand Up a Plan with a Bucket and First Task
+    summary: Create a plan in a group, add a bucket to it, then create the first task in that bucket.
+  - url: arazzo/microsoft-planner-create-task-with-details-workflow.yml
+    name: Microsoft Planner Create a Task and Populate Its Details
+    summary: Create a task in a plan, then read and update its task details with a description and checklist.
+  - url: arazzo/microsoft-planner-list-group-plan-tasks-workflow.yml
+    name: Microsoft Planner Drill From Group to Plan to Tasks
+    summary: List a group's plans, pick the first plan, and list that plan's tasks and buckets.
+  - url: arazzo/microsoft-planner-move-task-to-bucket-workflow.yml
+    name: Microsoft Planner Move a Task Into a Different Bucket
+    summary: Confirm the target bucket exists, read the task ETag, then reassign the task to that bucket.
+  - url: arazzo/microsoft-planner-rename-plan-workflow.yml
+    name: Microsoft Planner Rename a Plan and Describe Its Categories
+    summary: Read a plan and its details for ETags, rename the plan, then set category label descriptions.
 - type: Portal
   url: https://developer.microsoft.com/en-us/graph
 - type: TermsOfService

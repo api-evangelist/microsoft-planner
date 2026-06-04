@@ -1,0 +1,101 @@
+arazzo: 1.0.1
+info:
+  title: Microsoft Planner Stand Up a Plan with a Bucket and First Task
+  summary: Create a plan in a group, add a bucket to it, then create the first task in that bucket.
+  description: >-
+    The canonical Planner bootstrap flow. It creates a new plannerPlan contained
+    by a Microsoft 365 group, adds a plannerBucket to organize work within that
+    plan, and finally creates a plannerTask placed into the new bucket. Each step
+    threads the identifier returned by the previous create into the next request
+    so a fully organized plan exists after a single pass. Every request is spelled
+    out inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: plannerApi
+  url: ../openapi/microsoft-planner-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-plan-bucket-task
+  summary: Create a plan, a bucket inside it, and a first task inside the bucket.
+  description: >-
+    Bootstraps a Planner workspace by chaining createPlan, createBucket, and
+    createTask, carrying the plan id into the bucket and the plan and bucket ids
+    into the task.
+  inputs:
+    type: object
+    required:
+    - containerUrl
+    - planTitle
+    - bucketName
+    - taskTitle
+    properties:
+      containerUrl:
+        type: string
+        description: >-
+          The full canonical URL of the Microsoft 365 group container that will
+          own the plan (e.g. https://graph.microsoft.com/v1.0/groups/{group-id}).
+      planTitle:
+        type: string
+        description: Title for the new plan.
+      bucketName:
+        type: string
+        description: Name for the bucket to create inside the plan.
+      bucketOrderHint:
+        type: string
+        description: Optional order hint used to position the bucket.
+      taskTitle:
+        type: string
+        description: Title for the first task created inside the bucket.
+  steps:
+  - stepId: createPlan
+    description: >-
+      Create a new plan contained by the supplied Microsoft 365 group. Planner
+      returns 201 with the created plan including its id and ETag.
+    operationId: createPlan
+    requestBody:
+      contentType: application/json
+      payload:
+        title: $inputs.planTitle
+        container:
+          url: $inputs.containerUrl
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      planId: $response.body#/id
+      planEtag: $response.body#/@odata.etag
+  - stepId: createBucket
+    description: >-
+      Create a bucket inside the newly created plan so tasks can be organized.
+      Planner returns 201 with the created bucket id.
+    operationId: createBucket
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.bucketName
+        planId: $steps.createPlan.outputs.planId
+        orderHint: $inputs.bucketOrderHint
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      bucketId: $response.body#/id
+  - stepId: createTask
+    description: >-
+      Create the first task in the plan and place it into the new bucket.
+      Planner returns 201 with the created task id.
+    operationId: createTask
+    requestBody:
+      contentType: application/json
+      payload:
+        planId: $steps.createPlan.outputs.planId
+        bucketId: $steps.createBucket.outputs.bucketId
+        title: $inputs.taskTitle
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      taskId: $response.body#/id
+      taskEtag: $response.body#/@odata.etag
+  outputs:
+    planId: $steps.createPlan.outputs.planId
+    bucketId: $steps.createBucket.outputs.bucketId
+    taskId: $steps.createTask.outputs.taskId

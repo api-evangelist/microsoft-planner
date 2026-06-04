@@ -1,0 +1,70 @@
+arazzo: 1.0.1
+info:
+  title: Microsoft Planner Mark a Task Complete
+  summary: Read a task to capture its ETag, then patch it to 100 percent complete.
+  description: >-
+    Updating a Planner task requires the last known ETag supplied through an
+    If-Match header for optimistic concurrency. This flow reads the task first to
+    capture its current @odata.etag, then patches the task to set percentComplete
+    to 100, which Planner treats as completion. The patch returns the updated task
+    so the new completion timestamp and ETag can be captured. Every request is
+    spelled out inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: plannerApi
+  url: ../openapi/microsoft-planner-openapi.yml
+  type: openapi
+workflows:
+- workflowId: complete-task
+  summary: Read a task for its ETag then mark it complete.
+  description: >-
+    Chains getTask and updateTask, passing the task ETag into the If-Match header
+    and setting percentComplete to 100.
+  inputs:
+    type: object
+    required:
+    - taskId
+    properties:
+      taskId:
+        type: string
+        description: The id of the task to mark complete.
+  steps:
+  - stepId: getTask
+    description: >-
+      Read the task to capture its current ETag, which is required by the update
+      step's If-Match header.
+    operationId: getTask
+    parameters:
+    - name: task-id
+      in: path
+      value: $inputs.taskId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      taskEtag: $response.body#/@odata.etag
+      title: $response.body#/title
+  - stepId: updateTask
+    description: >-
+      Patch the task to 100 percent complete. The If-Match header carries the
+      ETag read in the prior step. Planner returns 200 with the updated task.
+    operationId: updateTask
+    parameters:
+    - name: task-id
+      in: path
+      value: $inputs.taskId
+    - name: If-Match
+      in: header
+      value: $steps.getTask.outputs.taskEtag
+    requestBody:
+      contentType: application/json
+      payload:
+        percentComplete: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      completedDateTime: $response.body#/completedDateTime
+      newEtag: $response.body#/@odata.etag
+  outputs:
+    taskId: $inputs.taskId
+    completedDateTime: $steps.updateTask.outputs.completedDateTime

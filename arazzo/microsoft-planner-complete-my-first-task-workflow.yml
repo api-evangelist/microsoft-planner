@@ -1,0 +1,91 @@
+arazzo: 1.0.1
+info:
+  title: Microsoft Planner Complete My First Assigned Task
+  summary: List tasks assigned to the signed-in user and, if any exist, mark the first one complete.
+  description: >-
+    A personal productivity flow that lists the tasks assigned to the signed-in
+    user, then branches: when the user has at least one assigned task it reads that
+    task for its ETag and patches it to 100 percent complete using an If-Match
+    header, and when the user has no assigned tasks it ends without making any
+    change. Every request is spelled out inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: plannerApi
+  url: ../openapi/microsoft-planner-openapi.yml
+  type: openapi
+workflows:
+- workflowId: complete-my-first-task
+  summary: List the current user's tasks and complete the first one if present.
+  description: >-
+    Chains listMyTasks, getTask, and updateTask with a branch on whether the user
+    has any assigned tasks, carrying the first task id and ETag forward.
+  inputs:
+    type: object
+    properties:
+      placeholder:
+        type: string
+        description: >-
+          Unused placeholder; this workflow operates entirely on the signed-in
+          user's context and needs no inputs.
+  steps:
+  - stepId: listMyTasks
+    description: >-
+      List the tasks assigned to the signed-in user and branch on whether the
+      collection contains any tasks.
+    operationId: listMyTasks
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tasks: $response.body#/value
+      firstTaskId: $response.body#/value/0/id
+    onSuccess:
+    - name: hasTasks
+      type: goto
+      stepId: getTask
+      criteria:
+      - context: $response.body
+        condition: $.value.length > 0
+        type: jsonpath
+    - name: noTasks
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.value.length == 0
+        type: jsonpath
+  - stepId: getTask
+    description: >-
+      Read the first assigned task to capture its current ETag for the If-Match
+      header used by the completion patch.
+    operationId: getTask
+    parameters:
+    - name: task-id
+      in: path
+      value: $steps.listMyTasks.outputs.firstTaskId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      taskEtag: $response.body#/@odata.etag
+  - stepId: updateTask
+    description: >-
+      Patch the first assigned task to 100 percent complete. The If-Match header
+      carries the task ETag. Planner returns 200 with the updated task.
+    operationId: updateTask
+    parameters:
+    - name: task-id
+      in: path
+      value: $steps.listMyTasks.outputs.firstTaskId
+    - name: If-Match
+      in: header
+      value: $steps.getTask.outputs.taskEtag
+    requestBody:
+      contentType: application/json
+      payload:
+        percentComplete: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      completedDateTime: $response.body#/completedDateTime
+  outputs:
+    completedTaskId: $steps.listMyTasks.outputs.firstTaskId
+    completedDateTime: $steps.updateTask.outputs.completedDateTime

@@ -1,0 +1,108 @@
+arazzo: 1.0.1
+info:
+  title: Microsoft Planner Create a Task and Populate Its Details
+  summary: Create a task in a plan, then read and update its task details with a description and checklist.
+  description: >-
+    A plannerTask carries only lightweight fields; its rich content (description,
+    checklist, references) lives on a separate plannerTaskDetails resource that is
+    created implicitly with the task. This flow creates the task, reads the task
+    details to capture the current ETag, and then patches the details with a
+    description and checklist using an If-Match header for optimistic concurrency.
+    Every request is spelled out inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: plannerApi
+  url: ../openapi/microsoft-planner-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-task-with-details
+  summary: Create a task and set its description and checklist via task details.
+  description: >-
+    Chains createTask, getTaskDetails (to obtain the ETag), and updateTaskDetails,
+    passing the task id forward and the details ETag into the If-Match header.
+  inputs:
+    type: object
+    required:
+    - planId
+    - taskTitle
+    - description
+    properties:
+      planId:
+        type: string
+        description: The id of the plan the task belongs to.
+      bucketId:
+        type: string
+        description: Optional bucket id to place the task into.
+      taskTitle:
+        type: string
+        description: Title for the new task.
+      description:
+        type: string
+        description: The long-form description to write onto the task details.
+      checklist:
+        type: object
+        description: >-
+          Optional plannerChecklistItems object keyed by item id, used to set the
+          task's checklist.
+      previewType:
+        type: string
+        description: >-
+          Optional preview type shown on the task card (automatic, noPreview,
+          checklist, description, or reference).
+  steps:
+  - stepId: createTask
+    description: >-
+      Create the task in the supplied plan (and optional bucket). Planner returns
+      201 with the created task id.
+    operationId: createTask
+    requestBody:
+      contentType: application/json
+      payload:
+        planId: $inputs.planId
+        bucketId: $inputs.bucketId
+        title: $inputs.taskTitle
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      taskId: $response.body#/id
+  - stepId: getTaskDetails
+    description: >-
+      Read the task details resource that was created alongside the task to
+      capture its current ETag before patching.
+    operationId: getTaskDetails
+    parameters:
+    - name: task-id
+      in: path
+      value: $steps.createTask.outputs.taskId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      detailsEtag: $response.body#/@odata.etag
+  - stepId: updateTaskDetails
+    description: >-
+      Patch the task details with the description, optional checklist, and
+      preview type. The If-Match header carries the ETag read in the prior step.
+      Planner returns 200 with the updated task details.
+    operationId: updateTaskDetails
+    parameters:
+    - name: task-id
+      in: path
+      value: $steps.createTask.outputs.taskId
+    - name: If-Match
+      in: header
+      value: $steps.getTaskDetails.outputs.detailsEtag
+    requestBody:
+      contentType: application/json
+      payload:
+        description: $inputs.description
+        checklist: $inputs.checklist
+        previewType: $inputs.previewType
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      detailsId: $response.body#/id
+      newEtag: $response.body#/@odata.etag
+  outputs:
+    taskId: $steps.createTask.outputs.taskId
+    detailsId: $steps.updateTaskDetails.outputs.detailsId

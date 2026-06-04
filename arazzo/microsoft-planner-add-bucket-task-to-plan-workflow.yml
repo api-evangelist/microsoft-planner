@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: Microsoft Planner Add a Bucket and Task to an Existing Plan
+  summary: Confirm a plan exists, create a new bucket in it, then add a task to that bucket.
+  description: >-
+    Extends an existing plan rather than creating a new one. The flow reads the
+    target plan to confirm it exists, creates a fresh plannerBucket inside it, and
+    then creates a plannerTask placed into that new bucket. The plan id flows into
+    the bucket and the plan and bucket ids flow into the task. Every request is
+    spelled out inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: plannerApi
+  url: ../openapi/microsoft-planner-openapi.yml
+  type: openapi
+workflows:
+- workflowId: add-bucket-task-to-plan
+  summary: Add a new bucket and a task to an existing plan.
+  description: >-
+    Chains getPlan, createBucket, and createTask, validating the plan and then
+    carrying its id into the bucket and the bucket id into the task.
+  inputs:
+    type: object
+    required:
+    - planId
+    - bucketName
+    - taskTitle
+    properties:
+      planId:
+        type: string
+        description: The id of the existing plan to extend.
+      bucketName:
+        type: string
+        description: Name for the new bucket.
+      bucketOrderHint:
+        type: string
+        description: Optional order hint used to position the bucket.
+      taskTitle:
+        type: string
+        description: Title for the task created inside the new bucket.
+  steps:
+  - stepId: getPlan
+    description: >-
+      Read the target plan to confirm it exists before adding a bucket and task.
+    operationId: getPlan
+    parameters:
+    - name: plan-id
+      in: path
+      value: $inputs.planId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      planTitle: $response.body#/title
+  - stepId: createBucket
+    description: >-
+      Create a new bucket inside the confirmed plan. Planner returns 201 with the
+      created bucket id.
+    operationId: createBucket
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.bucketName
+        planId: $inputs.planId
+        orderHint: $inputs.bucketOrderHint
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      bucketId: $response.body#/id
+  - stepId: createTask
+    description: >-
+      Create a task in the plan and place it into the new bucket. Planner returns
+      201 with the created task id.
+    operationId: createTask
+    requestBody:
+      contentType: application/json
+      payload:
+        planId: $inputs.planId
+        bucketId: $steps.createBucket.outputs.bucketId
+        title: $inputs.taskTitle
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      taskId: $response.body#/id
+  outputs:
+    planId: $inputs.planId
+    bucketId: $steps.createBucket.outputs.bucketId
+    taskId: $steps.createTask.outputs.taskId
