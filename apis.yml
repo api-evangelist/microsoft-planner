@@ -222,6 +222,12 @@ maintainers:
     email: kin@apievangelist.com
     url: https://apievangelist.com
 common:
+  - type: VulnerabilityDisclosure
+    url: security/microsoft-planner-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/microsoft-planner-domain-security.yml
+  - type: Authentication
+    url: authentication/microsoft-planner-authentication.yml
   - type: OAuthScopes
     url: scopes/microsoft-planner-scopes.yml
   - type: PostmanWorkspace
