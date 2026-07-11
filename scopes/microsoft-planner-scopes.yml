@@ -1,0 +1,48 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/microsoft-planner-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/microsoft-planner-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+    tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+  description: OAuth 2.0 authorization with Microsoft identity platform
+scopes:
+- scope: Group.Read.All
+  description: Read all groups
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-planner-openapi.yml
+- scope: Group.ReadWrite.All
+  description: Read and write all groups
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-planner-openapi.yml
+- scope: Tasks.Read
+  description: Read user Planner tasks
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-planner-openapi.yml
+- scope: Tasks.Read.All
+  description: Read all Planner tasks (admin)
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-planner-openapi.yml
+- scope: Tasks.ReadWrite
+  description: Read and write user Planner tasks
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-planner-openapi.yml
+- scope: Tasks.ReadWrite.All
+  description: Read and write all Planner tasks (admin)
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-planner-openapi.yml
