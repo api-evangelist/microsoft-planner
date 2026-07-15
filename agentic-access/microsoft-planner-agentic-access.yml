@@ -1,0 +1,412 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/microsoft-planner-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 22
+  by_action_class:
+    acting: 11
+    connected: 11
+  by_consequence:
+    write: 11
+    read: 11
+  human_in_the_loop_required: 0
+operations:
+- path: /planner/plans
+  method: post
+  operationId: createPlan
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/plans/{plan-id}
+  method: get
+  operationId: getPlan
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/plans/{plan-id}
+  method: patch
+  operationId: updatePlan
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/plans/{plan-id}
+  method: delete
+  operationId: deletePlan
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/plans/{plan-id}/tasks
+  method: get
+  operationId: listPlanTasks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/plans/{plan-id}/buckets
+  method: get
+  operationId: listPlanBuckets
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/plans/{plan-id}/details
+  method: get
+  operationId: getPlanDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/plans/{plan-id}/details
+  method: patch
+  operationId: updatePlanDetails
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/tasks
+  method: post
+  operationId: createTask
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/tasks/{task-id}
+  method: get
+  operationId: getTask
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/tasks/{task-id}
+  method: patch
+  operationId: updateTask
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/tasks/{task-id}
+  method: delete
+  operationId: deleteTask
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/tasks/{task-id}/details
+  method: get
+  operationId: getTaskDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/tasks/{task-id}/details
+  method: patch
+  operationId: updateTaskDetails
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/buckets
+  method: post
+  operationId: createBucket
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/buckets/{bucket-id}
+  method: get
+  operationId: getBucket
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/buckets/{bucket-id}
+  method: patch
+  operationId: updateBucket
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/buckets/{bucket-id}
+  method: delete
+  operationId: deleteBucket
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /planner/buckets/{bucket-id}/tasks
+  method: get
+  operationId: listBucketTasks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /groups/{group-id}/planner/plans
+  method: get
+  operationId: listGroupPlans
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /me/planner/tasks
+  method: get
+  operationId: listMyTasks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
+- path: /users/{user-id}/planner/tasks
+  method: get
+  operationId: listUserTasks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+    - Tasks.Read
+    - Tasks.ReadWrite
