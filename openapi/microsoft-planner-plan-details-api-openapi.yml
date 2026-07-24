@@ -1,0 +1,425 @@
+openapi: 3.1.0
+info:
+  title: Microsoft Planner Microsoft Graph Planner Buckets Plan Details API
+  description: The Microsoft Graph Planner API enables programmatic access to Planner resources in Microsoft 365. You can create and manage plans, tasks, and buckets to organize work, assign tasks to users, and track progress within groups. Plans are contained by Microsoft 365 groups, and tasks are organized into buckets within plans. This API covers the v1.0 stable endpoint for basic (non-premium) Planner operations.
+  version: 1.0.0
+  contact:
+    name: Microsoft Graph Support
+    url: https://developer.microsoft.com/en-us/graph/support
+    email: graphsdksupport@microsoft.com
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://docs.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://docs.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  x-apisguru-categories:
+  - collaboration
+  - project-management
+  x-logo:
+    url: https://docs.microsoft.com/en-us/media/logos/logo-ms-social.png
+servers:
+- url: https://graph.microsoft.com/v1.0
+  description: Microsoft Graph v1.0 production endpoint
+security:
+- oauth2:
+  - Tasks.Read
+  - Tasks.ReadWrite
+  - Group.Read.All
+  - Group.ReadWrite.All
+tags:
+- name: Plan Details
+  description: Operations for managing additional plan details
+  externalDocs:
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannerplandetails?view=graph-rest-1.0
+paths:
+  /planner/plans/{plan-id}/details:
+    parameters:
+    - $ref: '#/components/parameters/PlanId'
+    get:
+      operationId: getPlanDetails
+      summary: Microsoft Planner Get Plan Details
+      description: Retrieve the properties and relationships of a plannerPlanDetails object.
+      tags:
+      - Plan Details
+      responses:
+        '200':
+          description: The plan details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerPlanDetails'
+              examples:
+                Getplandetails200Example:
+                  summary: Default getPlanDetails 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    categoryDescriptions:
+                      category1: example_value
+                      category2: example_value
+                      category3: example_value
+                      category4: example_value
+                      category5: example_value
+                      category6: example_value
+                      category7: example_value
+                      category8: example_value
+                      category9: example_value
+                      category10: example_value
+                      category11: example_value
+                      category12: example_value
+                      category13: example_value
+                      category14: example_value
+                      category15: example_value
+                      category16: example_value
+                      category17: example_value
+                      category18: example_value
+                      category19: example_value
+                      category20: example_value
+                      category21: example_value
+                      category22: example_value
+                      category23: example_value
+                      category24: example_value
+                      category25: example_value
+                    sharedWith: {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updatePlanDetails
+      summary: Microsoft Planner Update Plan Details
+      description: Update the properties of a plannerPlanDetails object. Requires the If-Match header with the last known ETag value.
+      tags:
+      - Plan Details
+      parameters:
+      - $ref: '#/components/parameters/IfMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlannerPlanDetailsUpdate'
+            examples:
+              UpdateplandetailsRequestExample:
+                summary: Default updatePlanDetails request
+                x-microcks-default: true
+                value:
+                  categoryDescriptions:
+                    category1: example_value
+                    category2: example_value
+                    category3: example_value
+                    category4: example_value
+                    category5: example_value
+                    category6: example_value
+                    category7: example_value
+                    category8: example_value
+                    category9: example_value
+                    category10: example_value
+                    category11: example_value
+                    category12: example_value
+                    category13: example_value
+                    category14: example_value
+                    category15: example_value
+                    category16: example_value
+                    category17: example_value
+                    category18: example_value
+                    category19: example_value
+                    category20: example_value
+                    category21: example_value
+                    category22: example_value
+                    category23: example_value
+                    category24: example_value
+                    category25: example_value
+                  sharedWith: {}
+      responses:
+        '200':
+          description: The updated plan details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannerPlanDetails'
+              examples:
+                Updateplandetails200Example:
+                  summary: Default updatePlanDetails 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    categoryDescriptions:
+                      category1: example_value
+                      category2: example_value
+                      category3: example_value
+                      category4: example_value
+                      category5: example_value
+                      category6: example_value
+                      category7: example_value
+                      category8: example_value
+                      category9: example_value
+                      category10: example_value
+                      category11: example_value
+                      category12: example_value
+                      category13: example_value
+                      category14: example_value
+                      category15: example_value
+                      category16: example_value
+                      category17: example_value
+                      category18: example_value
+                      category19: example_value
+                      category20: example_value
+                      category21: example_value
+                      category22: example_value
+                      category23: example_value
+                      category24: example_value
+                      category25: example_value
+                    sharedWith: {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    PlannerUserIds:
+      type: object
+      description: Set of user IDs that a plan is shared with. Each key is a user ID and the value is true.
+      additionalProperties:
+        type: boolean
+    ODataError:
+      type: object
+      description: OData error response
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The error code
+            message:
+              type: string
+              description: A human-readable error message
+            innerError:
+              type: object
+              properties:
+                request-id:
+                  type: string
+                date:
+                  type: string
+                  format: date-time
+          example: example_value
+    PlannerCategoryDescriptions:
+      type: object
+      description: Describes the 25 categories that can be associated with tasks in a plan.
+      properties:
+        category1:
+          type: string
+          description: The label associated with category 1
+          example: example_value
+        category2:
+          type: string
+          description: The label associated with category 2
+          example: example_value
+        category3:
+          type: string
+          description: The label associated with category 3
+          example: example_value
+        category4:
+          type: string
+          description: The label associated with category 4
+          example: example_value
+        category5:
+          type: string
+          description: The label associated with category 5
+          example: example_value
+        category6:
+          type: string
+          description: The label associated with category 6
+          example: example_value
+        category7:
+          type: string
+          description: The label associated with category 7
+          example: example_value
+        category8:
+          type: string
+          description: The label associated with category 8
+          example: example_value
+        category9:
+          type: string
+          description: The label associated with category 9
+          example: example_value
+        category10:
+          type: string
+          description: The label associated with category 10
+          example: example_value
+        category11:
+          type: string
+          description: The label associated with category 11
+          example: example_value
+        category12:
+          type: string
+          description: The label associated with category 12
+          example: example_value
+        category13:
+          type: string
+          description: The label associated with category 13
+          example: example_value
+        category14:
+          type: string
+          description: The label associated with category 14
+          example: example_value
+        category15:
+          type: string
+          description: The label associated with category 15
+          example: example_value
+        category16:
+          type: string
+          description: The label associated with category 16
+          example: example_value
+        category17:
+          type: string
+          description: The label associated with category 17
+          example: example_value
+        category18:
+          type: string
+          description: The label associated with category 18
+          example: example_value
+        category19:
+          type: string
+          description: The label associated with category 19
+          example: example_value
+        category20:
+          type: string
+          description: The label associated with category 20
+          example: example_value
+        category21:
+          type: string
+          description: The label associated with category 21
+          example: example_value
+        category22:
+          type: string
+          description: The label associated with category 22
+          example: example_value
+        category23:
+          type: string
+          description: The label associated with category 23
+          example: example_value
+        category24:
+          type: string
+          description: The label associated with category 24
+          example: example_value
+        category25:
+          type: string
+          description: The label associated with category 25
+          example: example_value
+    PlannerPlanDetailsUpdate:
+      type: object
+      description: Request body for updating plan details
+      properties:
+        categoryDescriptions:
+          $ref: '#/components/schemas/PlannerCategoryDescriptions'
+        sharedWith:
+          $ref: '#/components/schemas/PlannerUserIds'
+    PlannerPlanDetails:
+      type: object
+      description: Represents additional information about a plan, including category descriptions and sharing information.
+      properties:
+        '@odata.etag':
+          type: string
+          description: The ETag of the resource
+          readOnly: true
+          example: example_value
+        id:
+          type: string
+          description: The unique identifier for the plan details
+          readOnly: true
+          example: abc123
+        categoryDescriptions:
+          $ref: '#/components/schemas/PlannerCategoryDescriptions'
+          description: Specifies the descriptions of the 25 categories for tasks in the plan
+        sharedWith:
+          $ref: '#/components/schemas/PlannerUserIds'
+          description: Set of user IDs that this plan is shared with
+  responses:
+    Forbidden:
+      description: Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    PreconditionFailed:
+      description: Precondition failed. The If-Match ETag value does not match the current version of the resource. Read the resource again to obtain the latest ETag.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. The request requires a valid OAuth 2.0 access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Conflict:
+      description: Conflict. The request conflicts with the current state of the resource due to a concurrent modification.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid. Common causes include incorrect types for open properties, invalid order hint formats, or logically inconsistent data such as a start date after a due date.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+  parameters:
+    IfMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.
+      schema:
+        type: string
+    PlanId:
+      name: plan-id
+      in: path
+      required: true
+      description: The unique identifier of the plannerPlan (28 characters, case-sensitive)
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authorization with Microsoft identity platform
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            Tasks.Read: Read user Planner tasks
+            Tasks.ReadWrite: Read and write user Planner tasks
+            Tasks.Read.All: Read all Planner tasks (admin)
+            Tasks.ReadWrite.All: Read and write all Planner tasks (admin)
+            Group.Read.All: Read all groups
+            Group.ReadWrite.All: Read and write all groups
+externalDocs:
+  description: Microsoft Graph Planner API documentation
+  url: https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-1.0
