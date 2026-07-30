@@ -3,6 +3,19 @@ name: Microsoft Planner
 description: >-
   Microsoft Planner is a task management tool that helps teams organize work, assign tasks, share files, and collaborate
   on projects within Microsoft 365.
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://docs.microsoft.com/en-us/media/logos/logo-ms-social.png
 tags:
   - Collaboration
@@ -15,208 +28,366 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/microsoft-planner/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - name: Microsoft Planner API
-    description: RESTful API for accessing and managing tasks, plans, and buckets in Microsoft Planner through Microsoft Graph.
-    image: https://docs.microsoft.com/en-us/media/logos/logo-ms-social.png
-    humanURL: https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/resources/planner_overview
-    baseURL: https://graph.microsoft.com/v1.0/planner
-    tags:
-      - Assignments
-      - Buckets
-      - Microsoft Graph
-      - Plans
-      - Tasks
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/graph/api/resources/planner-overview
-      - type: OpenAPI
-        url: openapi/microsoft-planner-openapi.yml
-      - type: JSONSchema
-        url: json-schema/microsoft-planner-task-schema.json
-      - type: JSONLD
-        url: json-ld/microsoft-planner-context.jsonld
-      - type: Authentication
-        url: https://learn.microsoft.com/en-us/graph/auth/
-      - type: Pricing
-        url: https://www.microsoft.com/en-us/microsoft-365/enterprise/microsoft365-plans-and-pricing
-      - type: RateLimits
-        url: https://learn.microsoft.com/en-us/graph/throttling
-      - type: SDKs
-        url: https://github.com/microsoftgraph/msgraph-sdk-dotnet
-        title: .NET SDK
-      - type: SDKs
-        url: https://github.com/microsoftgraph/msgraph-sdk-javascript
-        title: JavaScript SDK
-      - type: SDKs
-        url: https://github.com/microsoftgraph/msgraph-sdk-python
-        title: Python SDK
-      - type: SDKs
-        url: https://github.com/microsoftgraph/msgraph-sdk-java
-        title: Java SDK
-      - type: SDKs
-        url: https://github.com/microsoftgraph/msgraph-sdk-go
-        title: Go SDK
-      - type: SDKs
-        url: https://github.com/microsoftgraph/msgraph-sdk-php
-        title: PHP SDK
-      - type: Support
-        url: https://developer.microsoft.com/en-us/graph/support
-      - type: ChangeLog
-        url: https://developer.microsoft.com/en-us/graph/changelog
-      - type: Sandbox
-        url: https://developer.microsoft.com/en-us/graph/graph-explorer
-      - type: GettingStarted
-        url: https://learn.microsoft.com/en-us/graph/planner-concept-overview
-      - type: APIReference
-        url: https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-1.0
-      - type: GettingStarted
-        url: https://developer.microsoft.com/en-us/graph/quick-start
-    contact:
-      - FN: Microsoft Graph Support
-        url: https://developer.microsoft.com/en-us/graph/support
-        email: graphsdksupport@microsoft.com
-  - name: Microsoft Graph Plans API
-    description: >-
-      API for creating, reading, updating, and deleting plans in Microsoft Planner through Microsoft Graph. Plans are
-      the containers for tasks and are owned by groups or other containers.
-    image: https://docs.microsoft.com/en-us/media/logos/logo-ms-social.png
-    humanURL: https://learn.microsoft.com/en-us/graph/api/resources/plannerplan?view=graph-rest-1.0
-    baseURL: https://graph.microsoft.com/v1.0/planner/plans
-    tags:
-      - Microsoft Graph
-      - Planner
-      - Plans
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/graph/api/resources/plannerplan?view=graph-rest-1.0
-      - type: APIReference
-        url: https://learn.microsoft.com/en-us/graph/api/planner-post-plans?view=graph-rest-1.0
-      - type: OpenAPI
-        url: openapi/microsoft-planner-openapi.yml
-      - type: Authentication
-        url: https://learn.microsoft.com/en-us/graph/auth/
-      - type: GettingStarted
-        url: https://learn.microsoft.com/en-us/graph/planner-concept-overview
-      - type: Sandbox
-        url: https://developer.microsoft.com/en-us/graph/graph-explorer
-    contact:
-      - FN: Microsoft Graph Support
-        url: https://developer.microsoft.com/en-us/graph/support
-        email: graphsdksupport@microsoft.com
-  - name: Microsoft Graph Tasks API
-    description: >-
-      API for creating, reading, updating, and deleting tasks in Microsoft Planner through Microsoft Graph. Tasks are
-      contained in plans and can be assigned to buckets and users.
-    image: https://docs.microsoft.com/en-us/media/logos/logo-ms-social.png
-    humanURL: https://learn.microsoft.com/en-us/graph/api/resources/plannertask?view=graph-rest-1.0
-    baseURL: https://graph.microsoft.com/v1.0/planner/tasks
-    tags:
-      - Assignments
-      - Microsoft Graph
-      - Planner
-      - Tasks
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/graph/api/resources/plannertask?view=graph-rest-1.0
-      - type: APIReference
-        url: https://learn.microsoft.com/en-us/graph/api/planner-post-tasks?view=graph-rest-1.0
-      - type: OpenAPI
-        url: openapi/microsoft-planner-openapi.yml
-      - type: JSONSchema
-        url: json-schema/microsoft-planner-task-schema.json
-      - type: Authentication
-        url: https://learn.microsoft.com/en-us/graph/auth/
-      - type: GettingStarted
-        url: https://learn.microsoft.com/en-us/graph/planner-concept-overview
-      - type: Sandbox
-        url: https://developer.microsoft.com/en-us/graph/graph-explorer
-    contact:
-      - FN: Microsoft Graph Support
-        url: https://developer.microsoft.com/en-us/graph/support
-        email: graphsdksupport@microsoft.com
-  - name: Microsoft Graph Buckets API
-    description: >-
-      API for creating, reading, updating, and deleting buckets in Microsoft Planner through Microsoft Graph. Buckets
-      represent custom columns for organizing tasks within a plan.
-    image: https://docs.microsoft.com/en-us/media/logos/logo-ms-social.png
-    humanURL: https://learn.microsoft.com/en-us/graph/api/resources/plannerbucket?view=graph-rest-1.0
-    baseURL: https://graph.microsoft.com/v1.0/planner/buckets
-    tags:
-      - Buckets
-      - Microsoft Graph
-      - Organization
-      - Planner
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/graph/api/resources/plannerbucket?view=graph-rest-1.0
-      - type: APIReference
-        url: https://learn.microsoft.com/en-us/graph/api/planner-post-buckets?view=graph-rest-1.0
-      - type: OpenAPI
-        url: openapi/microsoft-planner-openapi.yml
-      - type: Authentication
-        url: https://learn.microsoft.com/en-us/graph/auth/
-      - type: GettingStarted
-        url: https://learn.microsoft.com/en-us/graph/planner-concept-overview
-      - type: Sandbox
-        url: https://developer.microsoft.com/en-us/graph/graph-explorer
-    contact:
-      - FN: Microsoft Graph Support
-        url: https://developer.microsoft.com/en-us/graph/support
-        email: graphsdksupport@microsoft.com
-  - name: Microsoft Graph Planner API (Beta)
-    description: >-
-      Beta version of the Planner API in Microsoft Graph providing access to preview features including plannerRoster
-      resources, business scenarios integration, and expanded container type support.
-    image: https://docs.microsoft.com/en-us/media/logos/logo-ms-social.png
-    humanURL: https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-beta
-    baseURL: https://graph.microsoft.com/beta/planner
-    tags:
-      - Beta
-      - Microsoft Graph
-      - Planner
-      - Preview
-      - Rosters
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-beta
-      - type: APIReference
-        url: https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-beta
-      - type: Authentication
-        url: https://learn.microsoft.com/en-us/graph/auth/
-      - type: GettingStarted
-        url: https://learn.microsoft.com/en-us/graph/planner-concept-overview
-      - type: Sandbox
-        url: https://developer.microsoft.com/en-us/graph/graph-explorer
-    contact:
-      - FN: Microsoft Graph Support
-        url: https://developer.microsoft.com/en-us/graph/support
-        email: graphsdksupport@microsoft.com
-  - name: Microsoft Graph Business Scenarios Planner API (Beta)
-    description: >-
-      Beta API for integrating external business processes with Microsoft Planner through business scenarios, allowing
-      creation of scenario-controlled Planner tasks and plans.
-    image: https://docs.microsoft.com/en-us/media/logos/logo-ms-social.png
-    humanURL: https://learn.microsoft.com/en-us/graph/api/resources/businessscenario-planner-overview?view=graph-rest-beta
-    baseURL: https://graph.microsoft.com/beta/solutions/businessScenarios
-    tags:
-      - Beta
-      - Business Scenarios
-      - Integration
-      - Microsoft Graph
-      - Planner
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/graph/api/resources/businessscenario-planner-overview?view=graph-rest-beta
-      - type: APIReference
-        url: https://learn.microsoft.com/en-us/graph/api/resources/businessscenario-overview?view=graph-rest-beta
-      - type: Authentication
-        url: https://learn.microsoft.com/en-us/graph/auth/
-      - type: Sandbox
-        url: https://developer.microsoft.com/en-us/graph/graph-explorer
-    contact:
-      - FN: Microsoft Graph Support
-        url: https://developer.microsoft.com/en-us/graph/support
-        email: graphsdksupport@microsoft.com
+- name: Microsoft Graph Planner API (Beta)
+  description: >-
+    Beta version of the Planner API in Microsoft Graph providing access to preview features including
+    plannerRoster resources, business scenarios integration, and expanded container type support.
+  image: https://docs.microsoft.com/en-us/media/logos/logo-ms-social.png
+  humanURL: >-
+    https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-beta
+  baseURL: https://graph.microsoft.com/beta/planner
+  tags:
+  - Beta
+  - Microsoft Graph
+  - Planner
+  - Preview
+  - Rosters
+  properties:
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-beta
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-beta
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/graph/auth/
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/graph/planner-concept-overview
+  - type: Sandbox
+    url: https://developer.microsoft.com/en-us/graph/graph-explorer
+  contact:
+  - FN: Microsoft Graph Support
+    url: https://developer.microsoft.com/en-us/graph/support
+    email: graphsdksupport@microsoft.com
+- name: Microsoft Graph Business Scenarios Planner API (Beta)
+  description: >-
+    Beta API for integrating external business processes with Microsoft Planner through business scenarios,
+    allowing creation of scenario-controlled Planner tasks and plans.
+  image: https://docs.microsoft.com/en-us/media/logos/logo-ms-social.png
+  humanURL: >-
+    https://learn.microsoft.com/en-us/graph/api/resources/businessscenario-planner-overview?view=graph-rest-beta
+  baseURL: https://graph.microsoft.com/beta/solutions/businessScenarios
+  tags:
+  - Beta
+  - Business Scenarios
+  - Integration
+  - Microsoft Graph
+  - Planner
+  properties:
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/graph/api/resources/businessscenario-planner-overview?view=graph-rest-beta
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/graph/api/resources/businessscenario-overview?view=graph-rest-beta
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/graph/auth/
+  - type: Sandbox
+    url: https://developer.microsoft.com/en-us/graph/graph-explorer
+  contact:
+  - FN: Microsoft Graph Support
+    url: https://developer.microsoft.com/en-us/graph/support
+    email: graphsdksupport@microsoft.com
+- aid: microsoft-planner:microsoft-planner-buckets-api
+  name: Microsoft Planner Buckets API
+  description: Operations for managing Planner buckets
+  humanURL: >-
+    https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/resources/planner_overview
+  baseURL: https://graph.microsoft.com/v1.0/planner
+  tags:
+  - Buckets
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-planner-buckets-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/planner-overview
+  - type: JSONSchema
+    url: json-schema/microsoft-planner-task-schema.json
+  - type: JSONLD
+    url: json-ld/microsoft-planner-context.jsonld
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/graph/auth/
+  - type: Pricing
+    url: https://www.microsoft.com/en-us/microsoft-365/enterprise/microsoft365-plans-and-pricing
+  - type: RateLimits
+    url: https://learn.microsoft.com/en-us/graph/throttling
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-dotnet
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-javascript
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-python
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-java
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-go
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-php
+  - type: Support
+    url: https://developer.microsoft.com/en-us/graph/support
+  - type: ChangeLog
+    url: https://developer.microsoft.com/en-us/graph/changelog
+  - type: Sandbox
+    url: https://developer.microsoft.com/en-us/graph/graph-explorer
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/graph/planner-concept-overview
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-1.0
+  - type: GettingStarted
+    url: https://developer.microsoft.com/en-us/graph/quick-start
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannerplan?view=graph-rest-1.0
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/graph/api/planner-post-plans?view=graph-rest-1.0
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannertask?view=graph-rest-1.0
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/graph/api/planner-post-tasks?view=graph-rest-1.0
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannerbucket?view=graph-rest-1.0
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/graph/api/planner-post-buckets?view=graph-rest-1.0
+- aid: microsoft-planner:microsoft-planner-plan-details-api
+  name: Microsoft Planner Plan Details API
+  description: Operations for managing additional plan details
+  humanURL: >-
+    https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/resources/planner_overview
+  baseURL: https://graph.microsoft.com/v1.0/planner
+  tags:
+  - Plan Details
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-planner-plan-details-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/planner-overview
+  - type: JSONSchema
+    url: json-schema/microsoft-planner-task-schema.json
+  - type: JSONLD
+    url: json-ld/microsoft-planner-context.jsonld
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/graph/auth/
+  - type: Pricing
+    url: https://www.microsoft.com/en-us/microsoft-365/enterprise/microsoft365-plans-and-pricing
+  - type: RateLimits
+    url: https://learn.microsoft.com/en-us/graph/throttling
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-dotnet
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-javascript
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-python
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-java
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-go
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-php
+  - type: Support
+    url: https://developer.microsoft.com/en-us/graph/support
+  - type: ChangeLog
+    url: https://developer.microsoft.com/en-us/graph/changelog
+  - type: Sandbox
+    url: https://developer.microsoft.com/en-us/graph/graph-explorer
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/graph/planner-concept-overview
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-1.0
+  - type: GettingStarted
+    url: https://developer.microsoft.com/en-us/graph/quick-start
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannerplan?view=graph-rest-1.0
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/graph/api/planner-post-plans?view=graph-rest-1.0
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannertask?view=graph-rest-1.0
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/graph/api/planner-post-tasks?view=graph-rest-1.0
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannerbucket?view=graph-rest-1.0
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/graph/api/planner-post-buckets?view=graph-rest-1.0
+- aid: microsoft-planner:microsoft-planner-plans-api
+  name: Microsoft Planner Plans API
+  description: Operations for managing Planner plans
+  humanURL: >-
+    https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/resources/planner_overview
+  baseURL: https://graph.microsoft.com/v1.0/planner
+  tags:
+  - Plans
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-planner-plans-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/planner-overview
+  - type: JSONSchema
+    url: json-schema/microsoft-planner-task-schema.json
+  - type: JSONLD
+    url: json-ld/microsoft-planner-context.jsonld
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/graph/auth/
+  - type: Pricing
+    url: https://www.microsoft.com/en-us/microsoft-365/enterprise/microsoft365-plans-and-pricing
+  - type: RateLimits
+    url: https://learn.microsoft.com/en-us/graph/throttling
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-dotnet
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-javascript
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-python
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-java
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-go
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-php
+  - type: Support
+    url: https://developer.microsoft.com/en-us/graph/support
+  - type: ChangeLog
+    url: https://developer.microsoft.com/en-us/graph/changelog
+  - type: Sandbox
+    url: https://developer.microsoft.com/en-us/graph/graph-explorer
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/graph/planner-concept-overview
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-1.0
+  - type: GettingStarted
+    url: https://developer.microsoft.com/en-us/graph/quick-start
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannerplan?view=graph-rest-1.0
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/graph/api/planner-post-plans?view=graph-rest-1.0
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannertask?view=graph-rest-1.0
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/graph/api/planner-post-tasks?view=graph-rest-1.0
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannerbucket?view=graph-rest-1.0
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/graph/api/planner-post-buckets?view=graph-rest-1.0
+- aid: microsoft-planner:microsoft-planner-task-details-api
+  name: Microsoft Planner Task Details API
+  description: Operations for managing additional task details
+  humanURL: >-
+    https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/resources/planner_overview
+  baseURL: https://graph.microsoft.com/v1.0/planner
+  tags:
+  - Task Details
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-planner-task-details-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/planner-overview
+  - type: JSONSchema
+    url: json-schema/microsoft-planner-task-schema.json
+  - type: JSONLD
+    url: json-ld/microsoft-planner-context.jsonld
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/graph/auth/
+  - type: Pricing
+    url: https://www.microsoft.com/en-us/microsoft-365/enterprise/microsoft365-plans-and-pricing
+  - type: RateLimits
+    url: https://learn.microsoft.com/en-us/graph/throttling
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-dotnet
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-javascript
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-python
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-java
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-go
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-php
+  - type: Support
+    url: https://developer.microsoft.com/en-us/graph/support
+  - type: ChangeLog
+    url: https://developer.microsoft.com/en-us/graph/changelog
+  - type: Sandbox
+    url: https://developer.microsoft.com/en-us/graph/graph-explorer
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/graph/planner-concept-overview
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-1.0
+  - type: GettingStarted
+    url: https://developer.microsoft.com/en-us/graph/quick-start
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannerplan?view=graph-rest-1.0
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/graph/api/planner-post-plans?view=graph-rest-1.0
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannertask?view=graph-rest-1.0
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/graph/api/planner-post-tasks?view=graph-rest-1.0
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannerbucket?view=graph-rest-1.0
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/graph/api/planner-post-buckets?view=graph-rest-1.0
+- aid: microsoft-planner:microsoft-planner-tasks-api
+  name: Microsoft Planner Tasks API
+  description: Operations for managing Planner tasks
+  humanURL: >-
+    https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/resources/planner_overview
+  baseURL: https://graph.microsoft.com/v1.0/planner
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-planner-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/planner-overview
+  - type: JSONSchema
+    url: json-schema/microsoft-planner-task-schema.json
+  - type: JSONLD
+    url: json-ld/microsoft-planner-context.jsonld
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/graph/auth/
+  - type: Pricing
+    url: https://www.microsoft.com/en-us/microsoft-365/enterprise/microsoft365-plans-and-pricing
+  - type: RateLimits
+    url: https://learn.microsoft.com/en-us/graph/throttling
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-dotnet
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-javascript
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-python
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-java
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-go
+  - type: SDKs
+    url: https://github.com/microsoftgraph/msgraph-sdk-php
+  - type: Support
+    url: https://developer.microsoft.com/en-us/graph/support
+  - type: ChangeLog
+    url: https://developer.microsoft.com/en-us/graph/changelog
+  - type: Sandbox
+    url: https://developer.microsoft.com/en-us/graph/graph-explorer
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/graph/planner-concept-overview
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-1.0
+  - type: GettingStarted
+    url: https://developer.microsoft.com/en-us/graph/quick-start
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannerplan?view=graph-rest-1.0
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/graph/api/planner-post-plans?view=graph-rest-1.0
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannertask?view=graph-rest-1.0
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/graph/api/planner-post-tasks?view=graph-rest-1.0
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/plannerbucket?view=graph-rest-1.0
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/graph/api/planner-post-buckets?view=graph-rest-1.0
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
