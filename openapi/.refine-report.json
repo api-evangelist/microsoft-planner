@@ -1,0 +1,22 @@
+{
+  "provider": "microsoft-planner",
+  "sources": [
+    "microsoft-planner-buckets-api-openapi.yml",
+    "microsoft-planner-plan-details-api-openapi.yml",
+    "microsoft-planner-plans-api-openapi.yml",
+    "microsoft-planner-task-details-api-openapi.yml",
+    "microsoft-planner-tasks-api-openapi.yml"
+  ],
+  "outputs": [
+    "microsoft-planner-buckets-api-openapi.yml",
+    "microsoft-planner-plan-details-api-openapi.yml",
+    "microsoft-planner-plans-api-openapi.yml",
+    "microsoft-planner-task-details-api-openapi.yml",
+    "microsoft-planner-tasks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
