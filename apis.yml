@@ -465,7 +465,7 @@ common:
   - type: RateLimits
     url: https://learn.microsoft.com/en-us/graph/throttling
   - type: OpenAPI
-    url: openapi/microsoft-planner-openapi.yml
+    url: openapi/_original/microsoft-planner-openapi.yml
   - type: JSONSchema
     url: json-schema/microsoft-planner-task-schema.json
   - type: JSONLD
