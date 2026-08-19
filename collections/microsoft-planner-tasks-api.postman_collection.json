@@ -1,0 +1,2459 @@
+{
+  "item": [
+    {
+      "id": "22baac43-ab95-40ad-a752-2d04e6fe7ace",
+      "name": "Tasks",
+      "description": {
+        "content": "Operations for managing Planner tasks",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2758ff2b-b0e7-4bec-83e3-ce59caa0e2a1",
+          "name": "Microsoft Planner List Plan Tasks",
+          "request": {
+            "name": "Microsoft Planner List Plan Tasks",
+            "description": {
+              "content": "Retrieve a list of plannerTask objects associated with a plannerPlan object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "planner",
+                "plans",
+                ":plan-id",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "plan-id",
+                  "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4526f232-45a0-45a5-9853-d1903788c890",
+              "name": "Collection of tasks in the plan",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "plans",
+                    ":plan-id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "plan-id",
+                      "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.context\": \"example_value\",\n  \"@odata.count\": 10,\n  \"value\": [\n    {\n      \"@odata.etag\": \"example_value\",\n      \"id\": \"abc123\",\n      \"title\": \"Example Title\",\n      \"planId\": \"500123\",\n      \"bucketId\": \"500123\",\n      \"priority\": 10,\n      \"percentComplete\": 10,\n      \"startDateTime\": \"2026-01-15T10:30:00Z\",\n      \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n      \"completedDateTime\": \"2026-01-15T10:30:00Z\",\n      \"createdDateTime\": \"2026-01-15T10:30:00Z\",\n      \"hasDescription\": true,\n      \"conversationThreadId\": \"500123\",\n      \"orderHint\": \"example_value\",\n      \"assigneePriority\": \"example_value\",\n      \"previewType\": \"automatic\",\n      \"activeChecklistItemCount\": 10,\n      \"checklistItemCount\": 10,\n      \"referenceCount\": 10\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7837c7f-8f37-4d8a-b39a-706c6a1f3e0b",
+              "name": "Unauthorized. The request requires a valid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "plans",
+                    ":plan-id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "plan-id",
+                      "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78fc2e1d-4092-417b-9d0a-c181a9b3d737",
+              "name": "Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "plans",
+                    ":plan-id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "plan-id",
+                      "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9955d7fc-8a66-4fbb-ba29-3a0ec49ed8bf",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "plans",
+                    ":plan-id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "plan-id",
+                      "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af38e07d-f27a-4c2f-b53c-c7a22a0a16a2",
+          "name": "Microsoft Planner Create a Task",
+          "request": {
+            "name": "Microsoft Planner Create a Task",
+            "description": {
+              "content": "Create a new plannerTask. The task must specify a planId to indicate which plan it belongs to. Tasks cannot be created without plans.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "planner",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"planId\": \"<string>\",\n  \"title\": \"<string>\",\n  \"bucketId\": \"<string>\",\n  \"assignments\": {\n    \"key_0\": {\n      \"@odata.type\": \"<string>\",\n      \"orderHint\": \"<string>\"\n    }\n  },\n  \"appliedCategories\": {\n    \"key_0\": \"<boolean>\",\n    \"key_1\": \"<boolean>\"\n  },\n  \"priority\": \"<integer>\",\n  \"percentComplete\": \"<integer>\",\n  \"startDateTime\": \"<dateTime>\",\n  \"dueDateTime\": \"<dateTime>\",\n  \"conversationThreadId\": \"<string>\",\n  \"orderHint\": \"<string>\",\n  \"assigneePriority\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c5d8f994-2bd1-4f1a-8880-d966f3696955",
+              "name": "The created task",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planId\": \"500123\",\n  \"title\": \"Example Title\",\n  \"bucketId\": \"500123\",\n  \"assignments\": {},\n  \"appliedCategories\": {},\n  \"priority\": 10,\n  \"percentComplete\": 10,\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n  \"conversationThreadId\": \"500123\",\n  \"orderHint\": \"example_value\",\n  \"assigneePriority\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.etag\": \"example_value\",\n  \"id\": \"abc123\",\n  \"title\": \"Example Title\",\n  \"planId\": \"500123\",\n  \"bucketId\": \"500123\",\n  \"assignments\": {},\n  \"appliedCategories\": {},\n  \"priority\": 10,\n  \"percentComplete\": 10,\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n  \"completedDateTime\": \"2026-01-15T10:30:00Z\",\n  \"completedBy\": {},\n  \"createdDateTime\": \"2026-01-15T10:30:00Z\",\n  \"createdBy\": {},\n  \"hasDescription\": true,\n  \"conversationThreadId\": \"500123\",\n  \"orderHint\": \"example_value\",\n  \"assigneePriority\": \"example_value\",\n  \"previewType\": \"automatic\",\n  \"activeChecklistItemCount\": 10,\n  \"checklistItemCount\": 10,\n  \"referenceCount\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "941c4c86-c3f4-48f1-9317-cd53a04b189f",
+              "name": "Bad request. The request body or parameters are invalid. Common causes include incorrect types for open properties, invalid order hint formats, or logically inconsistent data such as a start date after a due date.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planId\": \"500123\",\n  \"title\": \"Example Title\",\n  \"bucketId\": \"500123\",\n  \"assignments\": {},\n  \"appliedCategories\": {},\n  \"priority\": 10,\n  \"percentComplete\": 10,\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n  \"conversationThreadId\": \"500123\",\n  \"orderHint\": \"example_value\",\n  \"assigneePriority\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "495e025b-dac9-4ec5-8b10-c1d330d7c4c4",
+              "name": "Unauthorized. The request requires a valid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planId\": \"500123\",\n  \"title\": \"Example Title\",\n  \"bucketId\": \"500123\",\n  \"assignments\": {},\n  \"appliedCategories\": {},\n  \"priority\": 10,\n  \"percentComplete\": 10,\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n  \"conversationThreadId\": \"500123\",\n  \"orderHint\": \"example_value\",\n  \"assigneePriority\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5aae721-033c-4556-9ebf-c4e3497b4ed9",
+              "name": "Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planId\": \"500123\",\n  \"title\": \"Example Title\",\n  \"bucketId\": \"500123\",\n  \"assignments\": {},\n  \"appliedCategories\": {},\n  \"priority\": 10,\n  \"percentComplete\": 10,\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n  \"conversationThreadId\": \"500123\",\n  \"orderHint\": \"example_value\",\n  \"assigneePriority\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e95ab1a5-2b38-4713-9048-92bc0913ed11",
+          "name": "Microsoft Planner Get a Task",
+          "request": {
+            "name": "Microsoft Planner Get a Task",
+            "description": {
+              "content": "Retrieve the properties and relationships of a plannerTask object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "planner",
+                "tasks",
+                ":task-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "task-id",
+                  "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0b2afc7-1cb6-4558-895c-7153d4d9d2a6",
+              "name": "The requested task",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks",
+                    ":task-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task-id",
+                      "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.etag\": \"example_value\",\n  \"id\": \"abc123\",\n  \"title\": \"Example Title\",\n  \"planId\": \"500123\",\n  \"bucketId\": \"500123\",\n  \"assignments\": {},\n  \"appliedCategories\": {},\n  \"priority\": 10,\n  \"percentComplete\": 10,\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n  \"completedDateTime\": \"2026-01-15T10:30:00Z\",\n  \"completedBy\": {},\n  \"createdDateTime\": \"2026-01-15T10:30:00Z\",\n  \"createdBy\": {},\n  \"hasDescription\": true,\n  \"conversationThreadId\": \"500123\",\n  \"orderHint\": \"example_value\",\n  \"assigneePriority\": \"example_value\",\n  \"previewType\": \"automatic\",\n  \"activeChecklistItemCount\": 10,\n  \"checklistItemCount\": 10,\n  \"referenceCount\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98d0ea7d-80fb-423b-ac81-94562a6d24ff",
+              "name": "Unauthorized. The request requires a valid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks",
+                    ":task-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task-id",
+                      "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b0d7e63-e42a-4309-a408-071f17ad2f54",
+              "name": "Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks",
+                    ":task-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task-id",
+                      "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "049118d8-8d27-491a-9f3a-029a9b83922c",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks",
+                    ":task-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task-id",
+                      "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49bb5535-b8fa-4420-8309-d3649b450551",
+          "name": "Microsoft Planner Update a Task",
+          "request": {
+            "name": "Microsoft Planner Update a Task",
+            "description": {
+              "content": "Update the properties of a plannerTask object. Requires the If-Match header with the last known ETag value of the task.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "planner",
+                "tasks",
+                ":task-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "task-id",
+                  "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                "key": "If-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"bucketId\": \"<string>\",\n  \"assignments\": {\n    \"key_0\": {\n      \"@odata.type\": \"<string>\",\n      \"orderHint\": \"<string>\"\n    },\n    \"key_1\": {\n      \"@odata.type\": \"<string>\",\n      \"orderHint\": \"<string>\"\n    },\n    \"key_2\": {\n      \"@odata.type\": \"<string>\",\n      \"orderHint\": \"<string>\"\n    },\n    \"key_3\": {\n      \"@odata.type\": \"<string>\",\n      \"orderHint\": \"<string>\"\n    },\n    \"key_4\": {\n      \"@odata.type\": \"<string>\",\n      \"orderHint\": \"<string>\"\n    }\n  },\n  \"appliedCategories\": {\n    \"key_0\": \"<boolean>\",\n    \"key_1\": \"<boolean>\",\n    \"key_2\": \"<boolean>\",\n    \"key_3\": \"<boolean>\",\n    \"key_4\": \"<boolean>\"\n  },\n  \"priority\": \"<integer>\",\n  \"percentComplete\": \"<integer>\",\n  \"startDateTime\": \"<dateTime>\",\n  \"dueDateTime\": \"<dateTime>\",\n  \"conversationThreadId\": \"<string>\",\n  \"orderHint\": \"<string>\",\n  \"assigneePriority\": \"<string>\",\n  \"previewType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ab88133-126d-43bf-a5f6-d145d9955821",
+              "name": "The updated task",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks",
+                    ":task-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task-id",
+                      "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Example Title\",\n  \"bucketId\": \"500123\",\n  \"assignments\": {},\n  \"appliedCategories\": {},\n  \"priority\": 10,\n  \"percentComplete\": 10,\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n  \"conversationThreadId\": \"500123\",\n  \"orderHint\": \"example_value\",\n  \"assigneePriority\": \"example_value\",\n  \"previewType\": \"automatic\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.etag\": \"example_value\",\n  \"id\": \"abc123\",\n  \"title\": \"Example Title\",\n  \"planId\": \"500123\",\n  \"bucketId\": \"500123\",\n  \"assignments\": {},\n  \"appliedCategories\": {},\n  \"priority\": 10,\n  \"percentComplete\": 10,\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n  \"completedDateTime\": \"2026-01-15T10:30:00Z\",\n  \"completedBy\": {},\n  \"createdDateTime\": \"2026-01-15T10:30:00Z\",\n  \"createdBy\": {},\n  \"hasDescription\": true,\n  \"conversationThreadId\": \"500123\",\n  \"orderHint\": \"example_value\",\n  \"assigneePriority\": \"example_value\",\n  \"previewType\": \"automatic\",\n  \"activeChecklistItemCount\": 10,\n  \"checklistItemCount\": 10,\n  \"referenceCount\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c84e5d80-c015-447f-bf06-79c06eda19d5",
+              "name": "Bad request. The request body or parameters are invalid. Common causes include incorrect types for open properties, invalid order hint formats, or logically inconsistent data such as a start date after a due date.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks",
+                    ":task-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task-id",
+                      "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Example Title\",\n  \"bucketId\": \"500123\",\n  \"assignments\": {},\n  \"appliedCategories\": {},\n  \"priority\": 10,\n  \"percentComplete\": 10,\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n  \"conversationThreadId\": \"500123\",\n  \"orderHint\": \"example_value\",\n  \"assigneePriority\": \"example_value\",\n  \"previewType\": \"automatic\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f31a846f-88cd-4d28-937d-08084d8853cc",
+              "name": "Unauthorized. The request requires a valid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks",
+                    ":task-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task-id",
+                      "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Example Title\",\n  \"bucketId\": \"500123\",\n  \"assignments\": {},\n  \"appliedCategories\": {},\n  \"priority\": 10,\n  \"percentComplete\": 10,\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n  \"conversationThreadId\": \"500123\",\n  \"orderHint\": \"example_value\",\n  \"assigneePriority\": \"example_value\",\n  \"previewType\": \"automatic\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5bc08bf1-1870-4292-8ed0-6245e74af5ce",
+              "name": "Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks",
+                    ":task-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task-id",
+                      "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Example Title\",\n  \"bucketId\": \"500123\",\n  \"assignments\": {},\n  \"appliedCategories\": {},\n  \"priority\": 10,\n  \"percentComplete\": 10,\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n  \"conversationThreadId\": \"500123\",\n  \"orderHint\": \"example_value\",\n  \"assigneePriority\": \"example_value\",\n  \"previewType\": \"automatic\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4911d2a7-020a-4954-8a7b-f2476f72dc86",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks",
+                    ":task-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task-id",
+                      "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Example Title\",\n  \"bucketId\": \"500123\",\n  \"assignments\": {},\n  \"appliedCategories\": {},\n  \"priority\": 10,\n  \"percentComplete\": 10,\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n  \"conversationThreadId\": \"500123\",\n  \"orderHint\": \"example_value\",\n  \"assigneePriority\": \"example_value\",\n  \"previewType\": \"automatic\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b216914-fcf5-48f8-a5a5-8e0ae944b575",
+              "name": "Conflict. The request conflicts with the current state of the resource due to a concurrent modification.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks",
+                    ":task-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task-id",
+                      "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Example Title\",\n  \"bucketId\": \"500123\",\n  \"assignments\": {},\n  \"appliedCategories\": {},\n  \"priority\": 10,\n  \"percentComplete\": 10,\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n  \"conversationThreadId\": \"500123\",\n  \"orderHint\": \"example_value\",\n  \"assigneePriority\": \"example_value\",\n  \"previewType\": \"automatic\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76f841a6-f1eb-442c-a142-f3a23f4b7f34",
+              "name": "Precondition failed. The If-Match ETag value does not match the current version of the resource. Read the resource again to obtain the latest ETag.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks",
+                    ":task-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task-id",
+                      "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Example Title\",\n  \"bucketId\": \"500123\",\n  \"assignments\": {},\n  \"appliedCategories\": {},\n  \"priority\": 10,\n  \"percentComplete\": 10,\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n  \"conversationThreadId\": \"500123\",\n  \"orderHint\": \"example_value\",\n  \"assigneePriority\": \"example_value\",\n  \"previewType\": \"automatic\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f4192e1-597c-417e-af48-63c46d4d3356",
+          "name": "Microsoft Planner Delete a Task",
+          "request": {
+            "name": "Microsoft Planner Delete a Task",
+            "description": {
+              "content": "Delete a plannerTask object. Requires the If-Match header with the last known ETag value of the task.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "planner",
+                "tasks",
+                ":task-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "task-id",
+                  "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                "key": "If-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "523d4570-c62b-4b8a-b628-2ea20d8827f6",
+              "name": "Task deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks",
+                    ":task-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task-id",
+                      "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ab3668c8-5163-4c23-bbf2-079e3eb2b88f",
+              "name": "Unauthorized. The request requires a valid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks",
+                    ":task-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task-id",
+                      "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b125ffe7-7fdc-4a96-86ae-385634b8938f",
+              "name": "Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks",
+                    ":task-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task-id",
+                      "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72e476cc-65f2-499a-9cba-781f9dc8d6b9",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks",
+                    ":task-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task-id",
+                      "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d20d695-e0e1-464d-b3db-99881f6b2a5c",
+              "name": "Conflict. The request conflicts with the current state of the resource due to a concurrent modification.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks",
+                    ":task-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task-id",
+                      "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7b2437e-bf91-4bee-98e0-f12080e0bef5",
+              "name": "Precondition failed. The If-Match ETag value does not match the current version of the resource. Read the resource again to obtain the latest ETag.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "tasks",
+                    ":task-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task-id",
+                      "description": "(Required) The unique identifier of the plannerTask (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd1ccee8-d60b-4f65-ac5d-fb15e356afd3",
+          "name": "Microsoft Planner List Bucket Tasks",
+          "request": {
+            "name": "Microsoft Planner List Bucket Tasks",
+            "description": {
+              "content": "Retrieve a list of plannerTask objects associated with a plannerBucket object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "planner",
+                "buckets",
+                ":bucket-id",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bucket-id",
+                  "description": "(Required) The unique identifier of the plannerBucket (28 characters, case-sensitive)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7414706c-ae12-4cb5-a48c-7bbd6f2ce0cc",
+              "name": "Collection of tasks in the bucket",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "buckets",
+                    ":bucket-id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bucket-id",
+                      "description": "(Required) The unique identifier of the plannerBucket (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.context\": \"example_value\",\n  \"@odata.count\": 10,\n  \"value\": [\n    {\n      \"@odata.etag\": \"example_value\",\n      \"id\": \"abc123\",\n      \"title\": \"Example Title\",\n      \"planId\": \"500123\",\n      \"bucketId\": \"500123\",\n      \"priority\": 10,\n      \"percentComplete\": 10,\n      \"startDateTime\": \"2026-01-15T10:30:00Z\",\n      \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n      \"completedDateTime\": \"2026-01-15T10:30:00Z\",\n      \"createdDateTime\": \"2026-01-15T10:30:00Z\",\n      \"hasDescription\": true,\n      \"conversationThreadId\": \"500123\",\n      \"orderHint\": \"example_value\",\n      \"assigneePriority\": \"example_value\",\n      \"previewType\": \"automatic\",\n      \"activeChecklistItemCount\": 10,\n      \"checklistItemCount\": 10,\n      \"referenceCount\": 10\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e15a12c-de90-4db3-a1b0-d5a85d36acaa",
+              "name": "Unauthorized. The request requires a valid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "buckets",
+                    ":bucket-id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bucket-id",
+                      "description": "(Required) The unique identifier of the plannerBucket (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bee84f31-c69d-4a10-9432-026c54d37f8c",
+              "name": "Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "buckets",
+                    ":bucket-id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bucket-id",
+                      "description": "(Required) The unique identifier of the plannerBucket (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b90c63cf-2fcc-405d-87e7-42d9d8631a02",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "buckets",
+                    ":bucket-id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bucket-id",
+                      "description": "(Required) The unique identifier of the plannerBucket (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50fb0c29-eee9-4a9a-ad2f-99be6bc1625c",
+          "name": "Microsoft Planner List My Tasks",
+          "request": {
+            "name": "Microsoft Planner List My Tasks",
+            "description": {
+              "content": "Retrieve a list of plannerTask objects assigned to the signed-in user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "me",
+                "planner",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2cf90865-2dd2-4b81-a976-752a4efdef0b",
+              "name": "Collection of tasks assigned to the current user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "me",
+                    "planner",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.context\": \"example_value\",\n  \"@odata.count\": 10,\n  \"value\": [\n    {\n      \"@odata.etag\": \"example_value\",\n      \"id\": \"abc123\",\n      \"title\": \"Example Title\",\n      \"planId\": \"500123\",\n      \"bucketId\": \"500123\",\n      \"priority\": 10,\n      \"percentComplete\": 10,\n      \"startDateTime\": \"2026-01-15T10:30:00Z\",\n      \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n      \"completedDateTime\": \"2026-01-15T10:30:00Z\",\n      \"createdDateTime\": \"2026-01-15T10:30:00Z\",\n      \"hasDescription\": true,\n      \"conversationThreadId\": \"500123\",\n      \"orderHint\": \"example_value\",\n      \"assigneePriority\": \"example_value\",\n      \"previewType\": \"automatic\",\n      \"activeChecklistItemCount\": 10,\n      \"checklistItemCount\": 10,\n      \"referenceCount\": 10\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "614800c2-7c23-4bf5-98a1-46b9a0883984",
+              "name": "Unauthorized. The request requires a valid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "me",
+                    "planner",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1564f64-eeee-4613-a435-944d7b74ca9e",
+              "name": "Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "me",
+                    "planner",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "185e9c86-a573-40e3-ac0c-af0bb57009ec",
+          "name": "Microsoft Planner List User Tasks",
+          "request": {
+            "name": "Microsoft Planner List User Tasks",
+            "description": {
+              "content": "Retrieve a list of plannerTask objects assigned to a specific user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":user-id",
+                "planner",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user-id",
+                  "description": "(Required) The unique identifier of the user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "57603563-8c0e-4712-956d-f4ab5b0486ef",
+              "name": "Collection of tasks assigned to the user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":user-id",
+                    "planner",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user-id",
+                      "description": "(Required) The unique identifier of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.context\": \"example_value\",\n  \"@odata.count\": 10,\n  \"value\": [\n    {\n      \"@odata.etag\": \"example_value\",\n      \"id\": \"abc123\",\n      \"title\": \"Example Title\",\n      \"planId\": \"500123\",\n      \"bucketId\": \"500123\",\n      \"priority\": 10,\n      \"percentComplete\": 10,\n      \"startDateTime\": \"2026-01-15T10:30:00Z\",\n      \"dueDateTime\": \"2026-01-15T10:30:00Z\",\n      \"completedDateTime\": \"2026-01-15T10:30:00Z\",\n      \"createdDateTime\": \"2026-01-15T10:30:00Z\",\n      \"hasDescription\": true,\n      \"conversationThreadId\": \"500123\",\n      \"orderHint\": \"example_value\",\n      \"assigneePriority\": \"example_value\",\n      \"previewType\": \"automatic\",\n      \"activeChecklistItemCount\": 10,\n      \"checklistItemCount\": 10,\n      \"referenceCount\": 10\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b25fac51-37fb-4c00-acdb-ee6eae146dc1",
+              "name": "Unauthorized. The request requires a valid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":user-id",
+                    "planner",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user-id",
+                      "description": "(Required) The unique identifier of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b21f6e5-1e80-42f3-bc96-443511d29bb1",
+              "name": "Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":user-id",
+                    "planner",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user-id",
+                      "description": "(Required) The unique identifier of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfaf0612-0f34-4927-9f1e-ba11b49401b4",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":user-id",
+                    "planner",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user-id",
+                      "description": "(Required) The unique identifier of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1966-04-18T00:04:44.463Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://graph.microsoft.com/v1.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "Tasks.Read Tasks.ReadWrite Tasks.Read.All Tasks.ReadWrite.All Group.Read.All Group.ReadWrite.All"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "65769f65-33ba-407f-9ad6-f2c36be8a7fe",
+    "name": "Microsoft Planner Microsoft Graph Planner Buckets Tasks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Microsoft Graph Planner API enables programmatic access to Planner resources in Microsoft 365. You can create and manage plans, tasks, and buckets to organize work, assign tasks to users, and track progress within groups. Plans are contained by Microsoft 365 groups, and tasks are organized into buckets within plans. This API covers the v1.0 stable endpoint for basic (non-premium) Planner operations.\n\nContact Support:\n Name: Microsoft Graph Support\n Email: graphsdksupport@microsoft.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Microsoft Planner Microsoft Graph Planner Buckets Plans API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "accessTokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Plans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Microsoft Planner Create a Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://graph.microsoft.com/v1.0/planner/plans",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new plannerPlan object. The plan is contained within a Microsoft 365 group specified by the container property."
+        },
+        {
+          "info": {
+            "name": "Microsoft Planner Get a Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/planner/plans/:plan-id",
+            "params": [
+              {
+                "name": "plan-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+              }
+            ]
+          },
+          "docs": "Retrieve the properties and relationships of a plannerPlan object."
+        },
+        {
+          "info": {
+            "name": "Microsoft Planner Update a Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://graph.microsoft.com/v1.0/planner/plans/:plan-id",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "plan-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the properties of a plannerPlan object. Requires the If-Match header with the last known ETag value of the plan."
+        },
+        {
+          "info": {
+            "name": "Microsoft Planner Delete a Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://graph.microsoft.com/v1.0/planner/plans/:plan-id",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "plan-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+              }
+            ]
+          },
+          "docs": "Delete a plannerPlan object. Requires the If-Match header with the last known ETag value of the plan."
+        },
+        {
+          "info": {
+            "name": "Microsoft Planner List Plan Tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/planner/plans/:plan-id/tasks",
+            "params": [
+              {
+                "name": "plan-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of plannerTask objects associated with a plannerPlan object."
+        },
+        {
+          "info": {
+            "name": "Microsoft Planner List Plan Buckets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/planner/plans/:plan-id/buckets",
+            "params": [
+              {
+                "name": "plan-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of plannerBucket objects contained in a plannerPlan object."
+        },
+        {
+          "info": {
+            "name": "Microsoft Planner List Group Plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/groups/:group-id/planner/plans",
+            "params": [
+              {
+                "name": "group-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Microsoft 365 group"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of plannerPlan objects owned by a Microsoft 365 group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

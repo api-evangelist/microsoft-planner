@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Microsoft Planner Microsoft Graph Planner Buckets Plan Details API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "accessTokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Plan Details",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Microsoft Planner Get Plan Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/planner/plans/:plan-id/details",
+            "params": [
+              {
+                "name": "plan-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+              }
+            ]
+          },
+          "docs": "Retrieve the properties and relationships of a plannerPlanDetails object."
+        },
+        {
+          "info": {
+            "name": "Microsoft Planner Update Plan Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://graph.microsoft.com/v1.0/planner/plans/:plan-id/details",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "plan-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the properties of a plannerPlanDetails object. Requires the If-Match header with the last known ETag value."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

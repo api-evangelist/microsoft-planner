@@ -1,0 +1,856 @@
+{
+  "item": [
+    {
+      "id": "ed60566f-f26b-41f3-a186-b4449f7832fd",
+      "name": "Plan Details",
+      "description": {
+        "content": "Operations for managing additional plan details",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "30a61774-76ba-4971-80d5-b7eb9bf98bb4",
+          "name": "Microsoft Planner Get Plan Details",
+          "request": {
+            "name": "Microsoft Planner Get Plan Details",
+            "description": {
+              "content": "Retrieve the properties and relationships of a plannerPlanDetails object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "planner",
+                "plans",
+                ":plan-id",
+                "details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "plan-id",
+                  "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "27795f37-f027-4883-a4be-ea3052cdcb33",
+              "name": "The plan details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "plans",
+                    ":plan-id",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "plan-id",
+                      "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.etag\": \"example_value\",\n  \"id\": \"abc123\",\n  \"categoryDescriptions\": {\n    \"category1\": \"example_value\",\n    \"category2\": \"example_value\",\n    \"category3\": \"example_value\",\n    \"category4\": \"example_value\",\n    \"category5\": \"example_value\",\n    \"category6\": \"example_value\",\n    \"category7\": \"example_value\",\n    \"category8\": \"example_value\",\n    \"category9\": \"example_value\",\n    \"category10\": \"example_value\",\n    \"category11\": \"example_value\",\n    \"category12\": \"example_value\",\n    \"category13\": \"example_value\",\n    \"category14\": \"example_value\",\n    \"category15\": \"example_value\",\n    \"category16\": \"example_value\",\n    \"category17\": \"example_value\",\n    \"category18\": \"example_value\",\n    \"category19\": \"example_value\",\n    \"category20\": \"example_value\",\n    \"category21\": \"example_value\",\n    \"category22\": \"example_value\",\n    \"category23\": \"example_value\",\n    \"category24\": \"example_value\",\n    \"category25\": \"example_value\"\n  },\n  \"sharedWith\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc9545aa-f9a2-4dad-ad70-43377cc2d020",
+              "name": "Unauthorized. The request requires a valid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "plans",
+                    ":plan-id",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "plan-id",
+                      "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1982-10-17T13:33:47.545Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a63754a0-d1e2-49f1-a45f-cd14ca918a8a",
+              "name": "Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "plans",
+                    ":plan-id",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "plan-id",
+                      "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1982-10-17T13:33:47.545Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3327e50c-0c67-4bdc-9814-5c012a3aa12f",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "plans",
+                    ":plan-id",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "plan-id",
+                      "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1982-10-17T13:33:47.545Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0cdd67b-46cf-4829-aba0-9a52bdc182f2",
+          "name": "Microsoft Planner Update Plan Details",
+          "request": {
+            "name": "Microsoft Planner Update Plan Details",
+            "description": {
+              "content": "Update the properties of a plannerPlanDetails object. Requires the If-Match header with the last known ETag value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "planner",
+                "plans",
+                ":plan-id",
+                "details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "plan-id",
+                  "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                "key": "If-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"categoryDescriptions\": {\n    \"category1\": \"<string>\",\n    \"category2\": \"<string>\",\n    \"category3\": \"<string>\",\n    \"category4\": \"<string>\",\n    \"category5\": \"<string>\",\n    \"category6\": \"<string>\",\n    \"category7\": \"<string>\",\n    \"category8\": \"<string>\",\n    \"category9\": \"<string>\",\n    \"category10\": \"<string>\",\n    \"category11\": \"<string>\",\n    \"category12\": \"<string>\",\n    \"category13\": \"<string>\",\n    \"category14\": \"<string>\",\n    \"category15\": \"<string>\",\n    \"category16\": \"<string>\",\n    \"category17\": \"<string>\",\n    \"category18\": \"<string>\",\n    \"category19\": \"<string>\",\n    \"category20\": \"<string>\",\n    \"category21\": \"<string>\",\n    \"category22\": \"<string>\",\n    \"category23\": \"<string>\",\n    \"category24\": \"<string>\",\n    \"category25\": \"<string>\"\n  },\n  \"sharedWith\": {\n    \"key_0\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "17b1ea7d-09bc-4cf0-9e48-40c4d52eead8",
+              "name": "The updated plan details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "plans",
+                    ":plan-id",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "plan-id",
+                      "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"categoryDescriptions\": {\n    \"category1\": \"example_value\",\n    \"category2\": \"example_value\",\n    \"category3\": \"example_value\",\n    \"category4\": \"example_value\",\n    \"category5\": \"example_value\",\n    \"category6\": \"example_value\",\n    \"category7\": \"example_value\",\n    \"category8\": \"example_value\",\n    \"category9\": \"example_value\",\n    \"category10\": \"example_value\",\n    \"category11\": \"example_value\",\n    \"category12\": \"example_value\",\n    \"category13\": \"example_value\",\n    \"category14\": \"example_value\",\n    \"category15\": \"example_value\",\n    \"category16\": \"example_value\",\n    \"category17\": \"example_value\",\n    \"category18\": \"example_value\",\n    \"category19\": \"example_value\",\n    \"category20\": \"example_value\",\n    \"category21\": \"example_value\",\n    \"category22\": \"example_value\",\n    \"category23\": \"example_value\",\n    \"category24\": \"example_value\",\n    \"category25\": \"example_value\"\n  },\n  \"sharedWith\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.etag\": \"example_value\",\n  \"id\": \"abc123\",\n  \"categoryDescriptions\": {\n    \"category1\": \"example_value\",\n    \"category2\": \"example_value\",\n    \"category3\": \"example_value\",\n    \"category4\": \"example_value\",\n    \"category5\": \"example_value\",\n    \"category6\": \"example_value\",\n    \"category7\": \"example_value\",\n    \"category8\": \"example_value\",\n    \"category9\": \"example_value\",\n    \"category10\": \"example_value\",\n    \"category11\": \"example_value\",\n    \"category12\": \"example_value\",\n    \"category13\": \"example_value\",\n    \"category14\": \"example_value\",\n    \"category15\": \"example_value\",\n    \"category16\": \"example_value\",\n    \"category17\": \"example_value\",\n    \"category18\": \"example_value\",\n    \"category19\": \"example_value\",\n    \"category20\": \"example_value\",\n    \"category21\": \"example_value\",\n    \"category22\": \"example_value\",\n    \"category23\": \"example_value\",\n    \"category24\": \"example_value\",\n    \"category25\": \"example_value\"\n  },\n  \"sharedWith\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef181608-f8db-4ce1-b877-3b228b464561",
+              "name": "Bad request. The request body or parameters are invalid. Common causes include incorrect types for open properties, invalid order hint formats, or logically inconsistent data such as a start date after a due date.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "plans",
+                    ":plan-id",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "plan-id",
+                      "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"categoryDescriptions\": {\n    \"category1\": \"example_value\",\n    \"category2\": \"example_value\",\n    \"category3\": \"example_value\",\n    \"category4\": \"example_value\",\n    \"category5\": \"example_value\",\n    \"category6\": \"example_value\",\n    \"category7\": \"example_value\",\n    \"category8\": \"example_value\",\n    \"category9\": \"example_value\",\n    \"category10\": \"example_value\",\n    \"category11\": \"example_value\",\n    \"category12\": \"example_value\",\n    \"category13\": \"example_value\",\n    \"category14\": \"example_value\",\n    \"category15\": \"example_value\",\n    \"category16\": \"example_value\",\n    \"category17\": \"example_value\",\n    \"category18\": \"example_value\",\n    \"category19\": \"example_value\",\n    \"category20\": \"example_value\",\n    \"category21\": \"example_value\",\n    \"category22\": \"example_value\",\n    \"category23\": \"example_value\",\n    \"category24\": \"example_value\",\n    \"category25\": \"example_value\"\n  },\n  \"sharedWith\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1982-10-17T13:33:47.545Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "290aa169-f3f6-4dc0-a631-d7ff7ea4c8db",
+              "name": "Unauthorized. The request requires a valid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "plans",
+                    ":plan-id",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "plan-id",
+                      "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"categoryDescriptions\": {\n    \"category1\": \"example_value\",\n    \"category2\": \"example_value\",\n    \"category3\": \"example_value\",\n    \"category4\": \"example_value\",\n    \"category5\": \"example_value\",\n    \"category6\": \"example_value\",\n    \"category7\": \"example_value\",\n    \"category8\": \"example_value\",\n    \"category9\": \"example_value\",\n    \"category10\": \"example_value\",\n    \"category11\": \"example_value\",\n    \"category12\": \"example_value\",\n    \"category13\": \"example_value\",\n    \"category14\": \"example_value\",\n    \"category15\": \"example_value\",\n    \"category16\": \"example_value\",\n    \"category17\": \"example_value\",\n    \"category18\": \"example_value\",\n    \"category19\": \"example_value\",\n    \"category20\": \"example_value\",\n    \"category21\": \"example_value\",\n    \"category22\": \"example_value\",\n    \"category23\": \"example_value\",\n    \"category24\": \"example_value\",\n    \"category25\": \"example_value\"\n  },\n  \"sharedWith\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1982-10-17T13:33:47.545Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e65c768e-cd85-415e-9fc1-78e2bfd2440e",
+              "name": "Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "plans",
+                    ":plan-id",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "plan-id",
+                      "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"categoryDescriptions\": {\n    \"category1\": \"example_value\",\n    \"category2\": \"example_value\",\n    \"category3\": \"example_value\",\n    \"category4\": \"example_value\",\n    \"category5\": \"example_value\",\n    \"category6\": \"example_value\",\n    \"category7\": \"example_value\",\n    \"category8\": \"example_value\",\n    \"category9\": \"example_value\",\n    \"category10\": \"example_value\",\n    \"category11\": \"example_value\",\n    \"category12\": \"example_value\",\n    \"category13\": \"example_value\",\n    \"category14\": \"example_value\",\n    \"category15\": \"example_value\",\n    \"category16\": \"example_value\",\n    \"category17\": \"example_value\",\n    \"category18\": \"example_value\",\n    \"category19\": \"example_value\",\n    \"category20\": \"example_value\",\n    \"category21\": \"example_value\",\n    \"category22\": \"example_value\",\n    \"category23\": \"example_value\",\n    \"category24\": \"example_value\",\n    \"category25\": \"example_value\"\n  },\n  \"sharedWith\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1982-10-17T13:33:47.545Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3df97373-30b4-40f4-9084-7a08d24af719",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "plans",
+                    ":plan-id",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "plan-id",
+                      "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"categoryDescriptions\": {\n    \"category1\": \"example_value\",\n    \"category2\": \"example_value\",\n    \"category3\": \"example_value\",\n    \"category4\": \"example_value\",\n    \"category5\": \"example_value\",\n    \"category6\": \"example_value\",\n    \"category7\": \"example_value\",\n    \"category8\": \"example_value\",\n    \"category9\": \"example_value\",\n    \"category10\": \"example_value\",\n    \"category11\": \"example_value\",\n    \"category12\": \"example_value\",\n    \"category13\": \"example_value\",\n    \"category14\": \"example_value\",\n    \"category15\": \"example_value\",\n    \"category16\": \"example_value\",\n    \"category17\": \"example_value\",\n    \"category18\": \"example_value\",\n    \"category19\": \"example_value\",\n    \"category20\": \"example_value\",\n    \"category21\": \"example_value\",\n    \"category22\": \"example_value\",\n    \"category23\": \"example_value\",\n    \"category24\": \"example_value\",\n    \"category25\": \"example_value\"\n  },\n  \"sharedWith\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1982-10-17T13:33:47.545Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4fe5de4-d100-44ff-b565-d580e499f3a7",
+              "name": "Conflict. The request conflicts with the current state of the resource due to a concurrent modification.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "plans",
+                    ":plan-id",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "plan-id",
+                      "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"categoryDescriptions\": {\n    \"category1\": \"example_value\",\n    \"category2\": \"example_value\",\n    \"category3\": \"example_value\",\n    \"category4\": \"example_value\",\n    \"category5\": \"example_value\",\n    \"category6\": \"example_value\",\n    \"category7\": \"example_value\",\n    \"category8\": \"example_value\",\n    \"category9\": \"example_value\",\n    \"category10\": \"example_value\",\n    \"category11\": \"example_value\",\n    \"category12\": \"example_value\",\n    \"category13\": \"example_value\",\n    \"category14\": \"example_value\",\n    \"category15\": \"example_value\",\n    \"category16\": \"example_value\",\n    \"category17\": \"example_value\",\n    \"category18\": \"example_value\",\n    \"category19\": \"example_value\",\n    \"category20\": \"example_value\",\n    \"category21\": \"example_value\",\n    \"category22\": \"example_value\",\n    \"category23\": \"example_value\",\n    \"category24\": \"example_value\",\n    \"category25\": \"example_value\"\n  },\n  \"sharedWith\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1982-10-17T13:33:47.545Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "573d50b7-86b0-4a42-b3a2-9fe9b255d141",
+              "name": "Precondition failed. The If-Match ETag value does not match the current version of the resource. Read the resource again to obtain the latest ETag.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "planner",
+                    "plans",
+                    ":plan-id",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "plan-id",
+                      "description": "(Required) The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"categoryDescriptions\": {\n    \"category1\": \"example_value\",\n    \"category2\": \"example_value\",\n    \"category3\": \"example_value\",\n    \"category4\": \"example_value\",\n    \"category5\": \"example_value\",\n    \"category6\": \"example_value\",\n    \"category7\": \"example_value\",\n    \"category8\": \"example_value\",\n    \"category9\": \"example_value\",\n    \"category10\": \"example_value\",\n    \"category11\": \"example_value\",\n    \"category12\": \"example_value\",\n    \"category13\": \"example_value\",\n    \"category14\": \"example_value\",\n    \"category15\": \"example_value\",\n    \"category16\": \"example_value\",\n    \"category17\": \"example_value\",\n    \"category18\": \"example_value\",\n    \"category19\": \"example_value\",\n    \"category20\": \"example_value\",\n    \"category21\": \"example_value\",\n    \"category22\": \"example_value\",\n    \"category23\": \"example_value\",\n    \"category24\": \"example_value\",\n    \"category25\": \"example_value\"\n  },\n  \"sharedWith\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"request-id\": \"string\",\n      \"date\": \"1982-10-17T13:33:47.545Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://graph.microsoft.com/v1.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "Tasks.Read Tasks.ReadWrite Tasks.Read.All Tasks.ReadWrite.All Group.Read.All Group.ReadWrite.All"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "190d9aee-e210-4ec0-9260-b171bdb9d8d6",
+    "name": "Microsoft Planner Microsoft Graph Planner Buckets Plan Details API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Microsoft Graph Planner API enables programmatic access to Planner resources in Microsoft 365. You can create and manage plans, tasks, and buckets to organize work, assign tasks to users, and track progress within groups. Plans are contained by Microsoft 365 groups, and tasks are organized into buckets within plans. This API covers the v1.0 stable endpoint for basic (non-premium) Planner operations.\n\nContact Support:\n Name: Microsoft Graph Support\n Email: graphsdksupport@microsoft.com",
+      "type": "text/plain"
+    }
+  }
+}

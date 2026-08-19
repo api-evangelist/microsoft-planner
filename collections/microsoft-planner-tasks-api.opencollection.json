@@ -1,0 +1,186 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Microsoft Planner Microsoft Graph Planner Buckets Tasks API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "accessTokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Microsoft Planner List Plan Tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/planner/plans/:plan-id/tasks",
+            "params": [
+              {
+                "name": "plan-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plannerPlan (28 characters, case-sensitive)"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of plannerTask objects associated with a plannerPlan object."
+        },
+        {
+          "info": {
+            "name": "Microsoft Planner Create a Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://graph.microsoft.com/v1.0/planner/tasks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new plannerTask. The task must specify a planId to indicate which plan it belongs to. Tasks cannot be created without plans."
+        },
+        {
+          "info": {
+            "name": "Microsoft Planner Get a Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/planner/tasks/:task-id",
+            "params": [
+              {
+                "name": "task-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plannerTask (28 characters, case-sensitive)"
+              }
+            ]
+          },
+          "docs": "Retrieve the properties and relationships of a plannerTask object."
+        },
+        {
+          "info": {
+            "name": "Microsoft Planner Update a Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://graph.microsoft.com/v1.0/planner/tasks/:task-id",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "task-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plannerTask (28 characters, case-sensitive)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the properties of a plannerTask object. Requires the If-Match header with the last known ETag value of the task."
+        },
+        {
+          "info": {
+            "name": "Microsoft Planner Delete a Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://graph.microsoft.com/v1.0/planner/tasks/:task-id",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "task-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plannerTask (28 characters, case-sensitive)"
+              }
+            ]
+          },
+          "docs": "Delete a plannerTask object. Requires the If-Match header with the last known ETag value of the task."
+        },
+        {
+          "info": {
+            "name": "Microsoft Planner List Bucket Tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/planner/buckets/:bucket-id/tasks",
+            "params": [
+              {
+                "name": "bucket-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plannerBucket (28 characters, case-sensitive)"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of plannerTask objects associated with a plannerBucket object."
+        },
+        {
+          "info": {
+            "name": "Microsoft Planner List My Tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/me/planner/tasks"
+          },
+          "docs": "Retrieve a list of plannerTask objects assigned to the signed-in user."
+        },
+        {
+          "info": {
+            "name": "Microsoft Planner List User Tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/users/:user-id/planner/tasks",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the user"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of plannerTask objects assigned to a specific user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
