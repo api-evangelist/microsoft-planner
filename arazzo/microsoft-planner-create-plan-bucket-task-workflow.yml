@@ -12,8 +12,14 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: plannerApi
-  url: ../openapi/microsoft-planner-openapi.yml
+- name: bucketsApi
+  url: ../openapi/microsoft-planner-buckets-api-openapi.yml
+  type: openapi
+- name: plansApi
+  url: ../openapi/microsoft-planner-plans-api-openapi.yml
+  type: openapi
+- name: tasksApi
+  url: ../openapi/microsoft-planner-tasks-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: create-plan-bucket-task

@@ -11,8 +11,8 @@ info:
     executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: plannerApi
-  url: ../openapi/microsoft-planner-openapi.yml
+- name: tasksApi
+  url: ../openapi/microsoft-planner-tasks-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: complete-my-first-task
