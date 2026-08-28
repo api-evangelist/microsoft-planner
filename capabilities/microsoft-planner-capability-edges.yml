@@ -1,0 +1,26 @@
+slug: microsoft-planner
+provider: Microsoft Planner
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Tasks
+  spec_file: microsoft-planner-tasks-api-openapi.yml
+  capability_id: BC-900.30
+  capability_id_l1: BC-900
+  capability_name: Project Management
+  confidence: 0.7
+  evidence: POST /planner/tasks createTask; GET /planner/plans/{plan-id}/tasks listPlanTasks; "create
+    and manage plans, tasks, and buckets to organize work, assign tasks to users, and track progress"
+  reason: Planner task CRUD within plans is team work/project execution tracking. Maps to Project Management,
+    though it is lightweight collaborative task management rather than formal PPM — hence moderate confidence.
