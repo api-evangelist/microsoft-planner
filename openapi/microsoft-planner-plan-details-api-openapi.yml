@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Microsoft Planner Microsoft Graph Planner Buckets Plan Details API
   description: The Microsoft Graph Planner API enables programmatic access to Planner resources in Microsoft 365. You can create and manage plans, tasks, and buckets to organize work, assign tasks to users, and track progress within groups. Plans are contained by Microsoft 365 groups, and tasks are organized into buckets within plans. This API covers the v1.0 stable endpoint for basic (non-premium) Planner operations.
@@ -194,11 +194,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    PlannerUserIds:
-      type: object
-      description: Set of user IDs that a plan is shared with. Each key is a user ID and the value is true.
-      additionalProperties:
-        type: boolean
     ODataError:
       type: object
       description: OData error response
@@ -221,6 +216,11 @@ components:
                   type: string
                   format: date-time
           example: example_value
+    PlannerUserIds:
+      type: object
+      description: Set of user IDs that a plan is shared with. Each key is a user ID and the value is true.
+      additionalProperties:
+        type: boolean
     PlannerCategoryDescriptions:
       type: object
       description: Describes the 25 categories that can be associated with tasks in a plan.
@@ -325,14 +325,6 @@ components:
           type: string
           description: The label associated with category 25
           example: example_value
-    PlannerPlanDetailsUpdate:
-      type: object
-      description: Request body for updating plan details
-      properties:
-        categoryDescriptions:
-          $ref: '#/components/schemas/PlannerCategoryDescriptions'
-        sharedWith:
-          $ref: '#/components/schemas/PlannerUserIds'
     PlannerPlanDetails:
       type: object
       description: Represents additional information about a plan, including category descriptions and sharing information.
@@ -353,7 +345,33 @@ components:
         sharedWith:
           $ref: '#/components/schemas/PlannerUserIds'
           description: Set of user IDs that this plan is shared with
+    PlannerPlanDetailsUpdate:
+      type: object
+      description: Request body for updating plan details
+      properties:
+        categoryDescriptions:
+          $ref: '#/components/schemas/PlannerCategoryDescriptions'
+        sharedWith:
+          $ref: '#/components/schemas/PlannerUserIds'
   responses:
+    Conflict:
+      description: Conflict. The request conflicts with the current state of the resource due to a concurrent modification.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. The request requires a valid OAuth 2.0 access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid. Common causes include incorrect types for open properties, invalid order hint formats, or logically inconsistent data such as a start date after a due date.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
     Forbidden:
       description: Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).
       content:
@@ -372,37 +390,19 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
-    Unauthorized:
-      description: Unauthorized. The request requires a valid OAuth 2.0 access token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    Conflict:
-      description: Conflict. The request conflicts with the current state of the resource due to a concurrent modification.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid. Common causes include incorrect types for open properties, invalid order hint formats, or logically inconsistent data such as a start date after a due date.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
   parameters:
-    IfMatch:
-      name: If-Match
-      in: header
-      required: true
-      description: The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.
-      schema:
-        type: string
     PlanId:
       name: plan-id
       in: path
       required: true
       description: The unique identifier of the plannerPlan (28 characters, case-sensitive)
+      schema:
+        type: string
+    IfMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.
       schema:
         type: string
   securitySchemes:

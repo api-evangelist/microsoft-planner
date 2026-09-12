@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Microsoft Planner Microsoft Graph Planner Buckets Tasks API
   description: The Microsoft Graph Planner API enables programmatic access to Planner resources in Microsoft 365. You can create and manage plans, tasks, and buckets to organize work, assign tasks to users, and track progress within groups. Plans are contained by Microsoft 365 groups, and tasks are organized into buckets within plans. This API covers the v1.0 stable endpoint for basic (non-premium) Planner operations.
@@ -469,33 +469,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    PlannerAssignments:
-      type: object
-      description: The set of user assignments for a task. Each key is the user ID of the assignee, and the value is a plannerAssignment object.
-      additionalProperties:
-        $ref: '#/components/schemas/PlannerAssignment'
-    PlannerAssignment:
-      type: object
-      description: Represents the assignment of a task to a user
-      properties:
-        '@odata.type':
-          type: string
-          const: microsoft.graph.plannerAssignment
-          example: example_value
-        assignedBy:
-          $ref: '#/components/schemas/IdentitySet'
-          description: The identity of the user that performed the assignment
-          readOnly: true
-        assignedDateTime:
-          type: string
-          format: date-time
-          description: The time at which the task was assigned
-          readOnly: true
-          example: '2026-01-15T10:30:00Z'
-        orderHint:
-          type: string
-          description: Hint used to order assignees in a task. The format is defined in the Planner order hints documentation.
-          example: example_value
     ODataError:
       type: object
       description: OData error response
@@ -518,57 +491,6 @@ components:
                   type: string
                   format: date-time
           example: example_value
-    PlannerTaskCreate:
-      type: object
-      description: Request body for creating a new task
-      required:
-      - planId
-      - title
-      properties:
-        planId:
-          type: string
-          description: ID of the plan the task belongs to
-          example: '500123'
-        title:
-          type: string
-          description: Title of the task
-          example: Example Title
-        bucketId:
-          type: string
-          description: ID of the bucket to place the task in
-          example: '500123'
-        assignments:
-          $ref: '#/components/schemas/PlannerAssignments'
-        appliedCategories:
-          $ref: '#/components/schemas/PlannerAppliedCategories'
-        priority:
-          type: integer
-          minimum: 0
-          maximum: 10
-          description: Priority of the task (0 is highest, 10 is lowest)
-          example: 10
-        percentComplete:
-          type: integer
-          minimum: 0
-          maximum: 100
-          example: 10
-        startDateTime:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        dueDateTime:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        conversationThreadId:
-          type: string
-          example: '500123'
-        orderHint:
-          type: string
-          example: example_value
-        assigneePriority:
-          type: string
-          example: example_value
     PlannerTaskCollection:
       type: object
       description: A collection of plannerTask resources
@@ -586,73 +508,33 @@ components:
           items:
             $ref: '#/components/schemas/PlannerTask'
           example: []
-    Identity:
+    PlannerAssignment:
       type: object
-      description: Represents an identity of an actor
+      description: Represents the assignment of a task to a user
       properties:
-        displayName:
+        '@odata.type':
           type: string
-          description: The display name of the identity
+          const: microsoft.graph.plannerAssignment
           example: example_value
-        id:
-          type: string
-          description: The unique identifier of the identity
-          example: abc123
-    PlannerAppliedCategories:
-      type: object
-      description: The categories (labels) applied to a task. Up to 25 categories can be defined per plan. Category names (category1 through category25) are defined on the plan details.
-      additionalProperties:
-        type: boolean
-    PlannerTaskUpdate:
-      type: object
-      description: Request body for updating a task
-      properties:
-        title:
-          type: string
-          example: Example Title
-        bucketId:
-          type: string
-          example: '500123'
-        assignments:
-          $ref: '#/components/schemas/PlannerAssignments'
-        appliedCategories:
-          $ref: '#/components/schemas/PlannerAppliedCategories'
-        priority:
-          type: integer
-          minimum: 0
-          maximum: 10
-          example: 10
-        percentComplete:
-          type: integer
-          minimum: 0
-          maximum: 100
-          example: 10
-        startDateTime:
+        assignedBy:
+          $ref: '#/components/schemas/IdentitySet'
+          description: The identity of the user that performed the assignment
+          readOnly: true
+        assignedDateTime:
           type: string
           format: date-time
+          description: The time at which the task was assigned
+          readOnly: true
           example: '2026-01-15T10:30:00Z'
-        dueDateTime:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        conversationThreadId:
-          type: string
-          example: '500123'
         orderHint:
           type: string
+          description: Hint used to order assignees in a task. The format is defined in the Planner order hints documentation.
           example: example_value
-        assigneePriority:
-          type: string
-          example: example_value
-        previewType:
-          type: string
-          enum:
-          - automatic
-          - noPreview
-          - checklist
-          - description
-          - reference
-          example: automatic
+    PlannerAssignments:
+      type: object
+      description: The set of user assignments for a task. Each key is the user ID of the assignee, and the value is a plannerAssignment object.
+      additionalProperties:
+        $ref: '#/components/schemas/PlannerAssignment'
     PlannerTask:
       type: object
       description: Represents a Planner task in Microsoft 365. A task is contained in a plan and can be assigned to a bucket within the plan.
@@ -779,6 +661,62 @@ components:
           description: Number of external references on the task
           readOnly: true
           example: 10
+    PlannerTaskCreate:
+      type: object
+      description: Request body for creating a new task
+      required:
+      - planId
+      - title
+      properties:
+        planId:
+          type: string
+          description: ID of the plan the task belongs to
+          example: '500123'
+        title:
+          type: string
+          description: Title of the task
+          example: Example Title
+        bucketId:
+          type: string
+          description: ID of the bucket to place the task in
+          example: '500123'
+        assignments:
+          $ref: '#/components/schemas/PlannerAssignments'
+        appliedCategories:
+          $ref: '#/components/schemas/PlannerAppliedCategories'
+        priority:
+          type: integer
+          minimum: 0
+          maximum: 10
+          description: Priority of the task (0 is highest, 10 is lowest)
+          example: 10
+        percentComplete:
+          type: integer
+          minimum: 0
+          maximum: 100
+          example: 10
+        startDateTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        dueDateTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        conversationThreadId:
+          type: string
+          example: '500123'
+        orderHint:
+          type: string
+          example: example_value
+        assigneePriority:
+          type: string
+          example: example_value
+    PlannerAppliedCategories:
+      type: object
+      description: The categories (labels) applied to a task. Up to 25 categories can be defined per plan. Category names (category1 through category25) are defined on the plan details.
+      additionalProperties:
+        type: boolean
     IdentitySet:
       type: object
       description: A set of identities associated with various events for a resource
@@ -789,9 +727,71 @@ components:
           $ref: '#/components/schemas/Identity'
         user:
           $ref: '#/components/schemas/Identity'
+    Identity:
+      type: object
+      description: Represents an identity of an actor
+      properties:
+        displayName:
+          type: string
+          description: The display name of the identity
+          example: example_value
+        id:
+          type: string
+          description: The unique identifier of the identity
+          example: abc123
+    PlannerTaskUpdate:
+      type: object
+      description: Request body for updating a task
+      properties:
+        title:
+          type: string
+          example: Example Title
+        bucketId:
+          type: string
+          example: '500123'
+        assignments:
+          $ref: '#/components/schemas/PlannerAssignments'
+        appliedCategories:
+          $ref: '#/components/schemas/PlannerAppliedCategories'
+        priority:
+          type: integer
+          minimum: 0
+          maximum: 10
+          example: 10
+        percentComplete:
+          type: integer
+          minimum: 0
+          maximum: 100
+          example: 10
+        startDateTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        dueDateTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        conversationThreadId:
+          type: string
+          example: '500123'
+        orderHint:
+          type: string
+          example: example_value
+        assigneePriority:
+          type: string
+          example: example_value
+        previewType:
+          type: string
+          enum:
+          - automatic
+          - noPreview
+          - checklist
+          - description
+          - reference
+          example: automatic
   responses:
-    PreconditionFailed:
-      description: Precondition failed. The If-Match ETag value does not match the current version of the resource. Read the resource again to obtain the latest ETag.
+    Conflict:
+      description: Conflict. The request conflicts with the current state of the resource due to a concurrent modification.
       content:
         application/json:
           schema:
@@ -802,20 +802,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
-    Forbidden:
-      description: Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
     Unauthorized:
       description: Unauthorized. The request requires a valid OAuth 2.0 access token.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
-    Conflict:
-      description: Conflict. The request conflicts with the current state of the resource due to a concurrent modification.
+    Forbidden:
+      description: Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    PreconditionFailed:
+      description: Precondition failed. The If-Match ETag value does not match the current version of the resource. Read the resource again to obtain the latest ETag.
       content:
         application/json:
           schema:
@@ -827,6 +827,13 @@ components:
           schema:
             $ref: '#/components/schemas/ODataError'
   parameters:
+    IfMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.
+      schema:
+        type: string
     UserId:
       name: user-id
       in: path
@@ -834,18 +841,11 @@ components:
       description: The unique identifier of the user
       schema:
         type: string
-    PlanId:
-      name: plan-id
+    BucketId:
+      name: bucket-id
       in: path
       required: true
-      description: The unique identifier of the plannerPlan (28 characters, case-sensitive)
-      schema:
-        type: string
-    IfMatch:
-      name: If-Match
-      in: header
-      required: true
-      description: The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.
+      description: The unique identifier of the plannerBucket (28 characters, case-sensitive)
       schema:
         type: string
     TaskId:
@@ -855,11 +855,11 @@ components:
       description: The unique identifier of the plannerTask (28 characters, case-sensitive)
       schema:
         type: string
-    BucketId:
-      name: bucket-id
+    PlanId:
+      name: plan-id
       in: path
       required: true
-      description: The unique identifier of the plannerBucket (28 characters, case-sensitive)
+      description: The unique identifier of the plannerPlan (28 characters, case-sensitive)
       schema:
         type: string
   securitySchemes:

@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Microsoft Planner Microsoft Graph Planner Buckets Task Details API
   description: The Microsoft Graph Planner API enables programmatic access to Planner resources in Microsoft 365. You can create and manage plans, tasks, and buckets to organize work, assign tasks to users, and track progress within groups. Plans are contained by Microsoft 365 groups, and tasks are organized into buckets within plans. This API covers the v1.0 stable endpoint for basic (non-premium) Planner operations.
@@ -125,6 +125,118 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ODataError:
+      type: object
+      description: OData error response
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The error code
+            message:
+              type: string
+              description: A human-readable error message
+            innerError:
+              type: object
+              properties:
+                request-id:
+                  type: string
+                date:
+                  type: string
+                  format: date-time
+          example: example_value
+    PlannerExternalReferences:
+      type: object
+      description: A collection of references on a task. Each key is a URL-encoded URL of the reference, and the value is a plannerExternalReference.
+      additionalProperties:
+        $ref: '#/components/schemas/PlannerExternalReference'
+    PlannerTaskDetails:
+      type: object
+      description: Represents the additional information about a task, including description, checklist items, and external references.
+      properties:
+        '@odata.etag':
+          type: string
+          description: The ETag of the resource
+          readOnly: true
+          example: example_value
+        id:
+          type: string
+          description: The unique identifier for the task details
+          readOnly: true
+          example: abc123
+        description:
+          type: string
+          description: Description of the task
+          example: A sample description.
+        checklist:
+          $ref: '#/components/schemas/PlannerChecklistItems'
+          description: The collection of checklist items on the task
+        references:
+          $ref: '#/components/schemas/PlannerExternalReferences'
+          description: The collection of references on the task
+        previewType:
+          type: string
+          description: The type of preview shown on the task
+          enum:
+          - automatic
+          - noPreview
+          - checklist
+          - description
+          - reference
+          example: automatic
+    IdentitySet:
+      type: object
+      description: A set of identities associated with various events for a resource
+      properties:
+        application:
+          $ref: '#/components/schemas/Identity'
+        device:
+          $ref: '#/components/schemas/Identity'
+        user:
+          $ref: '#/components/schemas/Identity'
+    PlannerExternalReference:
+      type: object
+      description: An external reference attached to a Planner task
+      properties:
+        '@odata.type':
+          type: string
+          const: microsoft.graph.plannerExternalReference
+          example: example_value
+        alias:
+          type: string
+          description: A name alias for the reference
+          example: example_value
+        lastModifiedBy:
+          $ref: '#/components/schemas/IdentitySet'
+          readOnly: true
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          description: The date and time the reference was last modified
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        previewPriority:
+          type: string
+          description: Hint used to set the relative priority order in which the reference will be shown as a preview on the task
+          example: example_value
+        type:
+          type: string
+          description: The type of the reference (e.g., PowerPoint, Word, Excel, Other)
+          example: example_value
+    Identity:
+      type: object
+      description: Represents an identity of an actor
+      properties:
+        displayName:
+          type: string
+          description: The display name of the identity
+          example: example_value
+        id:
+          type: string
+          description: The unique identifier of the identity
+          example: abc123
     PlannerChecklistItem:
       type: object
       description: A checklist item on a Planner task
@@ -174,157 +286,12 @@ components:
           - description
           - reference
           example: automatic
-    Identity:
-      type: object
-      description: Represents an identity of an actor
-      properties:
-        displayName:
-          type: string
-          description: The display name of the identity
-          example: example_value
-        id:
-          type: string
-          description: The unique identifier of the identity
-          example: abc123
-    PlannerTaskDetails:
-      type: object
-      description: Represents the additional information about a task, including description, checklist items, and external references.
-      properties:
-        '@odata.etag':
-          type: string
-          description: The ETag of the resource
-          readOnly: true
-          example: example_value
-        id:
-          type: string
-          description: The unique identifier for the task details
-          readOnly: true
-          example: abc123
-        description:
-          type: string
-          description: Description of the task
-          example: A sample description.
-        checklist:
-          $ref: '#/components/schemas/PlannerChecklistItems'
-          description: The collection of checklist items on the task
-        references:
-          $ref: '#/components/schemas/PlannerExternalReferences'
-          description: The collection of references on the task
-        previewType:
-          type: string
-          description: The type of preview shown on the task
-          enum:
-          - automatic
-          - noPreview
-          - checklist
-          - description
-          - reference
-          example: automatic
-    ODataError:
-      type: object
-      description: OData error response
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: The error code
-            message:
-              type: string
-              description: A human-readable error message
-            innerError:
-              type: object
-              properties:
-                request-id:
-                  type: string
-                date:
-                  type: string
-                  format: date-time
-          example: example_value
     PlannerChecklistItems:
       type: object
       description: A collection of checklist items on a task. Each key is a GUID identifying the checklist item, and the value is a plannerChecklistItem.
       additionalProperties:
         $ref: '#/components/schemas/PlannerChecklistItem'
-    PlannerExternalReferences:
-      type: object
-      description: A collection of references on a task. Each key is a URL-encoded URL of the reference, and the value is a plannerExternalReference.
-      additionalProperties:
-        $ref: '#/components/schemas/PlannerExternalReference'
-    PlannerExternalReference:
-      type: object
-      description: An external reference attached to a Planner task
-      properties:
-        '@odata.type':
-          type: string
-          const: microsoft.graph.plannerExternalReference
-          example: example_value
-        alias:
-          type: string
-          description: A name alias for the reference
-          example: example_value
-        lastModifiedBy:
-          $ref: '#/components/schemas/IdentitySet'
-          readOnly: true
-        lastModifiedDateTime:
-          type: string
-          format: date-time
-          description: The date and time the reference was last modified
-          readOnly: true
-          example: '2026-01-15T10:30:00Z'
-        previewPriority:
-          type: string
-          description: Hint used to set the relative priority order in which the reference will be shown as a preview on the task
-          example: example_value
-        type:
-          type: string
-          description: The type of the reference (e.g., PowerPoint, Word, Excel, Other)
-          example: example_value
-    IdentitySet:
-      type: object
-      description: A set of identities associated with various events for a resource
-      properties:
-        application:
-          $ref: '#/components/schemas/Identity'
-        device:
-          $ref: '#/components/schemas/Identity'
-        user:
-          $ref: '#/components/schemas/Identity'
-  parameters:
-    TaskId:
-      name: task-id
-      in: path
-      required: true
-      description: The unique identifier of the plannerTask (28 characters, case-sensitive)
-      schema:
-        type: string
-    IfMatch:
-      name: If-Match
-      in: header
-      required: true
-      description: The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.
-      schema:
-        type: string
   responses:
-    Forbidden:
-      description: Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    PreconditionFailed:
-      description: Precondition failed. The If-Match ETag value does not match the current version of the resource. Read the resource again to obtain the latest ETag.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
     Conflict:
       description: Conflict. The request conflicts with the current state of the resource due to a concurrent modification.
       content:
@@ -343,6 +310,39 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
+    Forbidden:
+      description: Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    PreconditionFailed:
+      description: Precondition failed. The If-Match ETag value does not match the current version of the resource. Read the resource again to obtain the latest ETag.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+  parameters:
+    TaskId:
+      name: task-id
+      in: path
+      required: true
+      description: The unique identifier of the plannerTask (28 characters, case-sensitive)
+      schema:
+        type: string
+    IfMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

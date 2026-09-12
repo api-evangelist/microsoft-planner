@@ -17,6 +17,13 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "microsoft-planner-buckets-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "microsoft-planner-plan-details-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "microsoft-planner-plans-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "microsoft-planner-task-details-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "microsoft-planner-tasks-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

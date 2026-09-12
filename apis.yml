@@ -413,6 +413,8 @@ maintainers:
     email: kin@apievangelist.com
     url: https://apievangelist.com
 common:
+  - type: Website
+    url: https://www.microsoft.com/
   - type: CapabilityMap
     url: capabilities/microsoft-planner-capability-edges.yml
     name: Microsoft Planner Business Capability Map
@@ -529,3 +531,5 @@ common:
       - Excel for data export and reporting
       - Power BI for advanced analytics dashboards
       - Azure DevOps for development task bridging
+x-parent: microsoft
+x-relationship: product
