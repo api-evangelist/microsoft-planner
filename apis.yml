@@ -43,7 +43,7 @@ tags_raw:
   - Task Management
 created: '2024-01-01'
 modified: '2026-05-19'
-url: https://raw.githubusercontent.com/api-evangelist/microsoft-planner/refs/heads/main/apis.yml
+url: https://developer.microsoft.com/en-us/graph
 specificationVersion: '0.23'
 apis:
 - name: Microsoft Graph Planner API (Beta)
@@ -531,5 +531,5 @@ common:
       - Excel for data export and reporting
       - Power BI for advanced analytics dashboards
       - Azure DevOps for development task bridging
-x-parent: microsoft
+x-parent: microsoft-365
 x-relationship: product
