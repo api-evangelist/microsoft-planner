@@ -282,6 +282,25 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    PlannerBucketCreate:
+      type: object
+      description: Request body for creating a new bucket
+      required:
+      - name
+      - planId
+      properties:
+        name:
+          type: string
+          description: Name of the bucket
+          example: Example Title
+        planId:
+          type: string
+          description: ID of the plan the bucket belongs to
+          example: '500123'
+        orderHint:
+          type: string
+          description: Hint used to order the bucket
+          example: example_value
     ODataError:
       type: object
       description: OData error response
@@ -304,42 +323,37 @@ components:
                   type: string
                   format: date-time
           example: example_value
-    PlannerBucketCreate:
+    PlannerBucket:
       type: object
-      description: Request body for creating a new bucket
-      required:
-      - name
-      - planId
+      description: Represents a bucket (custom column) for tasks in a plan in Microsoft 365. It is contained in a plannerPlan and can have a collection of plannerTasks.
       properties:
+        '@odata.etag':
+          type: string
+          description: The ETag of the resource, used for concurrency control
+          readOnly: true
+          example: example_value
+        id:
+          type: string
+          description: The unique identifier for the bucket. 28 characters long and case-sensitive.
+          readOnly: true
+          example: abc123
         name:
           type: string
           description: Name of the bucket
           example: Example Title
         planId:
           type: string
-          description: ID of the plan the bucket belongs to
+          description: Plan ID to which the bucket belongs
           example: '500123'
         orderHint:
           type: string
-          description: Hint used to order the bucket
+          description: Hint used to order buckets in a list view
           example: example_value
-    PlannerTaskCollection:
+    PlannerAssignments:
       type: object
-      description: A collection of plannerTask resources
-      properties:
-        '@odata.context':
-          type: string
-          readOnly: true
-          example: example_value
-        '@odata.count':
-          type: integer
-          readOnly: true
-          example: 10
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlannerTask'
-          example: []
+      description: The set of user assignments for a task. Each key is the user ID of the assignee, and the value is a plannerAssignment object.
+      additionalProperties:
+        $ref: '#/components/schemas/PlannerAssignment'
     PlannerAssignment:
       type: object
       description: Represents the assignment of a task to a user
@@ -362,11 +376,23 @@ components:
           type: string
           description: Hint used to order assignees in a task. The format is defined in the Planner order hints documentation.
           example: example_value
-    PlannerAssignments:
+    PlannerTaskCollection:
       type: object
-      description: The set of user assignments for a task. Each key is the user ID of the assignee, and the value is a plannerAssignment object.
-      additionalProperties:
-        $ref: '#/components/schemas/PlannerAssignment'
+      description: A collection of plannerTask resources
+      properties:
+        '@odata.context':
+          type: string
+          readOnly: true
+          example: example_value
+        '@odata.count':
+          type: integer
+          readOnly: true
+          example: 10
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlannerTask'
+          example: []
     PlannerTask:
       type: object
       description: Represents a Planner task in Microsoft 365. A task is contained in a plan and can be assigned to a bucket within the plan.
@@ -493,71 +519,6 @@ components:
           description: Number of external references on the task
           readOnly: true
           example: 10
-    PlannerAppliedCategories:
-      type: object
-      description: The categories (labels) applied to a task. Up to 25 categories can be defined per plan. Category names (category1 through category25) are defined on the plan details.
-      additionalProperties:
-        type: boolean
-    IdentitySet:
-      type: object
-      description: A set of identities associated with various events for a resource
-      properties:
-        application:
-          $ref: '#/components/schemas/Identity'
-        device:
-          $ref: '#/components/schemas/Identity'
-        user:
-          $ref: '#/components/schemas/Identity'
-    Identity:
-      type: object
-      description: Represents an identity of an actor
-      properties:
-        displayName:
-          type: string
-          description: The display name of the identity
-          example: example_value
-        id:
-          type: string
-          description: The unique identifier of the identity
-          example: abc123
-    PlannerBucketUpdate:
-      type: object
-      description: Request body for updating a bucket
-      properties:
-        name:
-          type: string
-          description: Updated name of the bucket
-          example: Example Title
-        orderHint:
-          type: string
-          description: Updated order hint for the bucket
-          example: example_value
-    PlannerBucket:
-      type: object
-      description: Represents a bucket (custom column) for tasks in a plan in Microsoft 365. It is contained in a plannerPlan and can have a collection of plannerTasks.
-      properties:
-        '@odata.etag':
-          type: string
-          description: The ETag of the resource, used for concurrency control
-          readOnly: true
-          example: example_value
-        id:
-          type: string
-          description: The unique identifier for the bucket. 28 characters long and case-sensitive.
-          readOnly: true
-          example: abc123
-        name:
-          type: string
-          description: Name of the bucket
-          example: Example Title
-        planId:
-          type: string
-          description: Plan ID to which the bucket belongs
-          example: '500123'
-        orderHint:
-          type: string
-          description: Hint used to order buckets in a list view
-          example: example_value
     PlannerBucketCollection:
       type: object
       description: A collection of plannerBucket resources
@@ -575,7 +536,74 @@ components:
           items:
             $ref: '#/components/schemas/PlannerBucket'
           example: []
+    IdentitySet:
+      type: object
+      description: A set of identities associated with various events for a resource
+      properties:
+        application:
+          $ref: '#/components/schemas/Identity'
+        device:
+          $ref: '#/components/schemas/Identity'
+        user:
+          $ref: '#/components/schemas/Identity'
+    PlannerBucketUpdate:
+      type: object
+      description: Request body for updating a bucket
+      properties:
+        name:
+          type: string
+          description: Updated name of the bucket
+          example: Example Title
+        orderHint:
+          type: string
+          description: Updated order hint for the bucket
+          example: example_value
+    Identity:
+      type: object
+      description: Represents an identity of an actor
+      properties:
+        displayName:
+          type: string
+          description: The display name of the identity
+          example: example_value
+        id:
+          type: string
+          description: The unique identifier of the identity
+          example: abc123
+    PlannerAppliedCategories:
+      type: object
+      description: The categories (labels) applied to a task. Up to 25 categories can be defined per plan. Category names (category1 through category25) are defined on the plan details.
+      additionalProperties:
+        type: boolean
+  parameters:
+    BucketId:
+      name: bucket-id
+      in: path
+      required: true
+      description: The unique identifier of the plannerBucket (28 characters, case-sensitive)
+      schema:
+        type: string
+    IfMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.
+      schema:
+        type: string
+    PlanId:
+      name: plan-id
+      in: path
+      required: true
+      description: The unique identifier of the plannerPlan (28 characters, case-sensitive)
+      schema:
+        type: string
   responses:
+    Forbidden:
+      description: Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
     Conflict:
       description: Conflict. The request conflicts with the current state of the resource due to a concurrent modification.
       content:
@@ -588,20 +616,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
-    Unauthorized:
-      description: Unauthorized. The request requires a valid OAuth 2.0 access token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    Forbidden:
-      description: Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
     PreconditionFailed:
       description: Precondition failed. The If-Match ETag value does not match the current version of the resource. Read the resource again to obtain the latest ETag.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. The request requires a valid OAuth 2.0 access token.
       content:
         application/json:
           schema:
@@ -612,28 +634,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
-  parameters:
-    IfMatch:
-      name: If-Match
-      in: header
-      required: true
-      description: The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.
-      schema:
-        type: string
-    BucketId:
-      name: bucket-id
-      in: path
-      required: true
-      description: The unique identifier of the plannerBucket (28 characters, case-sensitive)
-      schema:
-        type: string
-    PlanId:
-      name: plan-id
-      in: path
-      required: true
-      description: The unique identifier of the plannerPlan (28 characters, case-sensitive)
-      schema:
-        type: string
   securitySchemes:
     oauth2:
       type: oauth2

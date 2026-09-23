@@ -1,11 +1,7 @@
 {
   "provider": "microsoft-planner",
   "sources": [
-    "microsoft-planner-buckets-api-openapi.yml",
-    "microsoft-planner-plan-details-api-openapi.yml",
-    "microsoft-planner-plans-api-openapi.yml",
-    "microsoft-planner-task-details-api-openapi.yml",
-    "microsoft-planner-tasks-api-openapi.yml"
+    "_original/microsoft-planner-openapi.yml"
   ],
   "outputs": [
     "microsoft-planner-buckets-api-openapi.yml",
@@ -18,12 +14,15 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "microsoft-planner-buckets-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-planner-plan-details-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-planner-plans-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-planner-task-details-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-planner-tasks-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "microsoft-planner-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "microsoft-planner-buckets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-planner-plan-details-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-planner-plans-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-planner-task-details-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-planner-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
