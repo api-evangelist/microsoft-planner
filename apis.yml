@@ -31,7 +31,7 @@ accessModel:
 image: https://docs.microsoft.com/en-us/media/logos/logo-ms-social.png
 tags:
   - Collaboration
-  - Microsoft-365
+  - Microsoft 365
   - Productivity
   - Project Management
   - Task Management
@@ -41,6 +41,7 @@ tags_raw:
   - Productivity
   - Project Management
   - Task Management
+  - Microsoft-365
 created: '2024-01-01'
 modified: '2026-05-19'
 url: https://developer.microsoft.com/en-us/graph
