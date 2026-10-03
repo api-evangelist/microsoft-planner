@@ -125,11 +125,11 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    PlannerExternalReferences:
+    PlannerChecklistItems:
       type: object
-      description: A collection of references on a task. Each key is a URL-encoded URL of the reference, and the value is a plannerExternalReference.
+      description: A collection of checklist items on a task. Each key is a GUID identifying the checklist item, and the value is a plannerChecklistItem.
       additionalProperties:
-        $ref: '#/components/schemas/PlannerExternalReference'
+        $ref: '#/components/schemas/PlannerChecklistItem'
     PlannerChecklistItem:
       type: object
       description: A checklist item on a Planner task
@@ -159,11 +159,75 @@ components:
           type: string
           description: Title of the checklist item
           example: Example Title
-    PlannerChecklistItems:
+    IdentitySet:
       type: object
-      description: A collection of checklist items on a task. Each key is a GUID identifying the checklist item, and the value is a plannerChecklistItem.
+      description: A set of identities associated with various events for a resource
+      properties:
+        application:
+          $ref: '#/components/schemas/Identity'
+        device:
+          $ref: '#/components/schemas/Identity'
+        user:
+          $ref: '#/components/schemas/Identity'
+    ODataError:
+      type: object
+      description: OData error response
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The error code
+            message:
+              type: string
+              description: A human-readable error message
+            innerError:
+              type: object
+              properties:
+                request-id:
+                  type: string
+                date:
+                  type: string
+                  format: date-time
+          example: example_value
+    PlannerTaskDetailsUpdate:
+      type: object
+      description: Request body for updating task details
+      properties:
+        description:
+          type: string
+          example: A sample description.
+        checklist:
+          $ref: '#/components/schemas/PlannerChecklistItems'
+        references:
+          $ref: '#/components/schemas/PlannerExternalReferences'
+        previewType:
+          type: string
+          enum:
+          - automatic
+          - noPreview
+          - checklist
+          - description
+          - reference
+          example: automatic
+    PlannerExternalReferences:
+      type: object
+      description: A collection of references on a task. Each key is a URL-encoded URL of the reference, and the value is a plannerExternalReference.
       additionalProperties:
-        $ref: '#/components/schemas/PlannerChecklistItem'
+        $ref: '#/components/schemas/PlannerExternalReference'
+    Identity:
+      type: object
+      description: Represents an identity of an actor
+      properties:
+        displayName:
+          type: string
+          description: The display name of the identity
+          example: example_value
+        id:
+          type: string
+          description: The unique identifier of the identity
+          example: abc123
     PlannerExternalReference:
       type: object
       description: An external reference attached to a Planner task
@@ -192,60 +256,6 @@ components:
         type:
           type: string
           description: The type of the reference (e.g., PowerPoint, Word, Excel, Other)
-          example: example_value
-    Identity:
-      type: object
-      description: Represents an identity of an actor
-      properties:
-        displayName:
-          type: string
-          description: The display name of the identity
-          example: example_value
-        id:
-          type: string
-          description: The unique identifier of the identity
-          example: abc123
-    PlannerTaskDetailsUpdate:
-      type: object
-      description: Request body for updating task details
-      properties:
-        description:
-          type: string
-          example: A sample description.
-        checklist:
-          $ref: '#/components/schemas/PlannerChecklistItems'
-        references:
-          $ref: '#/components/schemas/PlannerExternalReferences'
-        previewType:
-          type: string
-          enum:
-          - automatic
-          - noPreview
-          - checklist
-          - description
-          - reference
-          example: automatic
-    ODataError:
-      type: object
-      description: OData error response
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: The error code
-            message:
-              type: string
-              description: A human-readable error message
-            innerError:
-              type: object
-              properties:
-                request-id:
-                  type: string
-                date:
-                  type: string
-                  format: date-time
           example: example_value
     PlannerTaskDetails:
       type: object
@@ -281,31 +291,27 @@ components:
           - description
           - reference
           example: automatic
-    IdentitySet:
-      type: object
-      description: A set of identities associated with various events for a resource
-      properties:
-        application:
-          $ref: '#/components/schemas/Identity'
-        device:
-          $ref: '#/components/schemas/Identity'
-        user:
-          $ref: '#/components/schemas/Identity'
   responses:
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid. Common causes include incorrect types for open properties, invalid order hint formats, or logically inconsistent data such as a start date after a due date.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
     NotFound:
       description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
+    Forbidden:
+      description: Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
     PreconditionFailed:
       description: Precondition failed. The If-Match ETag value does not match the current version of the resource. Read the resource again to obtain the latest ETag.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid. Common causes include incorrect types for open properties, invalid order hint formats, or logically inconsistent data such as a start date after a due date.
       content:
         application/json:
           schema:
@@ -322,25 +328,19 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
-    Forbidden:
-      description: Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
   parameters:
-    TaskId:
-      name: task-id
-      in: path
-      required: true
-      description: The unique identifier of the plannerTask (28 characters, case-sensitive)
-      schema:
-        type: string
     IfMatch:
       name: If-Match
       in: header
       required: true
       description: The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.
+      schema:
+        type: string
+    TaskId:
+      name: task-id
+      in: path
+      required: true
+      description: The unique identifier of the plannerTask (28 characters, case-sensitive)
       schema:
         type: string
   securitySchemes:

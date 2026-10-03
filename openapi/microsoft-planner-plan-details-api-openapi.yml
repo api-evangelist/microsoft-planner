@@ -194,32 +194,8 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid. Common causes include incorrect types for open properties, invalid order hint formats, or logically inconsistent data such as a start date after a due date.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
     NotFound:
       description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    PreconditionFailed:
-      description: Precondition failed. The If-Match ETag value does not match the current version of the resource. Read the resource again to obtain the latest ETag.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    Unauthorized:
-      description: Unauthorized. The request requires a valid OAuth 2.0 access token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    Forbidden:
-      description: Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).
       content:
         application/json:
           schema:
@@ -230,15 +206,31 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
+    Forbidden:
+      description: Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    PreconditionFailed:
+      description: Precondition failed. The If-Match ETag value does not match the current version of the resource. Read the resource again to obtain the latest ETag.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid. Common causes include incorrect types for open properties, invalid order hint formats, or logically inconsistent data such as a start date after a due date.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. The request requires a valid OAuth 2.0 access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
   schemas:
-    PlannerPlanDetailsUpdate:
-      type: object
-      description: Request body for updating plan details
-      properties:
-        categoryDescriptions:
-          $ref: '#/components/schemas/PlannerCategoryDescriptions'
-        sharedWith:
-          $ref: '#/components/schemas/PlannerUserIds'
     ODataError:
       type: object
       description: OData error response
@@ -261,31 +253,6 @@ components:
                   type: string
                   format: date-time
           example: example_value
-    PlannerPlanDetails:
-      type: object
-      description: Represents additional information about a plan, including category descriptions and sharing information.
-      properties:
-        '@odata.etag':
-          type: string
-          description: The ETag of the resource
-          readOnly: true
-          example: example_value
-        id:
-          type: string
-          description: The unique identifier for the plan details
-          readOnly: true
-          example: abc123
-        categoryDescriptions:
-          $ref: '#/components/schemas/PlannerCategoryDescriptions'
-          description: Specifies the descriptions of the 25 categories for tasks in the plan
-        sharedWith:
-          $ref: '#/components/schemas/PlannerUserIds'
-          description: Set of user IDs that this plan is shared with
-    PlannerUserIds:
-      type: object
-      description: Set of user IDs that a plan is shared with. Each key is a user ID and the value is true.
-      additionalProperties:
-        type: boolean
     PlannerCategoryDescriptions:
       type: object
       description: Describes the 25 categories that can be associated with tasks in a plan.
@@ -390,6 +357,39 @@ components:
           type: string
           description: The label associated with category 25
           example: example_value
+    PlannerPlanDetails:
+      type: object
+      description: Represents additional information about a plan, including category descriptions and sharing information.
+      properties:
+        '@odata.etag':
+          type: string
+          description: The ETag of the resource
+          readOnly: true
+          example: example_value
+        id:
+          type: string
+          description: The unique identifier for the plan details
+          readOnly: true
+          example: abc123
+        categoryDescriptions:
+          $ref: '#/components/schemas/PlannerCategoryDescriptions'
+          description: Specifies the descriptions of the 25 categories for tasks in the plan
+        sharedWith:
+          $ref: '#/components/schemas/PlannerUserIds'
+          description: Set of user IDs that this plan is shared with
+    PlannerUserIds:
+      type: object
+      description: Set of user IDs that a plan is shared with. Each key is a user ID and the value is true.
+      additionalProperties:
+        type: boolean
+    PlannerPlanDetailsUpdate:
+      type: object
+      description: Request body for updating plan details
+      properties:
+        categoryDescriptions:
+          $ref: '#/components/schemas/PlannerCategoryDescriptions'
+        sharedWith:
+          $ref: '#/components/schemas/PlannerUserIds'
   parameters:
     IfMatch:
       name: If-Match
