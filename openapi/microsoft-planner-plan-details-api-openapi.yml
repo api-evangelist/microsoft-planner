@@ -193,44 +193,12 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    Conflict:
-      description: Conflict. The request conflicts with the current state of the resource due to a concurrent modification.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    Forbidden:
-      description: Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    PreconditionFailed:
-      description: Precondition failed. The If-Match ETag value does not match the current version of the resource. Read the resource again to obtain the latest ETag.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid. Common causes include incorrect types for open properties, invalid order hint formats, or logically inconsistent data such as a start date after a due date.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    Unauthorized:
-      description: Unauthorized. The request requires a valid OAuth 2.0 access token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
   schemas:
+    PlannerUserIds:
+      type: object
+      description: Set of user IDs that a plan is shared with. Each key is a user ID and the value is true.
+      additionalProperties:
+        type: boolean
     ODataError:
       type: object
       description: OData error response
@@ -377,11 +345,6 @@ components:
         sharedWith:
           $ref: '#/components/schemas/PlannerUserIds'
           description: Set of user IDs that this plan is shared with
-    PlannerUserIds:
-      type: object
-      description: Set of user IDs that a plan is shared with. Each key is a user ID and the value is true.
-      additionalProperties:
-        type: boolean
     PlannerPlanDetailsUpdate:
       type: object
       description: Request body for updating plan details
@@ -405,6 +368,43 @@ components:
       description: The unique identifier of the plannerPlan (28 characters, case-sensitive)
       schema:
         type: string
+  responses:
+    Conflict:
+      description: Conflict. The request conflicts with the current state of the resource due to a concurrent modification.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    PreconditionFailed:
+      description: Precondition failed. The If-Match ETag value does not match the current version of the resource. Read the resource again to obtain the latest ETag.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Forbidden:
+      description: Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. The request requires a valid OAuth 2.0 access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid. Common causes include incorrect types for open properties, invalid order hint formats, or logically inconsistent data such as a start date after a due date.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
   securitySchemes:
     oauth2:
       type: oauth2

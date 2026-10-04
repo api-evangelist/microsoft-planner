@@ -334,67 +334,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ODataError:
-      type: object
-      description: OData error response
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: The error code
-            message:
-              type: string
-              description: A human-readable error message
-            innerError:
-              type: object
-              properties:
-                request-id:
-                  type: string
-                date:
-                  type: string
-                  format: date-time
-          example: example_value
-    PlannerTaskCollection:
-      type: object
-      description: A collection of plannerTask resources
-      properties:
-        '@odata.context':
-          type: string
-          readOnly: true
-          example: example_value
-        '@odata.count':
-          type: integer
-          readOnly: true
-          example: 10
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlannerTask'
-          example: []
-    PlannerPlanCreate:
-      type: object
-      description: Request body for creating a new plan
-      required:
-      - title
-      - container
-      properties:
-        title:
-          type: string
-          description: Title of the plan
-          example: Example Title
-        container:
-          type: object
-          description: The container for the plan
-          required:
-          - url
-          properties:
-            url:
-              type: string
-              format: uri
-              description: The full canonical URL of the container (e.g., https://graph.microsoft.com/v1.0/groups/{group-id})
-          example: example_value
     Identity:
       type: object
       description: Represents an identity of an actor
@@ -407,152 +346,6 @@ components:
           type: string
           description: The unique identifier of the identity
           example: abc123
-    PlannerAssignment:
-      type: object
-      description: Represents the assignment of a task to a user
-      properties:
-        '@odata.type':
-          type: string
-          const: microsoft.graph.plannerAssignment
-          example: example_value
-        assignedBy:
-          $ref: '#/components/schemas/IdentitySet'
-          description: The identity of the user that performed the assignment
-          readOnly: true
-        assignedDateTime:
-          type: string
-          format: date-time
-          description: The time at which the task was assigned
-          readOnly: true
-          example: '2026-01-15T10:30:00Z'
-        orderHint:
-          type: string
-          description: Hint used to order assignees in a task. The format is defined in the Planner order hints documentation.
-          example: example_value
-    PlannerBucketCollection:
-      type: object
-      description: A collection of plannerBucket resources
-      properties:
-        '@odata.context':
-          type: string
-          readOnly: true
-          example: example_value
-        '@odata.count':
-          type: integer
-          readOnly: true
-          example: 10
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlannerBucket'
-          example: []
-    IdentitySet:
-      type: object
-      description: A set of identities associated with various events for a resource
-      properties:
-        application:
-          $ref: '#/components/schemas/Identity'
-        device:
-          $ref: '#/components/schemas/Identity'
-        user:
-          $ref: '#/components/schemas/Identity'
-    PlannerAppliedCategories:
-      type: object
-      description: The categories (labels) applied to a task. Up to 25 categories can be defined per plan. Category names (category1 through category25) are defined on the plan details.
-      additionalProperties:
-        type: boolean
-    PlannerPlanUpdate:
-      type: object
-      description: Request body for updating a plan
-      properties:
-        title:
-          type: string
-          description: Updated title of the plan
-          example: Example Title
-    PlannerPlan:
-      type: object
-      description: Represents a plan in Microsoft 365. A plan is owned by a group and contains a collection of plannerTasks. It can also have a collection of plannerBuckets.
-      properties:
-        '@odata.etag':
-          type: string
-          description: The ETag of the resource, used for concurrency control
-          readOnly: true
-          example: example_value
-        id:
-          type: string
-          description: The unique identifier for the plan. 28 characters long and case-sensitive.
-          readOnly: true
-          example: abc123
-        title:
-          type: string
-          description: Title of the plan
-          example: Example Title
-        container:
-          $ref: '#/components/schemas/PlannerPlanContainer'
-          description: Identifies the container of the plan. After it is set, this property cannot be updated.
-        owner:
-          type: string
-          description: Deprecated. Use the container property instead. ID of the group that owns the plan.
-          deprecated: true
-          example: example_value
-        createdBy:
-          $ref: '#/components/schemas/IdentitySet'
-          description: The user who created the plan
-          readOnly: true
-        createdDateTime:
-          type: string
-          format: date-time
-          description: The date and time at which the plan was created. ISO 8601 format, always in UTC.
-          readOnly: true
-          example: '2026-01-15T10:30:00Z'
-    PlannerAssignments:
-      type: object
-      description: The set of user assignments for a task. Each key is the user ID of the assignee, and the value is a plannerAssignment object.
-      additionalProperties:
-        $ref: '#/components/schemas/PlannerAssignment'
-    PlannerBucket:
-      type: object
-      description: Represents a bucket (custom column) for tasks in a plan in Microsoft 365. It is contained in a plannerPlan and can have a collection of plannerTasks.
-      properties:
-        '@odata.etag':
-          type: string
-          description: The ETag of the resource, used for concurrency control
-          readOnly: true
-          example: example_value
-        id:
-          type: string
-          description: The unique identifier for the bucket. 28 characters long and case-sensitive.
-          readOnly: true
-          example: abc123
-        name:
-          type: string
-          description: Name of the bucket
-          example: Example Title
-        planId:
-          type: string
-          description: Plan ID to which the bucket belongs
-          example: '500123'
-        orderHint:
-          type: string
-          description: Hint used to order buckets in a list view
-          example: example_value
-    PlannerPlanCollection:
-      type: object
-      description: A collection of plannerPlan resources
-      properties:
-        '@odata.context':
-          type: string
-          readOnly: true
-          example: example_value
-        '@odata.count':
-          type: integer
-          readOnly: true
-          example: 10
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlannerPlan'
-          example: []
     PlannerTask:
       type: object
       description: Represents a Planner task in Microsoft 365. A task is contained in a plan and can be assigned to a bucket within the plan.
@@ -679,6 +472,111 @@ components:
           description: Number of external references on the task
           readOnly: true
           example: 10
+    PlannerAssignments:
+      type: object
+      description: The set of user assignments for a task. Each key is the user ID of the assignee, and the value is a plannerAssignment object.
+      additionalProperties:
+        $ref: '#/components/schemas/PlannerAssignment'
+    ODataError:
+      type: object
+      description: OData error response
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The error code
+            message:
+              type: string
+              description: A human-readable error message
+            innerError:
+              type: object
+              properties:
+                request-id:
+                  type: string
+                date:
+                  type: string
+                  format: date-time
+          example: example_value
+    PlannerTaskCollection:
+      type: object
+      description: A collection of plannerTask resources
+      properties:
+        '@odata.context':
+          type: string
+          readOnly: true
+          example: example_value
+        '@odata.count':
+          type: integer
+          readOnly: true
+          example: 10
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlannerTask'
+          example: []
+    PlannerPlan:
+      type: object
+      description: Represents a plan in Microsoft 365. A plan is owned by a group and contains a collection of plannerTasks. It can also have a collection of plannerBuckets.
+      properties:
+        '@odata.etag':
+          type: string
+          description: The ETag of the resource, used for concurrency control
+          readOnly: true
+          example: example_value
+        id:
+          type: string
+          description: The unique identifier for the plan. 28 characters long and case-sensitive.
+          readOnly: true
+          example: abc123
+        title:
+          type: string
+          description: Title of the plan
+          example: Example Title
+        container:
+          $ref: '#/components/schemas/PlannerPlanContainer'
+          description: Identifies the container of the plan. After it is set, this property cannot be updated.
+        owner:
+          type: string
+          description: Deprecated. Use the container property instead. ID of the group that owns the plan.
+          deprecated: true
+          example: example_value
+        createdBy:
+          $ref: '#/components/schemas/IdentitySet'
+          description: The user who created the plan
+          readOnly: true
+        createdDateTime:
+          type: string
+          format: date-time
+          description: The date and time at which the plan was created. ISO 8601 format, always in UTC.
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+    PlannerPlanUpdate:
+      type: object
+      description: Request body for updating a plan
+      properties:
+        title:
+          type: string
+          description: Updated title of the plan
+          example: Example Title
+    PlannerBucketCollection:
+      type: object
+      description: A collection of plannerBucket resources
+      properties:
+        '@odata.context':
+          type: string
+          readOnly: true
+          example: example_value
+        '@odata.count':
+          type: integer
+          readOnly: true
+          example: 10
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlannerBucket'
+          example: []
     PlannerPlanContainer:
       type: object
       description: Represents the container for a plannerPlan. The container is a resource that specifies authorization rules and the lifecycle of the plan.
@@ -704,15 +602,139 @@ components:
           format: uri
           description: The full canonical URL of the container
           example: https://www.example.com
+    IdentitySet:
+      type: object
+      description: A set of identities associated with various events for a resource
+      properties:
+        application:
+          $ref: '#/components/schemas/Identity'
+        device:
+          $ref: '#/components/schemas/Identity'
+        user:
+          $ref: '#/components/schemas/Identity'
+    PlannerBucket:
+      type: object
+      description: Represents a bucket (custom column) for tasks in a plan in Microsoft 365. It is contained in a plannerPlan and can have a collection of plannerTasks.
+      properties:
+        '@odata.etag':
+          type: string
+          description: The ETag of the resource, used for concurrency control
+          readOnly: true
+          example: example_value
+        id:
+          type: string
+          description: The unique identifier for the bucket. 28 characters long and case-sensitive.
+          readOnly: true
+          example: abc123
+        name:
+          type: string
+          description: Name of the bucket
+          example: Example Title
+        planId:
+          type: string
+          description: Plan ID to which the bucket belongs
+          example: '500123'
+        orderHint:
+          type: string
+          description: Hint used to order buckets in a list view
+          example: example_value
+    PlannerPlanCreate:
+      type: object
+      description: Request body for creating a new plan
+      required:
+      - title
+      - container
+      properties:
+        title:
+          type: string
+          description: Title of the plan
+          example: Example Title
+        container:
+          type: object
+          description: The container for the plan
+          required:
+          - url
+          properties:
+            url:
+              type: string
+              format: uri
+              description: The full canonical URL of the container (e.g., https://graph.microsoft.com/v1.0/groups/{group-id})
+          example: example_value
+    PlannerPlanCollection:
+      type: object
+      description: A collection of plannerPlan resources
+      properties:
+        '@odata.context':
+          type: string
+          readOnly: true
+          example: example_value
+        '@odata.count':
+          type: integer
+          readOnly: true
+          example: 10
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlannerPlan'
+          example: []
+    PlannerAssignment:
+      type: object
+      description: Represents the assignment of a task to a user
+      properties:
+        '@odata.type':
+          type: string
+          const: microsoft.graph.plannerAssignment
+          example: example_value
+        assignedBy:
+          $ref: '#/components/schemas/IdentitySet'
+          description: The identity of the user that performed the assignment
+          readOnly: true
+        assignedDateTime:
+          type: string
+          format: date-time
+          description: The time at which the task was assigned
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        orderHint:
+          type: string
+          description: Hint used to order assignees in a task. The format is defined in the Planner order hints documentation.
+          example: example_value
+    PlannerAppliedCategories:
+      type: object
+      description: The categories (labels) applied to a task. Up to 25 categories can be defined per plan. Category names (category1 through category25) are defined on the plan details.
+      additionalProperties:
+        type: boolean
+  parameters:
+    GroupId:
+      name: group-id
+      in: path
+      required: true
+      description: The unique identifier of the Microsoft 365 group
+      schema:
+        type: string
+    PlanId:
+      name: plan-id
+      in: path
+      required: true
+      description: The unique identifier of the plannerPlan (28 characters, case-sensitive)
+      schema:
+        type: string
+    IfMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.
+      schema:
+        type: string
   responses:
-    Forbidden:
-      description: Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
-    PreconditionFailed:
-      description: Precondition failed. The If-Match ETag value does not match the current version of the resource. Read the resource again to obtain the latest ETag.
+    Forbidden:
+      description: Forbidden. The caller does not have sufficient permissions, or a service-defined limit has been exceeded (e.g., MaximumTasksInProject, MaximumBucketsInProject).
       content:
         application/json:
           schema:
@@ -723,46 +745,24 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
-    Unauthorized:
-      description: Unauthorized. The request requires a valid OAuth 2.0 access token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
     Conflict:
       description: Conflict. The request conflicts with the current state of the resource due to a concurrent modification.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
-  parameters:
-    GroupId:
-      name: group-id
-      in: path
-      required: true
-      description: The unique identifier of the Microsoft 365 group
-      schema:
-        type: string
-    IfMatch:
-      name: If-Match
-      in: header
-      required: true
-      description: The last known ETag value for the resource. Required for PATCH and DELETE operations. Planner uses ETags for optimistic concurrency control.
-      schema:
-        type: string
-    PlanId:
-      name: plan-id
-      in: path
-      required: true
-      description: The unique identifier of the plannerPlan (28 characters, case-sensitive)
-      schema:
-        type: string
+    PreconditionFailed:
+      description: Precondition failed. The If-Match ETag value does not match the current version of the resource. Read the resource again to obtain the latest ETag.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. The request requires a valid OAuth 2.0 access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
   securitySchemes:
     oauth2:
       type: oauth2
